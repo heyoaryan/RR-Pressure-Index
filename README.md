@@ -3,7 +3,7 @@
 Ranks the 10 best T20 batters and 10 best bowlers **under pressure**, using IPL + T20I ball-by-ball data (2022 onwards).
 
 - **Methodology report:** [`ClutchRank_Methodology.pdf`](ClutchRank_Methodology.pdf)
-- **Interactive site:** `dashboard/frontend/index.html` (static; open it directly or deploy the folder)
+- **Interactive site:** https://clutchrank.vercel.app (source: `dashboard/frontend/index.html`)
 
 ## How it works (one paragraph)
 

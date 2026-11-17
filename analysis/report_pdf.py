@@ -13,7 +13,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 F='/System/Library/Fonts/Supplemental/'
 pdfmetrics.registerFont(TTFont('Arial',F+'Arial.ttf')); pdfmetrics.registerFont(TTFont('Arial-Bold',F+'Arial Bold.ttf'))
 from reportlab.lib.fonts import addMapping; addMapping('Arial',0,0,'Arial'); addMapping('Arial',1,0,'Arial-Bold')
-SITE=os.environ.get('SITE_URL','https://rr-pressure-index-frontend.vercel.app'); REPO='https://github.com/heyoaryan/RR-Pressure-Index'
+SITE=os.environ.get('SITE_URL','https://clutchrank.vercel.app'); REPO='https://github.com/heyoaryan/RR-Pressure-Index'
 D=json.load(open('../dashboard_data.json')); O=D['overview']
 PINK=colors.HexColor('#c2185b'); NAVY=colors.HexColor('#1d2c5e'); LINE=colors.HexColor('#d6d5cf'); SUNK=colors.HexColor('#f2f2ee')
 
