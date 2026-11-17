@@ -7,7 +7,7 @@ D = json.load(open('../dashboard_data.json'))
 js = json.loads(open('../dashboard/frontend/data.js').read().split('=', 1)[1].strip().rstrip(';'))
 idx = open('../dashboard/frontend/index.html').read()
 static = re.search(r'STATIC-TOP10:START(.*?)STATIC-TOP10:END', idx, re.S).group(1)
-pdf = ''.join(p.get_text() for p in fitz.open('../Pressure_Index_Methodology.pdf'))
+pdf = ''.join(p.get_text() for p in fitz.open('../ClutchRank_Methodology.pdf'))
 ok = True
 for role, label in (('bat', 'BATTERS'), ('bowl', 'BOWLERS')):
     names = [p['name'] for p in D[role]]

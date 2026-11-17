@@ -1,8 +1,8 @@
-# Pressure Index — SupeRR Selector S2
+# ClutchRank — SupeRR Selector S2
 
 Ranks the 10 best T20 batters and 10 best bowlers **under pressure**, using IPL + T20I ball-by-ball data (2022 onwards).
 
-- **Methodology report:** [`Pressure_Index_Methodology.pdf`](Pressure_Index_Methodology.pdf)
+- **Methodology report:** [`ClutchRank_Methodology.pdf`](ClutchRank_Methodology.pdf)
 - **Interactive site:** `dashboard/frontend/index.html` (static; open it directly or deploy the folder)
 
 ## How it works (one paragraph)
@@ -41,7 +41,7 @@ data → wp model → leverage index → pressure flag → per-ball value → ra
 | 8 | `rel.py` | Split-half reliability (20 random splits) | `rel.pkl` |
 | 9 | `export.py` | Everything the site and PDF show | `../dashboard_data.json` |
 | 10 | `charts.py` | Report charts | `fig_*.png` |
-| 11 | `report_pdf.py` | Methodology PDF (`SITE_URL=https://… python3 report_pdf.py` to print the link) | `../Pressure_Index_Methodology.pdf` |
+| 11 | `report_pdf.py` | Methodology PDF (`SITE_URL=https://… python3 report_pdf.py` to print the link) | `../ClutchRank_Methodology.pdf` |
 
 Then, from the repo root:
 

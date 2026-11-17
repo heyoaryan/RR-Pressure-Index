@@ -1,7 +1,7 @@
 """
-Pressure Index Dashboard — Backend (single file)
+ClutchRank Dashboard — Backend (single file)
 
-Part 1: Pressure Index engine — same pipeline as prep.py → wp.py → final1.py → final2.py → bag.py.
+Part 1: ClutchRank engine — same pipeline as prep.py → wp.py → final1.py → final2.py → bag.py.
         Takes the raw CSVs as DataFrames and returns a dashboard_data.json-compatible dict.
 Part 2: FastAPI server — serves dashboard_data.json, accepts CSV uploads, runs the engine, returns analytics.
 
@@ -30,7 +30,7 @@ warnings.filterwarnings("ignore")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# PART 1 — PRESSURE INDEX ENGINE
+# PART 1 — CLUTCHRANK ENGINE
 # ═════════════════════════════════════════════════════════════════════════════
 
 # ─────────────────────────────────────────────
@@ -1037,7 +1037,7 @@ def root():
     return {"status": "T20 Analytics API running"}
 
 
-# ── PRESSURE INDEX DATA ───────────────────────────────────────────────────────
+# ── CLUTCHRANK DATA ───────────────────────────────────────────────────────
 # Looks for dashboard_data.json. The first entry resolves robustly relative to
 # this file (dashboard/backend -> project root), regardless of the CWD.
 _HERE = Path(__file__).parent
@@ -1071,7 +1071,7 @@ async def run_pressure(
     competition_team_player_mapping: Optional[UploadFile] = File(None),
 ):
     """
-    Accepts CSVs, runs the full pressure index pipeline in a background thread,
+    Accepts CSVs, runs the full ClutchRank pipeline in a background thread,
     returns immediately with {"status":"running"}.
     Poll GET /pressure/status for progress, GET /pressure/result for final data.
     """

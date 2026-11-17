@@ -1,4 +1,4 @@
-"""Methodology report → ../Pressure_Index_Methodology.pdf
+"""Methodology report → ../ClutchRank_Methodology.pdf
 Every number comes from ../dashboard_data.json (same file the website reads), so site and PDF cannot disagree.
     SITE_URL=https://your-site.vercel.app python3 report_pdf.py"""
 import json, os
@@ -40,7 +40,7 @@ kb,kw=D['k_bat'],D['k_bowl']; RB,RW=D['rel_bat'],D['rel_bowl']
 N,Pp=D['tab']
 
 S=[]
-S+=[P('Pressure Index',H1),P('Who performs best when a T20 match is on the line? · SupeRR Selector Season 2 · Round 1 methodology report',SM),Spacer(1,4)]
+S+=[P('ClutchRank',H1),P('Who performs best when a T20 match is on the line? · SupeRR Selector Season 2 · Round 1 methodology report',SM),Spacer(1,4)]
 S+=[P(f'<b>Summary.</b> I rate every eligible batter and bowler on the deliveries that could actually swing a T20 result. A win-probability model gives each ball a '
       f'<i>Leverage Index</i>; a ball is a <b>pressure ball</b> when leverage is high, the match is still live, and the innings is past the opening free-hit phase. '
       f'Players are judged on runs added (or saved) per ball against an average player in the <i>same</i> situation, corrected for opposition quality and sample size. '
@@ -145,7 +145,7 @@ S+=[P(f'Website: {SITE}<br/>Code: {REPO}<br/>Run order (from <font face="Courier
 
 def deco(c,d):
     c.saveState(); c.setFont('Arial',7.5); c.setFillColor(colors.HexColor('#888'))
-    c.drawString(18*mm,10*mm,'Pressure Index · SupeRR Selector S2 · Round 1'); c.drawRightString(A4[0]-18*mm,10*mm,str(d.page)); c.restoreState()
-doc=SimpleDocTemplate('../Pressure_Index_Methodology.pdf',pagesize=A4,leftMargin=18*mm,rightMargin=18*mm,topMargin=16*mm,bottomMargin=16*mm,
-                      title='Pressure Index — Methodology',author='Pressure Index')
+    c.drawString(18*mm,10*mm,'ClutchRank · SupeRR Selector S2 · Round 1'); c.drawRightString(A4[0]-18*mm,10*mm,str(d.page)); c.restoreState()
+doc=SimpleDocTemplate('../ClutchRank_Methodology.pdf',pagesize=A4,leftMargin=18*mm,rightMargin=18*mm,topMargin=16*mm,bottomMargin=16*mm,
+                      title='ClutchRank — Methodology',author='ClutchRank')
 doc.build(S,onFirstPage=deco,onLaterPages=deco); print('PDF written')

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Pressure Index · SupeRR Selector S2</title>
+<title>ClutchRank · SupeRR Selector S2</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
@@ -578,7 +578,7 @@ footer{
 <header>
   <div class="logo">
     <div class="logo-dot"></div>
-    Pressure Index
+    ClutchRank
     <span class="logo-sub">SupeRR Selector S2 · Rajasthan Royals</span>
   </div>
   <div class="header-pills">
@@ -1132,7 +1132,7 @@ footer{
           <div class="load-orbit"></div>
           <div class="load-ball"></div>
         </div>
-        <div class="ex-loading-title">Running Pressure Index pipeline</div>
+        <div class="ex-loading-title">Running ClutchRank pipeline</div>
         <div class="ex-loading-sub" id="ua-loading-msg">Starting…</div>
         <!-- Step tracker -->
         <div class="load-steps" id="load-steps">
@@ -1206,7 +1206,7 @@ footer{
 </main>
 
 <footer>
-  Pressure Index · SupeRR Selector Season 2 · Rajasthan Royals · IPL + T20I 2022–2026 · 788 matches · 188,151 deliveries
+  ClutchRank · SupeRR Selector Season 2 · Rajasthan Royals · IPL + T20I 2022–2026 · 788 matches · 188,151 deliveries
 </footer>
 
 <script>
@@ -2039,7 +2039,7 @@ async function uploadFiles() {
     // ignore upload errors — pressure pipeline has its own reading
 
     // 2. Start pressure pipeline with the same files (re-read from pickedFiles)
-    setLoadingMsg('Starting Pressure Index pipeline…');
+    setLoadingMsg('Starting ClutchRank pipeline…');
     const fd2 = new FormData();
     if (pickedFiles.ball_by_ball) fd2.append('ball_by_ball', pickedFiles.ball_by_ball);
     if (pickedFiles.matches)      fd2.append('matches',      pickedFiles.matches);
