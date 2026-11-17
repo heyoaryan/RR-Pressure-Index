@@ -21,3 +21,4 @@ analysis/node_modules/
 
 # Deploy tooling
 .vercel
+analysis/*.log

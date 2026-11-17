@@ -33,17 +33,19 @@ CFG={'bat':dict(ok='bat_ok',pid='striker_id',runc='a_rb_run',wkc='a_rb_wk',tot='
 def mom(x,n):
     m=x.mean(); s2=x.var()  # ball-level var using pooled
     return s2
-def eb_shrink(df,col,pidc,mask,minn=30):
+def eb_shrink(df,col,pidc,mask,minn=30,kfix=None):
     x=df[mask]; g=x.groupby(pidc)[col]; mean=g.mean(); n=g.size(); s2=x[col].var()
     el=n>=minn; tau2=max(mean[el].var()-(s2/n[el]).mean(),1e-9)
-    k=s2/tau2; mu=x[col].mean(); return mean, n, mu+(mean-mu)*n/(n+k), k, tau2
-def ratings(d,role,thr=1.5,elig=(75,15,100),opp=True,weights=(0.7,0.15,0.15),verbose=False,ret_k=False):
+    k=s2/tau2 if kfix is None else kfix; mu=x[col].mean(); return mean, n, mu+(mean-mu)*n/(n+k), k, tau2
+# Final weights: 0.70*z(pressure value) + 0.15*z(clutch lift) + 0.15*z(consistency)
+W=(0.70,0.15,0.15)
+def ratings(d,role,thr=1.5,elig=(75,15,100),opp=True,weights=W,verbose=False,ret_k=False,kfix=None):
     c=CFG[role]; pid=c['pid']; d=d[d[c['ok']]]
     pm=d.P if thr==1.5 else ((d.LI>=thr)&d.wp.between(.15,.85)&((d.legal_before>=36)|(d.w_before>=3)|(d.innings==2)))
     out=pd.DataFrame(index=sorted(d[pid].unique()))
     res={}
     for comp in ('runc','wkc'):
-        col=c[comp]; m,n,eb,k,t2=eb_shrink(d,col,pid,pm); out['m_'+comp]=m; out['eb_'+comp]=eb; out['k_'+comp]=k
+        col=c[comp]; m,n,eb,k,t2=eb_shrink(d,col,pid,pm,kfix=kfix); out['m_'+comp]=m; out['eb_'+comp]=eb; out['k_'+comp]=k
     out['pb']=d[pm].groupby(pid).size()
     out['pv_raw']=(out.m_runc+d.groupby(pid).lam.mean()*out.m_wkc)
     lam=d[pm].groupby(pid).lam.mean()

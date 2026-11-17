@@ -1,69 +1,71 @@
 # Pressure Index — SupeRR Selector S2
 
+Ranks the 10 best T20 batters and 10 best bowlers **under pressure**, using IPL + T20I ball-by-ball data (2022 onwards).
+
+- **Methodology report:** [`Pressure_Index_Methodology.pdf`](Pressure_Index_Methodology.pdf)
+- **Interactive site:** `dashboard/frontend/index.html` (static; open it directly or deploy the folder)
+
+## How it works (one paragraph)
+
+A win-probability (WP) model gives every ball a **Leverage Index** (LI): the expected swing in WP from that ball, relative to an average ball.
+A **pressure ball** is one with LI ≥ 1.5, WP between 15% and 85%, and past the free-hit phase (after over 6, 3+ wickets down, or any chase ball).
+Each ball is valued as runs added/saved vs an average player in the same situation, corrected for opposition (ridge regression on non-pressure balls) and shrunk for sample size (empirical Bayes).
+
 ```
-code/
-├── dashboard/              ← the dashboard (frontend/index.html = submission)
-│   ├── backend/main.py     FastAPI server + Pressure Index engine (single file)
-│   ├── frontend/index.html dashboard UI
-│   └── start.sh            starts both servers
-├── dashboard_data.json     data the dashboard shows (keep next to dashboard/)
-└── analysis/               original analysis pipeline that produced the report numbers
+rating = 0.70·z(pressure value) + 0.15·z(consistency) + 0.15·z(clutch lift)
+clutch lift = shrunk pressure value − shrunk normal (non-pressure) value
+final = ½ · full-data rating + ½ · mean rating over 200 bootstrap resamples of matches
 ```
 
-## Open the dashboard
+## Reproduce
 
-Just open `dashboard/frontend/index.html` in a browser — fully static, no server needed.
-It's a 7-page deck (Overview · Pressure · Batters · Bowlers · Confidence · Method · Validation):
-use the tabs, the Next button, or ← → keys; ↑ ↓ switches player on the Batters/Bowlers pages.
-Each page has its own link, e.g. `index.html#bowlers`.
+```
+data → wp model → leverage index → pressure flag → per-ball value → ratings → bootstrap → website + PDF
+```
 
-After re-running the analysis, rebuild the data file:
+1. Get the Data Pack (`ball_by_ball.csv`, `matches.csv`, `competitions.csv`, …). By default `prep.py` looks in
+   `~/Downloads/SupeRR Selector Season 2 | Problem Statement | Data Pack/SupeRR Selector Season 2 | Data Pack/`;
+   point it elsewhere with `DATA_DIR=/path/to/folder`.
+2. Install: `pip install -r analysis/requirements.txt` (Python 3.11).
+3. Run, from inside `analysis/`, in this order (about 3 minutes in total; writes ~500 MB of `.pkl` intermediates):
+
+| # | Script | What it does | Output |
+|---|---|---|---|
+| 1 | `prep.py` | Load CSVs; keep IPL + T20I, innings 1–2, decisive results, no DLS; rebuild score / wickets / balls state per ball | `balls.pkl` |
+| 2 | `wp.py` | Win-probability model per innings (gradient boosting, 5-fold grouped by match, out-of-fold) + Leverage Index | `balls_wp.pkl` |
+| 3 | `ledger.py` | Flag pressure balls (3 conditions) | `balls_final.pkl` |
+| 4 | `final1.py` | Context-expected runs/wickets, wicket run value λ by phase | `balls_v.pkl` |
+| 5 | `final2.py` | Opposition adjustment (ridge), shrinkage, `ratings()` function | `balls_v2.pkl`, `R.pkl` |
+| 6 | `bag.py` | 200 bootstrap resamples → **final top-10 tables** | `final_tables.pkl` |
+| 7 | `stab.py` | Sensitivity table (thresholds, weights, eligibility, k, IPL-only, T20I-only, no associates) | `sens.pkl` |
+| 8 | `rel.py` | Split-half reliability (20 random splits) | `rel.pkl` |
+| 9 | `export.py` | Everything the site and PDF show | `../dashboard_data.json` |
+| 10 | `charts.py` | Report charts | `fig_*.png` |
+| 11 | `report_pdf.py` | Methodology PDF (`SITE_URL=https://… python3 report_pdf.py` to print the link) | `../Pressure_Index_Methodology.pdf` |
+
+Then, from the repo root:
 
 ```bash
-python3 dashboard/build_data.py
+python3 dashboard/build_data.py          # website data.js + the static (no-JS) top-10 table
+cd analysis && python3 check_order.py    # site == static HTML == PDF order; prints the Unstop list
 ```
 
-Player photos load live from URLs (needs internet), set in the `PHOTOS` map in `index.html`:
-each player's ICC headshot in their national-team kit (`icc:` = ICC player id, from icc-cricket.com).
-Vaibhav Sooryavanshi, Krunal Pandya and Sunil Narine have no ICC headshot, so they fall back to
-their IPL headshot (`ipl:`). Any player can instead use `url:'https://…'`. If nothing loads → initials.
+`bag.py`, `stab.py` and `rel.py` use fixed random seeds, so a re-run gives the same lists.
+(`evid.py`, `mkjson.py` and `report.js` are the older .docx report path, kept for reference only.)
 
-The old dashboard (with CSV upload / "Explore Data") is kept as `dashboard/frontend/index_legacy.html`;
-it needs the backend: `bash dashboard/start.sh`, then http://localhost:3000/index_legacy.html
-(`pip install -r dashboard/backend/requirements.txt` first).
+## Website
 
-## Re-run the analysis
+`dashboard/frontend/` is fully static: `index.html` + `data.js` + `img/`. Pages: Overview · Pressure · Batters · Bowlers ·
+Pressure vs Normal · Confidence · Method · Validation (← → keys, or `index.html#bowlers` etc.).
+Player photos are stored in `img/` (`<name-slug>.icc.png` = ICC national-team headshot, `.ipl.png` = IPL headshot where ICC has none);
+a missing photo falls back to initials. With JavaScript off, a static top-10 table is shown.
 
-Run from inside `analysis/`, in this order:
-
-```bash
-cd analysis
-python3 prep.py      # load CSVs, filter, rebuild match state
-python3 wp.py        # win-probability model + Leverage Index
-python3 ledger.py    # flag pressure balls
-python3 final1.py    # expected values, wicket run value
-python3 final2.py    # opposition adjustment, shrinkage, ratings
-python3 stab.py      # stability + sensitivity
-python3 bag.py       # bootstrap → final top-10 tables
-python3 evid.py      # evidence tables + charts
-python3 mkjson.py    # export rows.json
-node report.js       # build the .docx report (needs `npm install` once)
-```
-
-The scripts write intermediate `.pkl` files (~500 MB) into `analysis/`. The whole run takes about 2–3 minutes.
-
-`prep.py` reads the CSVs from:
-`~/Downloads/SupeRR Selector Season 2 | Problem Statement | Data Pack/SupeRR Selector Season 2 | Data Pack/`
-If you move the Data Pack, edit the path at the top of `prep.py`.
+The old dashboard (CSV upload / "Explore Data") is kept as `dashboard/frontend/index_legacy.html` and needs the backend:
+`pip install -r dashboard/backend/requirements.txt && bash dashboard/start.sh`, then http://localhost:3000/index_legacy.html.
 
 ## Deployment
 
 | Part | Where | Config |
 |---|---|---|
 | Frontend (`dashboard/frontend/`) | Vercel — Root Directory `dashboard/frontend`, Framework "Other", no build | `dashboard/frontend/vercel.json` |
-| Backend (`dashboard/backend/`) | Render — Blueprint from repo | `render.yaml` |
-
-`index_legacy.html` calls `http://localhost:8000` when opened locally and
-`https://pressure-index-api.onrender.com` when deployed. If Render gives the service a different
-URL, update the `API` constant in `index_legacy.html`, or open `/legacy?api=https://<your-url>`.
-The Render free tier sleeps after 15 min idle, so the first request can take ~30–60 s.
+| Backend (`dashboard/backend/`, legacy page only) | Render — Blueprint from repo | `render.yaml` |

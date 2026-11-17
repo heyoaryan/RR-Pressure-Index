@@ -1,728 +1,4 @@
 {
- "bat": [
-  {
-   "name": "Vaibhav Sooryavanshi",
-   "point_score": 2.23,
-   "bag_score": 2.0,
-   "top10_freq": 0.57,
-   "mean_rank": 5.7,
-   "final_score": 2.12,
-   "pb": 92.0,
-   "stints": 20.0,
-   "pvraw100": 104.17,
-   "pv100": 52.33,
-   "usual100": 64.69,
-   "lift100": -12.37,
-   "cons_eb": 0.57,
-   "cons_raw": 0.6,
-   "ipl": 81,
-   "t20i": 11,
-   "sr": 248.35,
-   "exp_sr": 141.26,
-   "out_pct": 6.59,
-   "exp_out": 4.82,
-   "dots": 37.36,
-   "median_rank": 3.0,
-   "p10_rank": 1.0,
-   "p90_rank": 15.0
-  },
-  {
-   "name": "Kamindu Mendis",
-   "point_score": 2.01,
-   "bag_score": 1.83,
-   "top10_freq": 0.48,
-   "mean_rank": 5.12,
-   "final_score": 1.92,
-   "pb": 100.0,
-   "stints": 16.0,
-   "pvraw100": 89.31,
-   "pv100": 43.58,
-   "usual100": -3.07,
-   "lift100": 46.64,
-   "cons_eb": 0.68,
-   "cons_raw": 0.81,
-   "ipl": 11,
-   "t20i": 89,
-   "sr": 190.0,
-   "exp_sr": 137.7,
-   "out_pct": 2.0,
-   "exp_out": 6.14,
-   "dots": 25.0,
-   "median_rank": 3.0,
-   "p10_rank": 1.0,
-   "p90_rank": 14.0
-  },
-  {
-   "name": "Heinrich Klaasen",
-   "point_score": 1.91,
-   "bag_score": 1.41,
-   "top10_freq": 0.72,
-   "mean_rank": 11.52,
-   "final_score": 1.66,
-   "pb": 181.0,
-   "stints": 41.0,
-   "pvraw100": 68.81,
-   "pv100": 44.67,
-   "usual100": 46.9,
-   "lift100": -2.23,
-   "cons_eb": 0.63,
-   "cons_raw": 0.66,
-   "ipl": 162,
-   "t20i": 19,
-   "sr": 183.8,
-   "exp_sr": 137.9,
-   "out_pct": 3.35,
-   "exp_out": 5.57,
-   "dots": 21.79,
-   "median_rank": 6.0,
-   "p10_rank": 1.0,
-   "p90_rank": 25.0
-  },
-  {
-   "name": "Suryakumar Yadav",
-   "point_score": 1.88,
-   "bag_score": 1.26,
-   "top10_freq": 0.51,
-   "mean_rank": 12.7,
-   "final_score": 1.57,
-   "pb": 320.0,
-   "stints": 64.0,
-   "pvraw100": 53.64,
-   "pv100": 41.55,
-   "usual100": 42.46,
-   "lift100": -0.91,
-   "cons_eb": 0.69,
-   "cons_raw": 0.72,
-   "ipl": 171,
-   "t20i": 149,
-   "sr": 176.42,
-   "exp_sr": 137.57,
-   "out_pct": 4.4,
-   "exp_out": 5.39,
-   "dots": 30.19,
-   "median_rank": 10.0,
-   "p10_rank": 2.0,
-   "p90_rank": 30.0
-  },
-  {
-   "name": "Rovman Powell",
-   "point_score": 1.69,
-   "bag_score": 1.22,
-   "top10_freq": 0.52,
-   "mean_rank": 13.16,
-   "final_score": 1.46,
-   "pb": 223.0,
-   "stints": 48.0,
-   "pvraw100": 57.85,
-   "pv100": 40.72,
-   "usual100": 16.84,
-   "lift100": 23.88,
-   "cons_eb": 0.64,
-   "cons_raw": 0.67,
-   "ipl": 67,
-   "t20i": 156,
-   "sr": 181.08,
-   "exp_sr": 136.68,
-   "out_pct": 4.95,
-   "exp_out": 5.81,
-   "dots": 28.38,
-   "median_rank": 10.0,
-   "p10_rank": 3.9,
-   "p90_rank": 28.1
-  },
-  {
-   "name": "Tim David",
-   "point_score": 1.73,
-   "bag_score": 1.18,
-   "top10_freq": 0.48,
-   "mean_rank": 15.59,
-   "final_score": 1.45,
-   "pb": 243.0,
-   "stints": 54.0,
-   "pvraw100": 57.02,
-   "pv100": 41.78,
-   "usual100": 48.12,
-   "lift100": -6.34,
-   "cons_eb": 0.62,
-   "cons_raw": 0.65,
-   "ipl": 123,
-   "t20i": 120,
-   "sr": 185.12,
-   "exp_sr": 138.04,
-   "out_pct": 6.2,
-   "exp_out": 6.42,
-   "dots": 31.4,
-   "median_rank": 11.0,
-   "p10_rank": 2.0,
-   "p90_rank": 38.2
-  },
-  {
-   "name": "Abhishek Sharma",
-   "point_score": 1.65,
-   "bag_score": 1.06,
-   "top10_freq": 0.39,
-   "mean_rank": 18.45,
-   "final_score": 1.35,
-   "pb": 294.0,
-   "stints": 62.0,
-   "pvraw100": 50.03,
-   "pv100": 39.34,
-   "usual100": 50.82,
-   "lift100": -11.48,
-   "cons_eb": 0.65,
-   "cons_raw": 0.68,
-   "ipl": 171,
-   "t20i": 123,
-   "sr": 181.1,
-   "exp_sr": 132.9,
-   "out_pct": 5.5,
-   "exp_out": 4.51,
-   "dots": 36.08,
-   "median_rank": 15.0,
-   "p10_rank": 3.9,
-   "p90_rank": 39.1
-  },
-  {
-   "name": "David Miller",
-   "point_score": 1.36,
-   "bag_score": 1.13,
-   "top10_freq": 0.35,
-   "mean_rank": 16.94,
-   "final_score": 1.24,
-   "pb": 211.0,
-   "stints": 38.0,
-   "pvraw100": 57.01,
-   "pv100": 37.68,
-   "usual100": 21.14,
-   "lift100": 16.54,
-   "cons_eb": 0.58,
-   "cons_raw": 0.61,
-   "ipl": 171,
-   "t20i": 40,
-   "sr": 179.15,
-   "exp_sr": 154.52,
-   "out_pct": 3.79,
-   "exp_out": 7.24,
-   "dots": 22.27,
-   "median_rank": 17.0,
-   "p10_rank": 3.0,
-   "p90_rank": 45.1
-  },
-  {
-   "name": "Ishan Kishan",
-   "point_score": 1.48,
-   "bag_score": 1.01,
-   "top10_freq": 0.29,
-   "mean_rank": 18.52,
-   "final_score": 1.24,
-   "pb": 331.0,
-   "stints": 65.0,
-   "pvraw100": 48.33,
-   "pv100": 37.69,
-   "usual100": 13.56,
-   "lift100": 24.13,
-   "cons_eb": 0.63,
-   "cons_raw": 0.65,
-   "ipl": 256,
-   "t20i": 75,
-   "sr": 160.61,
-   "exp_sr": 135.63,
-   "out_pct": 2.73,
-   "exp_out": 4.72,
-   "dots": 33.94,
-   "median_rank": 15.5,
-   "p10_rank": 5.0,
-   "p90_rank": 36.1
-  },
-  {
-   "name": "Mohammad Nawaz",
-   "point_score": 1.26,
-   "bag_score": 1.09,
-   "top10_freq": 0.36,
-   "mean_rank": 18.54,
-   "final_score": 1.18,
-   "pb": 98.0,
-   "stints": 27.0,
-   "pvraw100": 63.63,
-   "pv100": 33.41,
-   "usual100": 2.46,
-   "lift100": 30.95,
-   "cons_eb": 0.64,
-   "cons_raw": 0.7,
-   "ipl": 0,
-   "t20i": 98,
-   "sr": 177.55,
-   "exp_sr": 142.87,
-   "out_pct": 3.06,
-   "exp_out": 6.88,
-   "dots": 31.63,
-   "median_rank": 12.5,
-   "p10_rank": 3.0,
-   "p90_rank": 43.6
-  }
- ],
- "bowl": [
-  {
-   "name": "Josh Hazlewood",
-   "point_score": 2.32,
-   "bag_score": 1.63,
-   "top10_freq": 0.66,
-   "mean_rank": 9.41,
-   "final_score": 1.97,
-   "pb": 211.0,
-   "stints": 38.0,
-   "pvraw100": 69.1,
-   "pv100": 27.32,
-   "usual100": 22.54,
-   "lift100": 4.78,
-   "cons_eb": 0.62,
-   "cons_raw": 0.63,
-   "ipl": 135,
-   "t20i": 76,
-   "econ": 7.63,
-   "exp_econ": 9.08,
-   "wk_pct": 9.36,
-   "exp_wk": 5.42,
-   "dots": 47.29,
-   "median_rank": 6.5,
-   "p10_rank": 1.0,
-   "p90_rank": 22.1
-  },
-  {
-   "name": "Abrar Ahmed",
-   "point_score": 1.94,
-   "bag_score": 1.57,
-   "top10_freq": 0.55,
-   "mean_rank": 9.2,
-   "final_score": 1.76,
-   "pb": 124.0,
-   "stints": 19.0,
-   "pvraw100": 69.91,
-   "pv100": 24.05,
-   "usual100": 24.16,
-   "lift100": -0.11,
-   "cons_eb": 0.71,
-   "cons_raw": 0.79,
-   "ipl": 0,
-   "t20i": 124,
-   "econ": 5.66,
-   "exp_econ": 7.8,
-   "wk_pct": 8.2,
-   "exp_wk": 4.56,
-   "dots": 48.36,
-   "median_rank": 6.0,
-   "p10_rank": 2.0,
-   "p90_rank": 22.5
-  },
-  {
-   "name": "Krunal Pandya",
-   "point_score": 2.03,
-   "bag_score": 1.35,
-   "top10_freq": 0.52,
-   "mean_rank": 13.24,
-   "final_score": 1.69,
-   "pb": 208.0,
-   "stints": 40.0,
-   "pvraw100": 54.79,
-   "pv100": 25.02,
-   "usual100": 22.68,
-   "lift100": 2.33,
-   "cons_eb": 0.67,
-   "cons_raw": 0.7,
-   "ipl": 208,
-   "t20i": 0,
-   "econ": 6.79,
-   "exp_econ": 8.06,
-   "wk_pct": 6.37,
-   "exp_wk": 4.74,
-   "dots": 34.31,
-   "median_rank": 10.0,
-   "p10_rank": 2.0,
-   "p90_rank": 28.0
-  },
-  {
-   "name": "Yuzvendra Chahal",
-   "point_score": 2.21,
-   "bag_score": 1.16,
-   "top10_freq": 0.34,
-   "mean_rank": 16.99,
-   "final_score": 1.68,
-   "pb": 325.0,
-   "stints": 69.0,
-   "pvraw100": 48.41,
-   "pv100": 26.04,
-   "usual100": 21.2,
-   "lift100": 4.85,
-   "cons_eb": 0.66,
-   "cons_raw": 0.68,
-   "ipl": 264,
-   "t20i": 61,
-   "econ": 8.34,
-   "exp_econ": 8.58,
-   "wk_pct": 7.99,
-   "exp_wk": 5.3,
-   "dots": 30.67,
-   "median_rank": 13.0,
-   "p10_rank": 3.0,
-   "p90_rank": 34.0
-  },
-  {
-   "name": "Sunil Narine",
-   "point_score": 1.98,
-   "bag_score": 1.36,
-   "top10_freq": 0.59,
-   "mean_rank": 12.3,
-   "final_score": 1.67,
-   "pb": 207.0,
-   "stints": 45.0,
-   "pvraw100": 54.22,
-   "pv100": 24.07,
-   "usual100": 35.55,
-   "lift100": -11.47,
-   "cons_eb": 0.72,
-   "cons_raw": 0.76,
-   "ipl": 207,
-   "t20i": 0,
-   "econ": 5.97,
-   "exp_econ": 7.99,
-   "wk_pct": 4.37,
-   "exp_wk": 4.96,
-   "dots": 44.66,
-   "median_rank": 7.5,
-   "p10_rank": 2.0,
-   "p90_rank": 26.3
-  },
-  {
-   "name": "Sikandar Raza",
-   "point_score": 1.51,
-   "bag_score": 1.16,
-   "top10_freq": 0.32,
-   "mean_rank": 16.37,
-   "final_score": 1.33,
-   "pb": 143.0,
-   "stints": 36.0,
-   "pvraw100": 57.86,
-   "pv100": 23.02,
-   "usual100": 15.99,
-   "lift100": 7.03,
-   "cons_eb": 0.62,
-   "cons_raw": 0.64,
-   "ipl": 15,
-   "t20i": 128,
-   "econ": 5.7,
-   "exp_econ": 7.8,
-   "wk_pct": 6.38,
-   "exp_wk": 4.7,
-   "dots": 41.84,
-   "median_rank": 18.0,
-   "p10_rank": 3.0,
-   "p90_rank": 42.2
-  },
-  {
-   "name": "Lockie Ferguson",
-   "point_score": 1.44,
-   "bag_score": 1.23,
-   "top10_freq": 0.45,
-   "mean_rank": 18.32,
-   "final_score": 1.33,
-   "pb": 119.0,
-   "stints": 32.0,
-   "pvraw100": 64.56,
-   "pv100": 22.49,
-   "usual100": 16.95,
-   "lift100": 5.55,
-   "cons_eb": 0.63,
-   "cons_raw": 0.66,
-   "ipl": 69,
-   "t20i": 50,
-   "econ": 8.41,
-   "exp_econ": 8.97,
-   "wk_pct": 9.82,
-   "exp_wk": 5.48,
-   "dots": 50.89,
-   "median_rank": 12.0,
-   "p10_rank": 2.0,
-   "p90_rank": 48.2
-  },
-  {
-   "name": "Tim Southee",
-   "point_score": 1.48,
-   "bag_score": 1.17,
-   "top10_freq": 0.49,
-   "mean_rank": 17.45,
-   "final_score": 1.33,
-   "pb": 126.0,
-   "stints": 26.0,
-   "pvraw100": 58.36,
-   "pv100": 22.0,
-   "usual100": 15.31,
-   "lift100": 6.69,
-   "cons_eb": 0.68,
-   "cons_raw": 0.73,
-   "ipl": 38,
-   "t20i": 88,
-   "econ": 7.19,
-   "exp_econ": 8.23,
-   "wk_pct": 9.48,
-   "exp_wk": 4.99,
-   "dots": 53.45,
-   "median_rank": 10.0,
-   "p10_rank": 2.0,
-   "p90_rank": 34.5
-  },
-  {
-   "name": "Matheesha Pathirana",
-   "point_score": 1.53,
-   "bag_score": 1.05,
-   "top10_freq": 0.33,
-   "mean_rank": 19.47,
-   "final_score": 1.29,
-   "pb": 209.0,
-   "stints": 34.0,
-   "pvraw100": 47.41,
-   "pv100": 22.4,
-   "usual100": 25.1,
-   "lift100": -2.7,
-   "cons_eb": 0.67,
-   "cons_raw": 0.71,
-   "ipl": 132,
-   "t20i": 77,
-   "econ": 8.84,
-   "exp_econ": 9.25,
-   "wk_pct": 9.78,
-   "exp_wk": 6.86,
-   "dots": 39.13,
-   "median_rank": 18.0,
-   "p10_rank": 4.0,
-   "p90_rank": 45.3
-  },
-  {
-   "name": "Axar Patel",
-   "point_score": 1.55,
-   "bag_score": 0.82,
-   "top10_freq": 0.12,
-   "mean_rank": 25.72,
-   "final_score": 1.18,
-   "pb": 346.0,
-   "stints": 80.0,
-   "pvraw100": 38.03,
-   "pv100": 22.81,
-   "usual100": 21.34,
-   "lift100": 1.47,
-   "cons_eb": 0.65,
-   "cons_raw": 0.66,
-   "ipl": 166,
-   "t20i": 180,
-   "econ": 7.12,
-   "exp_econ": 8.28,
-   "wk_pct": 4.68,
-   "exp_wk": 4.81,
-   "dots": 36.84,
-   "median_rank": 22.5,
-   "p10_rank": 10.0,
-   "p90_rank": 45.0
-  }
- ],
- "lift_bat": [
-  [
-   "Vaibhav Sooryavanshi",
-   "65",
-   "52",
-   "-12"
-  ],
-  [
-   "Kamindu Mendis",
-   "-3",
-   "44",
-   "+47"
-  ],
-  [
-   "Heinrich Klaasen",
-   "47",
-   "45",
-   "-2"
-  ],
-  [
-   "Suryakumar Yadav",
-   "42",
-   "42",
-   "-1"
-  ],
-  [
-   "Rovman Powell",
-   "17",
-   "41",
-   "+24"
-  ],
-  [
-   "Tim David",
-   "48",
-   "42",
-   "-6"
-  ],
-  [
-   "Abhishek Sharma",
-   "51",
-   "39",
-   "-11"
-  ],
-  [
-   "David Miller",
-   "21",
-   "38",
-   "+17"
-  ],
-  [
-   "Ishan Kishan",
-   "14",
-   "38",
-   "+24"
-  ],
-  [
-   "Mohammad Nawaz",
-   "2",
-   "33",
-   "+31"
-  ]
- ],
- "lift_bowl": [
-  [
-   "Josh Hazlewood",
-   "23",
-   "27",
-   "+5"
-  ],
-  [
-   "Abrar Ahmed",
-   "24",
-   "24",
-   "-0"
-  ],
-  [
-   "Krunal Pandya",
-   "23",
-   "25",
-   "+2"
-  ],
-  [
-   "Yuzvendra Chahal",
-   "21",
-   "26",
-   "+5"
-  ],
-  [
-   "Sunil Narine",
-   "36",
-   "24",
-   "-11"
-  ],
-  [
-   "Sikandar Raza",
-   "16",
-   "23",
-   "+7"
-  ],
-  [
-   "Lockie Ferguson",
-   "17",
-   "22",
-   "+6"
-  ],
-  [
-   "Tim Southee",
-   "15",
-   "22",
-   "+7"
-  ],
-  [
-   "Matheesha Pathirana",
-   "25",
-   "22",
-   "-3"
-  ],
-  [
-   "Axar Patel",
-   "21",
-   "23",
-   "+1"
-  ]
- ],
- "next_bat": [
-  [
-   11,
-   "Rinku Singh",
-   "1.17",
-   "40%"
-  ],
-  [
-   12,
-   "Rashid Khan",
-   "1.15",
-   "32%"
-  ],
-  [
-   13,
-   "Namboori Tilak Varma",
-   "1.11",
-   "18%"
-  ],
-  [
-   14,
-   "Matthew Short",
-   "1.08",
-   "18%"
-  ],
-  [
-   15,
-   "Mitchell Marsh",
-   "1.07",
-   "24%"
-  ],
-  [
-   16,
-   "Phil Salt",
-   "0.96",
-   "20%"
-  ]
- ],
- "next_bowl": [
-  [
-   11,
-   "Mohsin Khan",
-   "1.05",
-   "38%"
-  ],
-  [
-   12,
-   "Wanindu Hasaranga",
-   "1.05",
-   "20%"
-  ],
-  [
-   13,
-   "Mitchell Santner",
-   "1.04",
-   "23%"
-  ],
-  [
-   14,
-   "Kuldeep Yadav",
-   "1.01",
-   "20%"
-  ],
-  [
-   15,
-   "Umran Malik",
-   "1.01",
-   "20%"
-  ],
-  [
-   16,
-   "Patrick Cummins",
-   "0.99",
-   "30%"
-  ]
- ],
  "overview": {
   "n_match": 788,
   "n_ball": 188151,
@@ -733,9 +9,117 @@
   "ll1": 0.6455355850773535,
   "auc1": 0.6791816040193571,
   "br1": 0.2259854468157461,
-  "ll2": 0.41675127703205267,
-  "auc2": 0.8886598320654043,
-  "br2": 0.13587450691888942
+  "br1_naive": 0.2499670916910785,
+  "ll2": 0.41675127703205256,
+  "auc2": 0.8886598320654042,
+  "br2": 0.13587450691888942,
+  "br2_naive": 0.24938626998897861,
+  "calib": {
+   "1": [
+    [
+     0.055,
+     0.159,
+     1614
+    ],
+    [
+     0.157,
+     0.182,
+     4616
+    ],
+    [
+     0.254,
+     0.298,
+     8231
+    ],
+    [
+     0.353,
+     0.354,
+     11173
+    ],
+    [
+     0.454,
+     0.467,
+     19636
+    ],
+    [
+     0.547,
+     0.547,
+     22860
+    ],
+    [
+     0.648,
+     0.643,
+     16287
+    ],
+    [
+     0.74,
+     0.7,
+     9156
+    ],
+    [
+     0.841,
+     0.777,
+     3396
+    ],
+    [
+     0.946,
+     0.825,
+     1086
+    ]
+   ],
+   "2": [
+    [
+     0.04,
+     0.031,
+     18349
+    ],
+    [
+     0.148,
+     0.168,
+     9331
+    ],
+    [
+     0.249,
+     0.245,
+     7409
+    ],
+    [
+     0.349,
+     0.369,
+     6886
+    ],
+    [
+     0.448,
+     0.464,
+     6233
+    ],
+    [
+     0.551,
+     0.576,
+     5684
+    ],
+    [
+     0.651,
+     0.653,
+     6117
+    ],
+    [
+     0.751,
+     0.741,
+     6396
+    ],
+    [
+     0.852,
+     0.816,
+     8126
+    ],
+    [
+     0.961,
+     0.952,
+     15565
+    ]
+   ]
+  }
  },
  "tab": [
   {
@@ -744,9 +128,7 @@
    "wk": 5.484,
    "dot": 37.068,
    "wp": 0.489,
-   "LI": 0.76,
-   "bl": 63.216,
-   "wl": 2.651
+   "LI": 0.76
   },
   {
    "balls": 25944,
@@ -754,33 +136,2338 @@
    "wk": 6.121,
    "dot": 36.417,
    "wp": 0.502,
-   "LI": 2.413,
-   "bl": 59.269,
-   "wl": 2.837
+   "LI": 2.413
   }
  ],
- "phase_tab": [
+ "phase": [
+  [
+   "Powerplay (1–6)",
+   13.4
+  ],
+  [
+   "Middle (7–15)",
+   12.9
+  ],
+  [
+   "Death (16–20)",
+   19.1
+  ],
+  [
+   "1st innings",
+   7.7
+  ],
+  [
+   "2nd innings (chase)",
+   21.8
+  ]
+ ],
+ "by_over": {
+  "1": [
+   0.0,
+   0.0,
+   0.5,
+   1.6,
+   2.5,
+   4.3,
+   11.2,
+   10.2,
+   10.6,
+   8.3,
+   8.3,
+   8.7,
+   7.1,
+   7.5,
+   5.9,
+   12.9,
+   10.0,
+   13.5,
+   11.8,
+   19.7
+  ],
+  "2": [
+   43.5,
+   24.3,
+   22.5,
+   21.3,
+   20.2,
+   20.4,
+   15.5,
+   16.2,
+   15.1,
+   16.0,
+   16.4,
+   17.9,
+   17.7,
+   19.3,
+   20.9,
+   27.6,
+   26.7,
+   25.6,
+   27.7,
+   27.0
+  ]
+ },
+ "bat": [
   {
-   "P": false,
-   "balls": 154404,
-   "rr": 8.475,
-   "wk": 5.484,
-   "dot": 37.068,
-   "wp": 0.489,
-   "LI": 0.76,
-   "bl": 63.216,
-   "wl": 2.651
+   "name": "Kamindu Mendis",
+   "point_score": 2.187,
+   "bag_score": 1.954,
+   "final_score": 2.071,
+   "top10_freq": 0.565,
+   "mean_rank": 3.869,
+   "median_rank": 2.0,
+   "p10_rank": 1.0,
+   "p90_rank": 8.0,
+   "pb": 100.0,
+   "stints": 16.0,
+   "pvraw100": 89.315,
+   "pv100": 43.578,
+   "usual100": -3.066,
+   "lift100": 46.643,
+   "cons_eb": 0.684,
+   "cons_raw": 0.812,
+   "sr_p": 190.0,
+   "out_p": 2.0,
+   "exp_sr_p": 137.7,
+   "exp_out_p": 6.14,
+   "bnd_p": 27.0,
+   "dots_p": 25.0,
+   "sr_n": 117.56,
+   "out_n": 6.21,
+   "exp_sr_n": 125.84,
+   "exp_out_n": 4.59,
+   "bnd_n": 12.85,
+   "dots_n": 39.61,
+   "ipl": 11,
+   "t20i": 89,
+   "rank": 1,
+   "pid": 4904
   },
   {
-   "P": true,
-   "balls": 25944,
-   "rr": 8.574,
-   "wk": 6.121,
-   "dot": 36.417,
-   "wp": 0.502,
-   "LI": 2.413,
-   "bl": 59.269,
-   "wl": 2.837
+   "name": "Vaibhav Sooryavanshi",
+   "point_score": 1.815,
+   "bag_score": 1.759,
+   "final_score": 1.787,
+   "top10_freq": 0.575,
+   "mean_rank": 8.098,
+   "median_rank": 3.0,
+   "p10_rank": 1.0,
+   "p90_rank": 24.8,
+   "pb": 92.0,
+   "stints": 20.0,
+   "pvraw100": 104.17,
+   "pv100": 52.327,
+   "usual100": 64.694,
+   "lift100": -12.367,
+   "cons_eb": 0.567,
+   "cons_raw": 0.6,
+   "sr_p": 248.35,
+   "out_p": 6.59,
+   "exp_sr_p": 141.26,
+   "exp_out_p": 4.82,
+   "bnd_p": 45.05,
+   "dots_p": 37.36,
+   "sr_n": 213.38,
+   "out_n": 5.1,
+   "exp_sr_n": 137.05,
+   "exp_out_n": 4.38,
+   "bnd_n": 35.67,
+   "dots_n": 34.39,
+   "ipl": 81,
+   "t20i": 10,
+   "rank": 2,
+   "pid": 50284
+  },
+  {
+   "name": "Rovman Powell",
+   "point_score": 1.696,
+   "bag_score": 1.233,
+   "final_score": 1.465,
+   "top10_freq": 0.56,
+   "mean_rank": 12.295,
+   "median_rank": 9.0,
+   "p10_rank": 3.0,
+   "p90_rank": 25.1,
+   "pb": 223.0,
+   "stints": 48.0,
+   "pvraw100": 57.845,
+   "pv100": 40.718,
+   "usual100": 16.842,
+   "lift100": 23.877,
+   "cons_eb": 0.636,
+   "cons_raw": 0.667,
+   "sr_p": 181.08,
+   "out_p": 4.95,
+   "exp_sr_p": 136.68,
+   "exp_out_p": 5.81,
+   "bnd_p": 24.77,
+   "dots_p": 28.38,
+   "sr_n": 140.08,
+   "out_n": 5.29,
+   "exp_sr_n": 132.01,
+   "exp_out_n": 5.55,
+   "bnd_n": 18.16,
+   "dots_n": 39.62,
+   "ipl": 66,
+   "t20i": 156,
+   "rank": 3,
+   "pid": 4986
+  },
+  {
+   "name": "Heinrich Klaasen",
+   "point_score": 1.621,
+   "bag_score": 1.246,
+   "final_score": 1.433,
+   "top10_freq": 0.545,
+   "mean_rank": 14.335,
+   "median_rank": 9.0,
+   "p10_rank": 2.0,
+   "p90_rank": 35.0,
+   "pb": 181.0,
+   "stints": 41.0,
+   "pvraw100": 68.808,
+   "pv100": 44.671,
+   "usual100": 46.903,
+   "lift100": -2.232,
+   "cons_eb": 0.626,
+   "cons_raw": 0.659,
+   "sr_p": 183.8,
+   "out_p": 3.35,
+   "exp_sr_p": 137.9,
+   "exp_out_p": 5.57,
+   "bnd_p": 22.35,
+   "dots_p": 21.79,
+   "sr_n": 164.95,
+   "out_n": 4.17,
+   "exp_sr_n": 135.97,
+   "exp_out_n": 5.44,
+   "bnd_n": 21.57,
+   "dots_n": 26.14,
+   "ipl": 160,
+   "t20i": 19,
+   "rank": 4,
+   "pid": 4260
+  },
+  {
+   "name": "Suryakumar Yadav",
+   "point_score": 1.588,
+   "bag_score": 1.084,
+   "final_score": 1.336,
+   "top10_freq": 0.355,
+   "mean_rank": 16.355,
+   "median_rank": 14.0,
+   "p10_rank": 3.0,
+   "p90_rank": 33.0,
+   "pb": 320.0,
+   "stints": 64.0,
+   "pvraw100": 53.635,
+   "pv100": 41.552,
+   "usual100": 42.462,
+   "lift100": -0.91,
+   "cons_eb": 0.686,
+   "cons_raw": 0.719,
+   "sr_p": 176.42,
+   "out_p": 4.4,
+   "exp_sr_p": 137.57,
+   "exp_out_p": 5.39,
+   "bnd_p": 26.1,
+   "dots_p": 30.19,
+   "sr_n": 165.67,
+   "out_n": 4.18,
+   "exp_sr_n": 135.68,
+   "exp_out_n": 4.9,
+   "bnd_n": 24.54,
+   "dots_n": 32.34,
+   "ipl": 171,
+   "t20i": 147,
+   "rank": 5,
+   "pid": 1699
+  },
+  {
+   "name": "Mohammad Nawaz",
+   "point_score": 1.388,
+   "bag_score": 1.188,
+   "final_score": 1.288,
+   "top10_freq": 0.38,
+   "mean_rank": 15.706,
+   "median_rank": 11.0,
+   "p10_rank": 2.9,
+   "p90_rank": 37.1,
+   "pb": 98.0,
+   "stints": 27.0,
+   "pvraw100": 63.629,
+   "pv100": 33.413,
+   "usual100": 2.462,
+   "lift100": 30.951,
+   "cons_eb": 0.645,
+   "cons_raw": 0.704,
+   "sr_p": 177.55,
+   "out_p": 3.06,
+   "exp_sr_p": 142.87,
+   "exp_out_p": 6.88,
+   "bnd_p": 24.49,
+   "dots_p": 31.63,
+   "sr_n": 133.75,
+   "out_n": 7.56,
+   "exp_sr_n": 141.49,
+   "exp_out_n": 6.5,
+   "bnd_n": 16.62,
+   "dots_n": 36.78,
+   "ipl": 0,
+   "t20i": 98,
+   "rank": 6,
+   "pid": 2490
+  },
+  {
+   "name": "Ishan Kishan",
+   "point_score": 1.512,
+   "bag_score": 1.033,
+   "final_score": 1.272,
+   "top10_freq": 0.35,
+   "mean_rank": 17.195,
+   "median_rank": 13.0,
+   "p10_rank": 5.0,
+   "p90_rank": 35.0,
+   "pb": 331.0,
+   "stints": 65.0,
+   "pvraw100": 48.334,
+   "pv100": 37.693,
+   "usual100": 13.563,
+   "lift100": 24.129,
+   "cons_eb": 0.625,
+   "cons_raw": 0.646,
+   "sr_p": 160.61,
+   "out_p": 2.73,
+   "exp_sr_p": 135.63,
+   "exp_out_p": 4.72,
+   "bnd_p": 24.24,
+   "dots_p": 33.94,
+   "sr_n": 143.99,
+   "out_n": 4.86,
+   "exp_sr_n": 136.68,
+   "exp_out_n": 4.64,
+   "bnd_n": 21.35,
+   "dots_n": 37.16,
+   "ipl": 255,
+   "t20i": 75,
+   "rank": 7,
+   "pid": 4117
+  },
+  {
+   "name": "David Miller",
+   "point_score": 1.346,
+   "bag_score": 1.126,
+   "final_score": 1.236,
+   "top10_freq": 0.46,
+   "mean_rank": 16.32,
+   "median_rank": 11.0,
+   "p10_rank": 3.0,
+   "p90_rank": 37.0,
+   "pb": 211.0,
+   "stints": 38.0,
+   "pvraw100": 57.011,
+   "pv100": 37.682,
+   "usual100": 21.138,
+   "lift100": 16.544,
+   "cons_eb": 0.583,
+   "cons_raw": 0.605,
+   "sr_p": 179.15,
+   "out_p": 3.79,
+   "exp_sr_p": 154.52,
+   "exp_out_p": 7.24,
+   "bnd_p": 23.22,
+   "dots_p": 22.27,
+   "sr_n": 141.93,
+   "out_n": 3.79,
+   "exp_sr_n": 142.01,
+   "exp_out_n": 5.57,
+   "bnd_n": 17.51,
+   "dots_n": 32.0,
+   "ipl": 171,
+   "t20i": 40,
+   "rank": 8,
+   "pid": 1077
+  },
+  {
+   "name": "Tim David",
+   "point_score": 1.416,
+   "bag_score": 0.996,
+   "final_score": 1.206,
+   "top10_freq": 0.355,
+   "mean_rank": 19.66,
+   "median_rank": 15.5,
+   "p10_rank": 4.0,
+   "p90_rank": 41.1,
+   "pb": 243.0,
+   "stints": 54.0,
+   "pvraw100": 57.025,
+   "pv100": 41.783,
+   "usual100": 48.121,
+   "lift100": -6.337,
+   "cons_eb": 0.624,
+   "cons_raw": 0.648,
+   "sr_p": 185.12,
+   "out_p": 6.2,
+   "exp_sr_p": 138.04,
+   "exp_out_p": 6.42,
+   "bnd_p": 25.62,
+   "dots_p": 31.4,
+   "sr_n": 174.78,
+   "out_n": 4.8,
+   "exp_sr_n": 137.24,
+   "exp_out_n": 6.07,
+   "bnd_n": 24.78,
+   "dots_n": 31.11,
+   "ipl": 123,
+   "t20i": 119,
+   "rank": 9,
+   "pid": 6396
+  },
+  {
+   "name": "Matthew Short",
+   "point_score": 1.243,
+   "bag_score": 1.128,
+   "final_score": 1.186,
+   "top10_freq": 0.24,
+   "mean_rank": 14.202,
+   "median_rank": 11.0,
+   "p10_rank": 5.0,
+   "p90_rank": 28.0,
+   "pb": 88.0,
+   "stints": 16.0,
+   "pvraw100": 54.947,
+   "pv100": 29.192,
+   "usual100": -2.295,
+   "lift100": 31.487,
+   "cons_eb": 0.684,
+   "cons_raw": 0.812,
+   "sr_p": 155.68,
+   "out_p": 2.27,
+   "exp_sr_p": 119.71,
+   "exp_out_p": 4.79,
+   "bnd_p": 25.0,
+   "dots_p": 38.64,
+   "sr_n": 133.33,
+   "out_n": 7.94,
+   "exp_sr_n": 129.33,
+   "exp_out_n": 4.69,
+   "bnd_n": 18.73,
+   "dots_n": 42.22,
+   "ipl": 39,
+   "t20i": 49,
+   "rank": 10,
+   "pid": 3727
   }
+ ],
+ "next_bat": [
+  [
+   11,
+   "Rashid Khan",
+   1.14,
+   0.33
+  ],
+  [
+   12,
+   "Rinku Singh",
+   1.11,
+   0.38
+  ],
+  [
+   13,
+   "Abhishek Sharma",
+   1.06,
+   0.23
+  ],
+  [
+   14,
+   "Mitchell Marsh",
+   1.0,
+   0.23
+  ],
+  [
+   15,
+   "Namboori Tilak Varma",
+   1.0,
+   0.15
+  ],
+  [
+   16,
+   "Washington Sundar",
+   0.89,
+   0.23
+  ]
+ ],
+ "scatter_bat": [
+  [
+   "Kamindu Mendis",
+   -3.1,
+   43.6,
+   1
+  ],
+  [
+   "Vaibhav Sooryavanshi",
+   64.7,
+   52.3,
+   1
+  ],
+  [
+   "Rovman Powell",
+   16.8,
+   40.7,
+   1
+  ],
+  [
+   "Heinrich Klaasen",
+   46.9,
+   44.7,
+   1
+  ],
+  [
+   "Suryakumar Yadav",
+   42.5,
+   41.6,
+   1
+  ],
+  [
+   "Mohammad Nawaz",
+   2.5,
+   33.4,
+   1
+  ],
+  [
+   "Ishan Kishan",
+   13.6,
+   37.7,
+   1
+  ],
+  [
+   "David Miller",
+   21.1,
+   37.7,
+   1
+  ],
+  [
+   "Tim David",
+   48.1,
+   41.8,
+   1
+  ],
+  [
+   "Matthew Short",
+   -2.3,
+   29.2,
+   1
+  ],
+  [
+   "Rashid Khan",
+   19.1,
+   35.5,
+   0
+  ],
+  [
+   "Rinku Singh",
+   29.1,
+   37.3,
+   0
+  ],
+  [
+   "Abhishek Sharma",
+   50.8,
+   39.3,
+   0
+  ],
+  [
+   "Mitchell Marsh",
+   26.1,
+   35.0,
+   0
+  ],
+  [
+   "Namboori Tilak Varma",
+   28.0,
+   34.3,
+   0
+  ],
+  [
+   "Washington Sundar",
+   6.5,
+   33.5,
+   0
+  ],
+  [
+   "Tanzid Hasan",
+   -1.4,
+   30.3,
+   0
+  ],
+  [
+   "Dinesh Karthik",
+   29.0,
+   32.7,
+   0
+  ],
+  [
+   "Prabhsimran Singh",
+   22.8,
+   32.6,
+   0
+  ],
+  [
+   "Shreyas Iyer",
+   29.7,
+   35.3,
+   0
+  ],
+  [
+   "Phil Salt",
+   40.2,
+   33.2,
+   0
+  ],
+  [
+   "Jitesh Sharma",
+   19.2,
+   27.4,
+   0
+  ],
+  [
+   "Nicholas Pooran",
+   29.7,
+   32.7,
+   0
+  ],
+  [
+   "Shubman Gill",
+   24.7,
+   27.0,
+   0
+  ],
+  [
+   "Sikandar Raza",
+   10.3,
+   26.9,
+   0
+  ],
+  [
+   "M Shahrukh Khan",
+   9.9,
+   24.6,
+   0
+  ],
+  [
+   "Naman Dhir",
+   31.4,
+   26.0,
+   0
+  ],
+  [
+   "Rahul Tewatia",
+   13.3,
+   25.2,
+   0
+  ],
+  [
+   "Salman Agha",
+   0.6,
+   21.8,
+   0
+  ],
+  [
+   "Fakhar Zaman",
+   0.4,
+   21.0,
+   0
+  ],
+  [
+   "Rajat Patidar",
+   40.2,
+   26.7,
+   0
+  ],
+  [
+   "Cameron Green",
+   30.8,
+   28.4,
+   0
+  ],
+  [
+   "Liam Livingstone",
+   24.7,
+   23.5,
+   0
+  ],
+  [
+   "Hardik Pandya",
+   14.4,
+   23.1,
+   0
+  ],
+  [
+   "Yashasvi Jaiswal",
+   26.5,
+   24.9,
+   0
+  ],
+  [
+   "Ryan Rickelton",
+   25.1,
+   22.9,
+   0
+  ],
+  [
+   "Shivam Dube",
+   26.4,
+   23.8,
+   0
+  ],
+  [
+   "Matthew Wade",
+   13.1,
+   22.3,
+   0
+  ],
+  [
+   "Tristan Stubbs",
+   29.9,
+   26.8,
+   0
+  ],
+  [
+   "Ravindra Jadeja",
+   13.9,
+   20.6,
+   0
+  ],
+  [
+   "Daryl Mitchell",
+   19.7,
+   22.6,
+   0
+  ],
+  [
+   "Nitish Rana",
+   16.8,
+   19.7,
+   0
+  ],
+  [
+   "Kusal Mendis",
+   2.5,
+   21.4,
+   0
+  ],
+  [
+   "Mahendra Singh Dhoni",
+   25.2,
+   23.3,
+   0
+  ],
+  [
+   "George Dockrell",
+   11.1,
+   21.1,
+   0
+  ],
+  [
+   "Riyan Parag",
+   24.4,
+   22.4,
+   0
+  ],
+  [
+   "Towhid Hridoy",
+   2.3,
+   20.1,
+   0
+  ],
+  [
+   "Josh Inglis",
+   30.4,
+   21.5,
+   0
+  ],
+  [
+   "Curtis Campher",
+   0.0,
+   14.5,
+   0
+  ],
+  [
+   "Nitish Reddy",
+   26.7,
+   19.2,
+   0
+  ],
+  [
+   "Moeen Ali",
+   7.4,
+   17.5,
+   0
+  ],
+  [
+   "Krunal Pandya",
+   0.7,
+   19.8,
+   0
+  ],
+  [
+   "Andre Russell",
+   48.2,
+   21.5,
+   0
+  ],
+  [
+   "Dhruv Jurel",
+   22.7,
+   18.8,
+   0
+  ],
+  [
+   "Rachin Ravindra",
+   3.9,
+   16.9,
+   0
+  ],
+  [
+   "Harry Brook",
+   33.0,
+   21.2,
+   0
+  ],
+  [
+   "Reeza Hendricks",
+   22.2,
+   17.1,
+   0
+  ],
+  [
+   "Quinton de Kock",
+   18.4,
+   20.7,
+   0
+  ],
+  [
+   "Wriddhiman Saha",
+   -2.4,
+   13.3,
+   0
+  ],
+  [
+   "Faf du Plessis",
+   20.1,
+   17.3,
+   0
+  ],
+  [
+   "Virat Kohli",
+   26.6,
+   19.4,
+   0
+  ],
+  [
+   "Roston Chase",
+   0.2,
+   14.5,
+   0
+  ],
+  [
+   "Azmatullah Omarzai",
+   9.2,
+   13.6,
+   0
+  ],
+  [
+   "Jaker Ali Anik",
+   11.9,
+   17.3,
+   0
+  ],
+  [
+   "Mark Chapman",
+   18.6,
+   17.0,
+   0
+  ],
+  [
+   "Marcus Stoinis",
+   26.2,
+   16.3,
+   0
+  ],
+  [
+   "Pathum Nissanka",
+   12.4,
+   14.4,
+   0
+  ],
+  [
+   "Devdutt Padikkal",
+   3.9,
+   13.9,
+   0
+  ],
+  [
+   "Shahbaz Ahmed",
+   15.0,
+   16.2,
+   0
+  ],
+  [
+   "Venkatesh Iyer",
+   25.6,
+   15.3,
+   0
+  ],
+  [
+   "Mohammad Rizwan",
+   9.1,
+   14.7,
+   0
+  ],
+  [
+   "Sai Sudharsan",
+   26.7,
+   13.0,
+   0
+  ],
+  [
+   "Romario Shepherd",
+   35.5,
+   18.4,
+   0
+  ],
+  [
+   "Jonny Bairstow",
+   20.7,
+   14.9,
+   0
+  ],
+  [
+   "William Jacks",
+   7.7,
+   13.5,
+   0
+  ],
+  [
+   "Shai Hope",
+   14.3,
+   13.8,
+   0
+  ],
+  [
+   "Glenn Phillips",
+   24.8,
+   13.3,
+   0
+  ],
+  [
+   "Shimron Hetmyer",
+   18.6,
+   15.6,
+   0
+  ],
+  [
+   "Ryan Burl",
+   4.2,
+   10.8,
+   0
+  ],
+  [
+   "David Warner",
+   22.8,
+   14.0,
+   0
+  ],
+  [
+   "Kyle Mayers",
+   4.2,
+   11.4,
+   0
+  ],
+  [
+   "Sanju Samson",
+   26.8,
+   11.8,
+   0
+  ],
+  [
+   "Dasun Shanaka",
+   19.1,
+   11.8,
+   0
+  ],
+  [
+   "Sam Curran",
+   7.3,
+   7.8,
+   0
+  ],
+  [
+   "Brian Bennett",
+   1.8,
+   6.4,
+   0
+  ],
+  [
+   "Ajinkya Rahane",
+   9.3,
+   8.6,
+   0
+  ],
+  [
+   "Rohit Sharma",
+   9.3,
+   8.5,
+   0
+  ],
+  [
+   "Abishek Porel",
+   22.2,
+   7.5,
+   0
+  ],
+  [
+   "Rahul Tripathi",
+   15.4,
+   7.5,
+   0
+  ],
+  [
+   "Aiden Markram",
+   18.9,
+   8.6,
+   0
+  ],
+  [
+   "Ibrahim Zadran",
+   0.4,
+   4.9,
+   0
+  ],
+  [
+   "Finn Allen",
+   42.9,
+   11.8,
+   0
+  ],
+  [
+   "Sherfane Rutherford",
+   15.9,
+   6.3,
+   0
+  ],
+  [
+   "Andrew Balbirnie",
+   -2.7,
+   6.1,
+   0
+  ],
+  [
+   "Deepak Hooda",
+   4.7,
+   4.2,
+   0
+  ],
+  [
+   "Rahmanullah Gurbaz",
+   -1.2,
+   4.2,
+   0
+  ],
+  [
+   "Ayush Badoni",
+   14.9,
+   6.8,
+   0
+  ],
+  [
+   "Harry Tector",
+   3.9,
+   4.2,
+   0
+  ],
+  [
+   "Mohammad Nabi",
+   11.2,
+   4.8,
+   0
+  ],
+  [
+   "Axar Patel",
+   19.1,
+   7.3,
+   0
+  ],
+  [
+   "Travis Head",
+   42.0,
+   7.0,
+   0
+  ],
+  [
+   "Ruturaj Gaikwad",
+   17.9,
+   1.9,
+   0
+  ],
+  [
+   "Jos Buttler",
+   32.4,
+   5.1,
+   0
+  ],
+  [
+   "Glenn Maxwell",
+   29.0,
+   4.3,
+   0
+  ],
+  [
+   "Lokesh Rahul",
+   25.6,
+   -1.3,
+   0
+  ],
+  [
+   "Babar Azam",
+   8.2,
+   -1.6,
+   0
+  ],
+  [
+   "Rishabh Pant",
+   17.1,
+   -0.9,
+   0
+  ],
+  [
+   "Kusal Perera",
+   9.3,
+   -5.7,
+   0
+  ],
+  [
+   "Charith Asalanka",
+   2.7,
+   -6.2,
+   0
+  ],
+  [
+   "Nehal Wadhera",
+   24.0,
+   -4.4,
+   0
+  ],
+  [
+   "Brandon King",
+   5.4,
+   -7.7,
+   0
+  ],
+  [
+   "Liton Das",
+   -1.6,
+   -8.3,
+   0
+  ],
+  [
+   "Paul Stirling",
+   6.5,
+   -9.5,
+   0
+  ],
+  [
+   "Muhammad Waseem",
+   28.0,
+   -7.8,
+   0
+  ]
+ ],
+ "sens_bat": {
+  "Base (70/15/15)": [
+   9,
+   10,
+   114
+  ],
+  "Old weights 80/0/20 (no lift)": [
+   8,
+   10,
+   114
+  ],
+  "Pressure value only": [
+   8,
+   10,
+   114
+  ],
+  "Threshold LI ≥ 1.0": [
+   7,
+   10,
+   156
+  ],
+  "Threshold LI ≥ 2.0": [
+   5,
+   6,
+   46
+  ],
+  "Stricter: 120 balls, 25 matches": [
+   6,
+   6,
+   53
+  ],
+  "IPL balls only": [
+   4,
+   6,
+   59
+  ],
+  "T20I balls only": [
+   4,
+   5,
+   53
+  ],
+  "Drop T20Is with associates": [
+   10,
+   10,
+   110
+  ]
+ },
+ "rel_bat": {
+  "Pressure value, raw": 0.17921154639410591,
+  "Pressure value, shrunk": 0.27254789337105495,
+  "Final rating (70/15/15)": 0.21273063298380995,
+  "Consistency alone": 0.19538022251493437,
+  "Usual (non-pressure) level": 0.45532748639331144,
+  "Clutch lift": 0.0835803202746505,
+  "_players": 90.95
+ },
+ "bowl": [
+  {
+   "name": "Josh Hazlewood",
+   "point_score": 2.147,
+   "bag_score": 1.641,
+   "final_score": 1.894,
+   "top10_freq": 0.715,
+   "mean_rank": 9.215,
+   "median_rank": 5.0,
+   "p10_rank": 1.0,
+   "p90_rank": 21.2,
+   "pb": 211.0,
+   "stints": 38.0,
+   "pvraw100": 69.103,
+   "pv100": 27.323,
+   "usual100": 22.541,
+   "lift100": 4.783,
+   "cons_eb": 0.617,
+   "cons_raw": 0.632,
+   "econ_p": 7.63,
+   "wk_p": 9.36,
+   "exp_econ_p": 9.44,
+   "exp_wk_p": 5.42,
+   "dots_p": 47.29,
+   "econ_n": 8.5,
+   "wk_n": 6.01,
+   "exp_econ_n": 8.59,
+   "exp_wk_n": 5.28,
+   "dots_n": 45.92,
+   "ipl": 128,
+   "t20i": 75,
+   "rank": 1,
+   "pid": 830
+  },
+  {
+   "name": "Abrar Ahmed",
+   "point_score": 1.688,
+   "bag_score": 1.502,
+   "final_score": 1.595,
+   "top10_freq": 0.6,
+   "mean_rank": 9.669,
+   "median_rank": 6.0,
+   "p10_rank": 1.1,
+   "p90_rank": 23.9,
+   "pb": 124.0,
+   "stints": 19.0,
+   "pvraw100": 69.914,
+   "pv100": 24.053,
+   "usual100": 24.159,
+   "lift100": -0.106,
+   "cons_eb": 0.705,
+   "cons_raw": 0.789,
+   "econ_p": 5.66,
+   "wk_p": 8.2,
+   "exp_econ_p": 7.93,
+   "exp_wk_p": 4.56,
+   "dots_p": 48.36,
+   "econ_n": 6.97,
+   "wk_n": 5.62,
+   "exp_econ_n": 7.93,
+   "exp_wk_n": 4.7,
+   "dots_n": 42.43,
+   "ipl": 0,
+   "t20i": 122,
+   "rank": 2,
+   "pid": 5979
+  },
+  {
+   "name": "Yuzvendra Chahal",
+   "point_score": 2.038,
+   "bag_score": 1.13,
+   "final_score": 1.584,
+   "top10_freq": 0.41,
+   "mean_rank": 17.375,
+   "median_rank": 14.0,
+   "p10_rank": 4.0,
+   "p90_rank": 36.2,
+   "pb": 325.0,
+   "stints": 69.0,
+   "pvraw100": 48.408,
+   "pv100": 26.044,
+   "usual100": 21.196,
+   "lift100": 4.848,
+   "cons_eb": 0.665,
+   "cons_raw": 0.681,
+   "econ_p": 8.34,
+   "wk_p": 7.99,
+   "exp_econ_p": 8.91,
+   "exp_wk_p": 5.3,
+   "dots_p": 30.67,
+   "econ_n": 8.75,
+   "wk_n": 5.41,
+   "exp_econ_n": 8.82,
+   "exp_wk_n": 4.97,
+   "dots_n": 30.12,
+   "ipl": 255,
+   "t20i": 58,
+   "rank": 3,
+   "pid": 1612
+  },
+  {
+   "name": "Krunal Pandya",
+   "point_score": 1.825,
+   "bag_score": 1.306,
+   "final_score": 1.566,
+   "top10_freq": 0.555,
+   "mean_rank": 13.965,
+   "median_rank": 9.0,
+   "p10_rank": 2.0,
+   "p90_rank": 31.2,
+   "pb": 208.0,
+   "stints": 40.0,
+   "pvraw100": 54.79,
+   "pv100": 25.017,
+   "usual100": 22.685,
+   "lift100": 2.333,
+   "cons_eb": 0.67,
+   "cons_raw": 0.7,
+   "econ_p": 6.79,
+   "wk_p": 6.37,
+   "exp_econ_p": 8.22,
+   "exp_wk_p": 4.74,
+   "dots_p": 34.31,
+   "econ_n": 8.04,
+   "wk_n": 4.11,
+   "exp_econ_n": 8.56,
+   "exp_wk_n": 4.77,
+   "dots_n": 30.63,
+   "ipl": 204,
+   "t20i": 0,
+   "rank": 4,
+   "pid": 4219
+  },
+  {
+   "name": "Sikandar Raza",
+   "point_score": 1.482,
+   "bag_score": 1.199,
+   "final_score": 1.341,
+   "top10_freq": 0.44,
+   "mean_rank": 15.095,
+   "median_rank": 12.0,
+   "p10_rank": 3.0,
+   "p90_rank": 32.1,
+   "pb": 143.0,
+   "stints": 36.0,
+   "pvraw100": 57.861,
+   "pv100": 23.024,
+   "usual100": 15.992,
+   "lift100": 7.033,
+   "cons_eb": 0.622,
+   "cons_raw": 0.639,
+   "econ_p": 5.7,
+   "wk_p": 6.38,
+   "exp_econ_p": 7.91,
+   "exp_wk_p": 4.7,
+   "dots_p": 41.84,
+   "econ_n": 7.35,
+   "wk_n": 3.59,
+   "exp_econ_n": 8.08,
+   "exp_wk_n": 4.37,
+   "dots_n": 31.33,
+   "ipl": 15,
+   "t20i": 126,
+   "rank": 5,
+   "pid": 2984
+  },
+  {
+   "name": "Sunil Narine",
+   "point_score": 1.482,
+   "bag_score": 1.191,
+   "final_score": 1.337,
+   "top10_freq": 0.43,
+   "mean_rank": 15.455,
+   "median_rank": 12.5,
+   "p10_rank": 3.0,
+   "p90_rank": 30.0,
+   "pb": 207.0,
+   "stints": 45.0,
+   "pvraw100": 54.224,
+   "pv100": 24.074,
+   "usual100": 35.545,
+   "lift100": -11.471,
+   "cons_eb": 0.717,
+   "cons_raw": 0.756,
+   "econ_p": 5.97,
+   "wk_p": 4.37,
+   "exp_econ_p": 8.03,
+   "exp_wk_p": 4.96,
+   "dots_p": 44.66,
+   "econ_n": 7.09,
+   "wk_n": 4.24,
+   "exp_econ_n": 8.45,
+   "exp_wk_n": 4.66,
+   "dots_n": 37.13,
+   "ipl": 206,
+   "t20i": 0,
+   "rank": 6,
+   "pid": 781
+  },
+  {
+   "name": "Lockie Ferguson",
+   "point_score": 1.387,
+   "bag_score": 1.26,
+   "final_score": 1.323,
+   "top10_freq": 0.505,
+   "mean_rank": 17.32,
+   "median_rank": 10.0,
+   "p10_rank": 2.0,
+   "p90_rank": 42.8,
+   "pb": 119.0,
+   "stints": 32.0,
+   "pvraw100": 64.562,
+   "pv100": 22.495,
+   "usual100": 16.948,
+   "lift100": 5.546,
+   "cons_eb": 0.633,
+   "cons_raw": 0.656,
+   "econ_p": 8.41,
+   "wk_p": 9.82,
+   "exp_econ_p": 9.53,
+   "exp_wk_p": 5.48,
+   "dots_p": 50.89,
+   "econ_n": 9.05,
+   "wk_n": 5.01,
+   "exp_econ_n": 9.18,
+   "exp_wk_n": 5.51,
+   "dots_n": 41.02,
+   "ipl": 66,
+   "t20i": 46,
+   "rank": 7,
+   "pid": 4692
+  },
+  {
+   "name": "Tim Southee",
+   "point_score": 1.431,
+   "bag_score": 1.19,
+   "final_score": 1.31,
+   "top10_freq": 0.415,
+   "mean_rank": 16.928,
+   "median_rank": 12.5,
+   "p10_rank": 2.0,
+   "p90_rank": 38.7,
+   "pb": 126.0,
+   "stints": 26.0,
+   "pvraw100": 58.364,
+   "pv100": 22.003,
+   "usual100": 15.312,
+   "lift100": 6.691,
+   "cons_eb": 0.68,
+   "cons_raw": 0.731,
+   "econ_p": 7.19,
+   "wk_p": 9.48,
+   "exp_econ_p": 8.94,
+   "exp_wk_p": 4.99,
+   "dots_p": 53.45,
+   "econ_n": 8.74,
+   "wk_n": 6.08,
+   "exp_econ_n": 8.94,
+   "exp_wk_n": 5.51,
+   "dots_n": 39.51,
+   "ipl": 36,
+   "t20i": 80,
+   "rank": 8,
+   "pid": 278
+  },
+  {
+   "name": "Umran Malik",
+   "point_score": 1.194,
+   "bag_score": 1.135,
+   "final_score": 1.165,
+   "top10_freq": 0.29,
+   "mean_rank": 19.134,
+   "median_rank": 12.0,
+   "p10_rank": 2.8,
+   "p90_rank": 44.8,
+   "pb": 89.0,
+   "stints": 17.0,
+   "pvraw100": 57.981,
+   "pv100": 20.58,
+   "usual100": 6.974,
+   "lift100": 13.606,
+   "cons_eb": 0.616,
+   "cons_raw": 0.647,
+   "econ_p": 8.49,
+   "wk_p": 9.76,
+   "exp_econ_p": 9.48,
+   "exp_wk_p": 5.38,
+   "dots_p": 43.9,
+   "econ_n": 10.08,
+   "wk_n": 6.28,
+   "exp_econ_n": 8.55,
+   "exp_wk_n": 4.8,
+   "dots_n": 42.89,
+   "ipl": 56,
+   "t20i": 26,
+   "rank": 9,
+   "pid": 25048
+  },
+  {
+   "name": "Matheesha Pathirana",
+   "point_score": 1.282,
+   "bag_score": 0.977,
+   "final_score": 1.13,
+   "top10_freq": 0.32,
+   "mean_rank": 21.09,
+   "median_rank": 18.0,
+   "p10_rank": 4.0,
+   "p90_rank": 45.0,
+   "pb": 209.0,
+   "stints": 34.0,
+   "pvraw100": 47.413,
+   "pv100": 22.4,
+   "usual100": 25.102,
+   "lift100": -2.703,
+   "cons_eb": 0.671,
+   "cons_raw": 0.706,
+   "econ_p": 8.84,
+   "wk_p": 9.78,
+   "exp_econ_p": 10.5,
+   "exp_wk_p": 6.86,
+   "dots_p": 39.13,
+   "econ_n": 8.81,
+   "wk_n": 6.63,
+   "exp_econ_n": 9.85,
+   "exp_wk_n": 6.13,
+   "dots_n": 37.04,
+   "ipl": 118,
+   "t20i": 66,
+   "rank": 10,
+   "pid": 8661
+  }
+ ],
+ "next_bowl": [
+  [
+   11,
+   "Axar Patel",
+   1.09,
+   0.14
+  ],
+  [
+   12,
+   "FazalHaq Farooqi",
+   0.99,
+   0.21
+  ],
+  [
+   13,
+   "Patrick Cummins",
+   0.98,
+   0.3
+  ],
+  [
+   14,
+   "Avesh Khan",
+   0.97,
+   0.18
+  ],
+  [
+   15,
+   "Mohsin Khan",
+   0.97,
+   0.36
+  ],
+  [
+   16,
+   "T Natarajan",
+   0.92,
+   0.24
+  ]
+ ],
+ "scatter_bowl": [
+  [
+   "Josh Hazlewood",
+   22.5,
+   27.3,
+   1
+  ],
+  [
+   "Abrar Ahmed",
+   24.2,
+   24.1,
+   1
+  ],
+  [
+   "Yuzvendra Chahal",
+   21.2,
+   26.0,
+   1
+  ],
+  [
+   "Krunal Pandya",
+   22.7,
+   25.0,
+   1
+  ],
+  [
+   "Sikandar Raza",
+   16.0,
+   23.0,
+   1
+  ],
+  [
+   "Sunil Narine",
+   35.5,
+   24.1,
+   1
+  ],
+  [
+   "Lockie Ferguson",
+   16.9,
+   22.5,
+   1
+  ],
+  [
+   "Tim Southee",
+   15.3,
+   22.0,
+   1
+  ],
+  [
+   "Umran Malik",
+   7.0,
+   20.6,
+   1
+  ],
+  [
+   "Matheesha Pathirana",
+   25.1,
+   22.4,
+   1
+  ],
+  [
+   "Axar Patel",
+   21.3,
+   22.8,
+   0
+  ],
+  [
+   "FazalHaq Farooqi",
+   9.3,
+   19.9,
+   0
+  ],
+  [
+   "Patrick Cummins",
+   15.0,
+   20.0,
+   0
+  ],
+  [
+   "Avesh Khan",
+   5.1,
+   20.7,
+   0
+  ],
+  [
+   "Mohsin Khan",
+   23.6,
+   21.4,
+   0
+  ],
+  [
+   "T Natarajan",
+   13.1,
+   18.8,
+   0
+  ],
+  [
+   "Wanindu Hasaranga",
+   29.1,
+   23.2,
+   0
+  ],
+  [
+   "Jofra Archer",
+   18.0,
+   20.5,
+   0
+  ],
+  [
+   "Anshul Kamboj",
+   13.8,
+   19.0,
+   0
+  ],
+  [
+   "Matt Henry",
+   4.2,
+   18.3,
+   0
+  ],
+  [
+   "Mitchell Santner",
+   28.6,
+   21.6,
+   0
+  ],
+  [
+   "Kagiso Rabada",
+   15.8,
+   19.9,
+   0
+  ],
+  [
+   "Rashid Khan",
+   28.8,
+   22.5,
+   0
+  ],
+  [
+   "Kuldeep Yadav",
+   31.4,
+   21.1,
+   0
+  ],
+  [
+   "Shaheen Afridi",
+   23.4,
+   20.8,
+   0
+  ],
+  [
+   "Mohammad Nawaz",
+   31.8,
+   21.0,
+   0
+  ],
+  [
+   "Varun Chakravarthy",
+   33.7,
+   22.0,
+   0
+  ],
+  [
+   "Mark Adair",
+   12.5,
+   18.7,
+   0
+  ],
+  [
+   "Dushmantha Chameera",
+   12.2,
+   18.4,
+   0
+  ],
+  [
+   "Ravindra Jadeja",
+   22.8,
+   19.6,
+   0
+  ],
+  [
+   "Trent Boult",
+   19.7,
+   19.1,
+   0
+  ],
+  [
+   "Gudakesh Motie",
+   17.6,
+   19.1,
+   0
+  ],
+  [
+   "Taskin Ahmed",
+   16.2,
+   17.9,
+   0
+  ],
+  [
+   "Jacob Duffy",
+   19.3,
+   18.7,
+   0
+  ],
+  [
+   "Moeen Ali",
+   18.4,
+   17.8,
+   0
+  ],
+  [
+   "Harpreet Brar",
+   24.8,
+   18.2,
+   0
+  ],
+  [
+   "Roston Chase",
+   21.7,
+   17.4,
+   0
+  ],
+  [
+   "Mohammed Siraj",
+   19.1,
+   17.8,
+   0
+  ],
+  [
+   "Mustafizur Rahman",
+   27.5,
+   17.4,
+   0
+  ],
+  [
+   "Mohammed Shami",
+   21.3,
+   16.6,
+   0
+  ],
+  [
+   "Deepak Chahar",
+   17.9,
+   16.2,
+   0
+  ],
+  [
+   "Saim Ayub",
+   20.2,
+   17.8,
+   0
+  ],
+  [
+   "Jasprit Bumrah",
+   37.4,
+   17.6,
+   0
+  ],
+  [
+   "Cameron Green",
+   7.4,
+   15.6,
+   0
+  ],
+  [
+   "Naseem Shah",
+   9.2,
+   15.7,
+   0
+  ],
+  [
+   "Shoriful Islam",
+   9.0,
+   16.1,
+   0
+  ],
+  [
+   "Akeal Hosein",
+   27.7,
+   17.2,
+   0
+  ],
+  [
+   "Reece Topley",
+   14.9,
+   15.8,
+   0
+  ],
+  [
+   "Mukesh Kumar",
+   6.1,
+   15.4,
+   0
+  ],
+  [
+   "Maheesh Theekshana",
+   21.0,
+   14.8,
+   0
+  ],
+  [
+   "Gerald Coetzee",
+   14.3,
+   15.8,
+   0
+  ],
+  [
+   "Adam Milne",
+   13.8,
+   15.9,
+   0
+  ],
+  [
+   "Adil Rashid",
+   22.6,
+   16.8,
+   0
+  ],
+  [
+   "Arshdeep Singh",
+   20.4,
+   15.6,
+   0
+  ],
+  [
+   "Vyshak Kumar",
+   8.8,
+   15.2,
+   0
+  ],
+  [
+   "Mitchell Starc",
+   16.2,
+   14.9,
+   0
+  ],
+  [
+   "Richard Ngarava",
+   17.6,
+   15.4,
+   0
+  ],
+  [
+   "Ravichandran Ashwin",
+   25.9,
+   14.8,
+   0
+  ],
+  [
+   "Alzarri Joseph",
+   9.9,
+   15.3,
+   0
+  ],
+  [
+   "Mohammad Rishad Hossain",
+   8.6,
+   14.1,
+   0
+  ],
+  [
+   "Yash Thakur",
+   10.6,
+   15.1,
+   0
+  ],
+  [
+   "Naveen ul Haq",
+   20.0,
+   16.3,
+   0
+  ],
+  [
+   "Bhuvneshwar Kumar",
+   28.4,
+   16.6,
+   0
+  ],
+  [
+   "Rahul Chahar",
+   20.4,
+   16.1,
+   0
+  ],
+  [
+   "Digvesh Rathi",
+   16.4,
+   14.9,
+   0
+  ],
+  [
+   "Barry McCarthy",
+   9.9,
+   13.5,
+   0
+  ],
+  [
+   "Khaleel Ahmed",
+   20.7,
+   14.3,
+   0
+  ],
+  [
+   "Ravi Bishnoi",
+   21.5,
+   14.4,
+   0
+  ],
+  [
+   "Adam Zampa",
+   15.7,
+   14.3,
+   0
+  ],
+  [
+   "Mujeeb Ur Rahman",
+   29.6,
+   15.1,
+   0
+  ],
+  [
+   "Jaydev Unadkat",
+   10.9,
+   14.5,
+   0
+  ],
+  [
+   "Ish Sodhi",
+   10.9,
+   14.5,
+   0
+  ],
+  [
+   "Anrich Nortje",
+   3.8,
+   13.4,
+   0
+  ],
+  [
+   "Washington Sundar",
+   18.7,
+   14.6,
+   0
+  ],
+  [
+   "Prasidh Krishna",
+   19.2,
+   13.6,
+   0
+  ],
+  [
+   "Prince Yadav",
+   17.7,
+   14.1,
+   0
+  ],
+  [
+   "Harshal Patel",
+   19.9,
+   13.2,
+   0
+  ],
+  [
+   "Xavier Bartlett",
+   6.6,
+   13.8,
+   0
+  ],
+  [
+   "Jason Holder",
+   21.2,
+   13.6,
+   0
+  ],
+  [
+   "Dasun Shanaka",
+   11.3,
+   14.4,
+   0
+  ],
+  [
+   "Vaibhav Arora",
+   11.8,
+   13.8,
+   0
+  ],
+  [
+   "Hardik Pandya",
+   8.5,
+   12.8,
+   0
+  ],
+  [
+   "Mohammad Nabi",
+   7.5,
+   13.4,
+   0
+  ],
+  [
+   "Sam Curran",
+   11.7,
+   12.8,
+   0
+  ],
+  [
+   "Blessing Muzarabani",
+   28.6,
+   14.0,
+   0
+  ],
+  [
+   "Suyash Sharma",
+   10.2,
+   12.6,
+   0
+  ],
+  [
+   "Haris Rauf",
+   28.0,
+   13.5,
+   0
+  ],
+  [
+   "Nathan Ellis",
+   30.5,
+   13.5,
+   0
+  ],
+  [
+   "Liam Livingstone",
+   16.2,
+   13.5,
+   0
+  ],
+  [
+   "Harshit Rana",
+   12.9,
+   13.3,
+   0
+  ],
+  [
+   "Glenn Maxwell",
+   18.8,
+   13.9,
+   0
+  ],
+  [
+   "Nuwan Thushara",
+   10.9,
+   11.9,
+   0
+  ],
+  [
+   "Noor Ahmad",
+   32.4,
+   12.7,
+   0
+  ],
+  [
+   "Michael Bracewell",
+   24.5,
+   13.0,
+   0
+  ],
+  [
+   "Tanzim Sakib",
+   10.3,
+   11.9,
+   0
+  ],
+  [
+   "Mahedi Hasan",
+   23.2,
+   12.4,
+   0
+  ],
+  [
+   "Shamar Joseph",
+   13.7,
+   11.7,
+   0
+  ],
+  [
+   "Shivam Dube",
+   11.7,
+   11.7,
+   0
+  ],
+  [
+   "Yash Dayal",
+   16.2,
+   11.7,
+   0
+  ],
+  [
+   "Shadab Khan",
+   16.2,
+   11.6,
+   0
+  ],
+  [
+   "Craig Young",
+   26.4,
+   12.0,
+   0
+  ],
+  [
+   "Eshan Malinga",
+   21.5,
+   11.6,
+   0
+  ],
+  [
+   "Benjamin Sears",
+   17.0,
+   11.8,
+   0
+  ],
+  [
+   "Azmatullah Omarzai",
+   15.1,
+   9.5,
+   0
+  ],
+  [
+   "Romario Shepherd",
+   3.4,
+   9.0,
+   0
+  ],
+  [
+   "Sandeep Sharma",
+   18.3,
+   9.5,
+   0
+  ],
+  [
+   "Marcus Stoinis",
+   14.4,
+   10.6,
+   0
+  ],
+  [
+   "Lungi Ngidi",
+   23.7,
+   10.9,
+   0
+  ],
+  [
+   "Abhishek Sharma",
+   5.1,
+   9.9,
+   0
+  ],
+  [
+   "Tushar Deshpande",
+   17.0,
+   9.8,
+   0
+  ],
+  [
+   "Marco Jansen",
+   14.0,
+   9.4,
+   0
+  ],
+  [
+   "Mohit Sharma",
+   19.5,
+   10.5,
+   0
+  ],
+  [
+   "Obed McCoy",
+   18.8,
+   9.8,
+   0
+  ],
+  [
+   "Shardul Thakur",
+   14.4,
+   7.9,
+   0
+  ],
+  [
+   "Andre Russell",
+   17.4,
+   8.5,
+   0
+  ]
+ ],
+ "sens_bowl": {
+  "Base (70/15/15)": [
+   9,
+   10,
+   115
+  ],
+  "Old weights 80/0/20 (no lift)": [
+   8,
+   10,
+   115
+  ],
+  "Pressure value only": [
+   7,
+   10,
+   115
+  ],
+  "Threshold LI ≥ 1.0": [
+   4,
+   10,
+   154
+  ],
+  "Threshold LI ≥ 2.0": [
+   5,
+   5,
+   57
+  ],
+  "Stricter: 120 balls, 25 matches": [
+   7,
+   7,
+   69
+  ],
+  "Bowling k = 350 (vs ≈783)": [
+   9,
+   10,
+   115
+  ],
+  "IPL balls only": [
+   5,
+   5,
+   54
+  ],
+  "T20I balls only": [
+   3,
+   4,
+   55
+  ],
+  "Drop T20Is with associates": [
+   7,
+   10,
+   111
+  ]
+ },
+ "rel_bowl": {
+  "Pressure value, raw": 0.22037831802872745,
+  "Pressure value, shrunk": 0.24045957873506438,
+  "Final rating (70/15/15)": 0.1933999610132933,
+  "Consistency alone": 0.15368419177252,
+  "Usual (non-pressure) level": 0.3514707387992203,
+  "Clutch lift": 0.08482510957489625,
+  "_players": 95.95
+ },
+ "k_bat": [
+  127.0,
+  174.0
+ ],
+ "k_bowl": [
+  783.0,
+  627.0
  ]
 }
