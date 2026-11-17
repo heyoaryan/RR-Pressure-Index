@@ -1,0 +1,2679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pressure Index · SupeRR Selector S2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08090d;
+  --s1:#0e1016;
+  --s2:#13151f;
+  --s3:#1a1d2a;
+  --border:#1f2235;
+  --border2:#262940;
+  --pink:#e8175d;
+  --navy:#13264d;
+  --cyan:#00d4aa;
+  --gold:#f5a623;
+  --purple:#7c5cbf;
+  --text:#f0f2f8;
+  --muted:#5a6180;
+  --dim:#3a3f58;
+}
+html{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+body{min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:56px;
+  background:rgba(8,9,13,.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px);
+}
+.logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;letter-spacing:-.3px}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--pink)}
+.logo-sub{font-size:11px;font-weight:400;color:var(--muted);margin-left:4px}
+.header-pills{display:flex;gap:6px}
+.pill{
+  padding:5px 14px;border-radius:20px;font-size:11.5px;font-weight:600;
+  cursor:pointer;border:1px solid var(--border2);color:var(--muted);
+  background:transparent;font-family:inherit;transition:all .15s;letter-spacing:.2px
+}
+.pill:hover{color:var(--text);border-color:var(--dim)}
+.pill.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+.pill.active.bowl{background:var(--cyan);color:#08090d;border-color:var(--cyan)}
+.pill.active.explore{background:var(--gold);color:#08090d;border-color:var(--gold)}
+
+/* ── EXPLORE UPLOAD VIEW ── */
+.ex-wrap{max-width:1200px;margin:0 auto}
+
+/* Upload hero */
+.ex-upload-hero{text-align:center;padding:48px 24px 32px;max-width:560px;margin:0 auto}
+.ex-upload-icon{font-size:48px;margin-bottom:16px}
+.ex-upload-hero h2{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
+.ex-upload-hero h2 span{color:var(--gold)}
+.ex-upload-hero p{color:var(--muted);font-size:13px;line-height:1.65}
+
+/* Drop zone */
+.ex-drop-zone{
+  display:block;
+  border:2px dashed var(--border2);border-radius:20px;
+  padding:52px 24px;text-align:center;
+  background:var(--s1);transition:all .2s;cursor:pointer;
+  margin:0 auto 20px;max-width:620px;
+}
+.ex-drop-zone:hover,.ex-drop-zone.drag{
+  border-color:var(--gold);background:rgba(245,166,35,.03);
+}
+.ex-drop-big-icon{font-size:52px;margin-bottom:12px;line-height:1}
+.ex-drop-cta{font-size:16px;font-weight:700;margin-bottom:6px}
+.ex-drop-sub{font-size:13px;color:var(--muted)}
+.ex-drop-browse{color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* Detected files list */
+.ex-file-list{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  max-width:620px;margin:0 auto 20px;min-height:0;
+}
+.ex-file-chip{
+  display:flex;align-items:center;gap:7px;
+  padding:7px 14px;border-radius:8px;
+  background:var(--s2);border:1px solid var(--border);font-size:12px;
+}
+.ex-file-chip.ready{border-color:var(--cyan);background:rgba(0,212,170,.05)}
+.ex-file-chip.required{border-color:var(--gold)}
+.ex-file-chip-icon{font-size:14px}
+.ex-file-chip-name{font-weight:600;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ex-file-chip-key{font-size:10px;color:var(--muted)}
+.ex-file-chip-rm{color:var(--dim);cursor:pointer;font-size:14px;margin-left:2px}
+.ex-file-chip-rm:hover{color:var(--pink)}
+
+/* Upload actions */
+.ex-upload-actions{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:20px}
+.ex-btn-analyse{
+  padding:12px 32px;border-radius:10px;font-size:14px;font-weight:700;
+  background:var(--gold);color:#08090d;border:none;cursor:pointer;
+  font-family:inherit;transition:all .15s;letter-spacing:.1px
+}
+.ex-btn-analyse:hover{background:#e69a1c;transform:translateY(-1px)}
+.ex-btn-analyse:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.ex-btn-clear{
+  padding:11px 20px;border-radius:10px;font-size:13px;font-weight:600;
+  background:transparent;color:var(--muted);border:1px solid var(--border2);
+  cursor:pointer;font-family:inherit;transition:all .15s
+}
+.ex-btn-clear:hover{color:var(--text);border-color:var(--dim)}
+.ex-upload-hint{font-size:12px;color:var(--muted)}
+
+/* Supported files hint */
+.ex-supported{
+  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;
+  max-width:620px;margin:0 auto;padding-bottom:40px
+}
+.ex-sup-label{font-size:11px;color:var(--dim);margin-right:4px}
+.ex-sup-chip{
+  font-size:10.5px;font-family:'JetBrains Mono',monospace;
+  padding:3px 9px;border-radius:4px;
+  background:var(--s2);border:1px solid var(--border);color:var(--dim)
+}
+
+/* ── LOADING STATE ── */
+.ex-loading-wrap{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 24px 80px;gap:0;text-align:center;min-height:420px
+}
+
+/* Animated cricket ball icon */
+.load-ball-wrap{
+  position:relative;width:88px;height:88px;margin-bottom:28px
+}
+.load-ball{
+  width:88px;height:88px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #e8175d, #9b0d3a);
+  box-shadow:0 0 40px rgba(232,23,93,.35),0 8px 32px rgba(0,0,0,.5);
+  position:relative;overflow:hidden;
+  animation:ball-pulse 2s ease-in-out infinite
+}
+/* seam lines */
+.load-ball::before,.load-ball::after{
+  content:'';position:absolute;border:1.5px solid rgba(255,255,255,.18);
+  border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)
+}
+.load-ball::before{width:140%;height:60%;transform:translate(-50%,-50%) rotate(30deg)}
+.load-ball::after{width:140%;height:60%;transform:translate(-50%,-50%) rotate(-30deg)}
+/* orbit ring */
+.load-orbit{
+  position:absolute;inset:-10px;border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--gold);border-right-color:rgba(245,166,35,.3);
+  animation:spin .9s linear infinite
+}
+.load-orbit2{
+  position:absolute;inset:-18px;border-radius:50%;
+  border:1.5px solid transparent;
+  border-bottom-color:var(--cyan);border-left-color:rgba(0,212,170,.3);
+  animation:spin 1.4s linear infinite reverse
+}
+
+@keyframes ball-pulse{
+  0%,100%{box-shadow:0 0 40px rgba(232,23,93,.35),0 8px 32px rgba(0,0,0,.5)}
+  50%{box-shadow:0 0 60px rgba(232,23,93,.55),0 12px 48px rgba(0,0,0,.6)}
+}
+
+/* Title */
+.ex-loading-title{
+  font-size:20px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;
+  background:linear-gradient(135deg,var(--text) 40%,var(--muted));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.ex-loading-sub{
+  font-size:13px;color:var(--gold);font-weight:600;margin-bottom:28px;
+  min-height:20px
+}
+
+/* Progress steps */
+.load-steps{
+  display:flex;flex-direction:column;gap:9px;
+  width:100%;max-width:400px;margin-bottom:28px
+}
+.load-step{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 14px;border-radius:9px;
+  background:var(--s2);border:1px solid var(--border);
+  font-size:12px;font-weight:500;color:var(--muted);
+  transition:all .4s ease
+}
+.load-step.done{
+  border-color:rgba(0,212,170,.35);background:rgba(0,212,170,.05);color:var(--text)
+}
+.load-step.active{
+  border-color:rgba(245,166,35,.4);background:rgba(245,166,35,.06);color:var(--text);
+  box-shadow:0 0 16px rgba(245,166,35,.1)
+}
+.load-step-icon{font-size:14px;width:20px;text-align:center;flex-shrink:0}
+.load-step-name{flex:1}
+.load-step-tick{font-size:11px;color:var(--cyan);font-weight:700;opacity:0;transition:opacity .3s}
+.load-step.done .load-step-tick{opacity:1}
+.load-step.active .load-step-tick{opacity:0}
+
+/* Time estimate */
+.load-eta{
+  font-size:11px;color:var(--dim);max-width:380px;line-height:1.6
+}
+.load-eta strong{color:var(--muted)}
+
+/* Result bar */
+.ex-result-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;padding:14px 18px;
+  background:var(--s1);border:1px solid var(--border);border-radius:12px
+}
+.ex-result-meta{font-size:13px;color:var(--muted)}
+.ex-result-meta strong{color:var(--gold)}
+
+/* Stat strip */
+.ex-stat-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px
+}
+@media(max-width:800px){.ex-stat-strip{grid-template-columns:repeat(2,1fr)}}
+.ex-search-bar{
+  width:100%;padding:10px 16px;background:var(--s2);border:1px solid var(--border);
+  border-radius:9px;color:var(--text);font-size:13px;font-family:inherit;
+  margin-bottom:16px;outline:none;transition:border-color .15s
+}
+.ex-search-bar:focus{border-color:var(--gold)}
+
+/* upload analytics output */
+.ua-tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.ua-tab{
+  padding:9px 18px;cursor:pointer;font-size:13px;font-weight:500;
+  color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;
+  margin-bottom:-1px
+}
+.ua-tab:hover{color:var(--text)}
+.ua-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.ua-view{display:none}
+.ua-view.active{display:block}
+
+.up-error{font-size:12px;color:var(--pink);margin-top:8px}
+.spinner{width:32px;height:32px;border:3px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.u-chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}
+@media(max-width:800px){.u-chart-grid{grid-template-columns:1fr}}
+.u-cbox{
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:18px
+}
+.u-cbox.wide{grid-column:span 2}
+@media(max-width:800px){.u-cbox.wide{grid-column:span 1}}
+.u-ctitle{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:14px}
+.u-cwrap{position:relative;height:200px}
+.u-cwrap.tall{height:260px}
+
+.u-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);margin-bottom:24px}
+.u-table{width:100%;border-collapse:collapse;font-size:12px}
+.u-table th{
+  padding:9px 12px;text-align:left;font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--muted);
+  border-bottom:1px solid var(--border);background:var(--s1)
+}
+.u-table th.r{text-align:right}
+.u-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.u-table td.r{text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.u-table td.name{font-weight:600}
+.u-table tr:hover td{background:var(--s1)}
+.u-table tr:last-child td{border-bottom:none}
+.u-badge{
+  display:inline-block;padding:2px 8px;border-radius:4px;
+  font-size:10.5px;font-weight:600;font-family:'JetBrains Mono',monospace
+}
+.u-badge.g{background:rgba(0,212,170,.1);color:var(--cyan)}
+.u-badge.r{background:rgba(232,23,93,.1);color:var(--pink)}
+.u-badge.y{background:rgba(245,166,35,.1);color:var(--gold)}
+
+/* stat cards used in explore overview */
+.scard{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:16px 14px;position:relative;overflow:hidden}
+.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--scolor,var(--gold))}
+.scard-val{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1}
+.scard-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:5px}
+
+/* ── LAYOUT ── */
+main{max-width:1300px;margin:0 auto;padding:32px 24px 80px}
+
+/* ── HERO ── */
+.hero{
+  display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:0;
+  margin-bottom:40px;
+  background:var(--s1);
+  border:1px solid var(--border);
+  border-radius:16px;
+  position:relative;overflow:hidden
+}
+.hero::before{
+  content:'';position:absolute;top:-120px;left:-80px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,23,93,.06) 0%,transparent 65%);
+  pointer-events:none
+}
+.hero::after{
+  content:'';position:absolute;bottom:-60px;right:200px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,170,.04) 0%,transparent 65%);
+  pointer-events:none
+}
+.hero-left{padding:32px 28px;border-right:1px solid var(--border)}
+.hero-left h1{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:-.6px;margin-bottom:10px}
+.hero-left h1 span{color:var(--pink)}
+.hero-left p{color:var(--muted);font-size:12.5px;line-height:1.65;max-width:380px}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.hs{
+  background:var(--s2);border:1px solid var(--border);border-radius:10px;
+  padding:12px 14px;display:flex;flex-direction:column;gap:4px;position:relative;overflow:hidden
+}
+.hs::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--hs-color,var(--dim))}
+.hs-val{font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.hs-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+/* Donut chart side */
+.hero-donut{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:28px 20px;border-right:1px solid var(--border);gap:12px
+}
+.hero-donut-title{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);text-align:center}
+.hero-donut-wrap{position:relative;width:150px;height:150px}
+.hero-donut-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;pointer-events:none
+}
+.hero-donut-center-val{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--pink);line-height:1}
+.hero-donut-center-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.donut-legend{display:flex;flex-direction:column;gap:5px;width:100%}
+.donut-legend-item{display:flex;align-items:center;gap:7px;font-size:11px}
+.donut-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.donut-legend-label{color:var(--muted);flex:1}
+.donut-legend-val{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text)}
+
+/* Pressure meter side */
+.hero-right{display:flex;flex-direction:column;gap:14px;justify-content:center;padding:28px 24px}
+.hero-right .label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:2px}
+.pressure-bands{display:flex;flex-direction:column;gap:8px}
+.pband{display:flex;align-items:center;gap:10px;font-size:12px}
+.pband-name{width:94px;color:var(--muted);font-size:11px}
+.pband-track{flex:1;height:6px;background:var(--border2);border-radius:3px;overflow:hidden;position:relative}
+.pband-fill{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.pband-val{width:38px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px}
+.phase-metric-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.phase-metric{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px}
+.phase-metric-val{font-size:16px;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1}
+.phase-metric-lbl{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr 1fr}
+  .hero-donut{display:none}
+}
+@media(max-width:650px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{border-top:1px solid var(--border)}
+}
+
+/* ── SECTION ── */
+.section{margin-bottom:40px}
+.section-head{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--border)
+}
+.section-head h2{font-size:15px;font-weight:700;letter-spacing:-.2px}
+.section-head .sh-sub{color:var(--muted);font-size:12px;margin-left:auto}
+.tag{
+  display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;
+  font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px
+}
+.tag-bat{background:rgba(232,23,93,.12);color:var(--pink);border:1px solid rgba(232,23,93,.2)}
+.tag-bowl{background:rgba(0,212,170,.1);color:var(--cyan);border:1px solid rgba(0,212,170,.18)}
+.tag-info{background:rgba(124,92,191,.12);color:var(--purple);border:1px solid rgba(124,92,191,.2)}
+
+/* ── RANKING CARDS ── */
+.rank-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:1100px){.rank-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.rank-grid{grid-template-columns:repeat(2,1fr)}}
+
+.rcard{
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:16px 14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden
+}
+.rcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.rcard.selected{border-color:var(--pink);background:rgba(232,23,93,.05)}
+.rcard.selected.bowl-card{border-color:var(--cyan);background:rgba(0,212,170,.04)}
+.rcard-rank{
+  font-size:11px;font-weight:800;font-family:'JetBrains Mono',monospace;
+  color:var(--muted);margin-bottom:8px;letter-spacing:.5px
+}
+.rcard-rank span{color:var(--pink);font-size:17px}
+.rcard-rank.bowl-rank span{color:var(--cyan)}
+.rcard-name{font-size:13px;font-weight:700;line-height:1.3;margin-bottom:10px;letter-spacing:-.1px}
+.rcard-score{
+  font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;
+  color:var(--pink);line-height:1
+}
+.rcard-score.bowl-score{color:var(--cyan)}
+.rcard-score-lbl{font-size:10px;color:var(--muted);margin-top:2px}
+.rcard-meta{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.rcard-chip{
+  font-size:10px;padding:2px 7px;border-radius:4px;
+  background:var(--s3);color:var(--dim);font-family:'JetBrains Mono',monospace
+}
+.rcard-stab{margin-top:10px}
+.stab-bar-track{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:3px}
+.stab-bar-fill{height:100%;border-radius:2px;background:var(--pink);transition:width .8s ease}
+.stab-bar-fill.bowl{background:var(--cyan)}
+.stab-pct{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.rcard-glow{
+  position:absolute;top:0;right:0;width:60px;height:60px;
+  background:radial-gradient(circle,rgba(232,23,93,.15) 0%,transparent 70%);
+  pointer-events:none
+}
+.rcard-glow.bowl{background:radial-gradient(circle,rgba(0,212,170,.12) 0%,transparent 70%)}
+
+/* ── DETAIL PANEL ── */
+.detail-panel{
+  background:var(--s1);border:1px solid var(--border2);border-radius:14px;
+  padding:24px;margin-top:16px;display:none
+}
+.detail-panel.open{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+@media(max-width:900px){.detail-panel.open{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.detail-panel.open{grid-template-columns:1fr}}
+
+.dp-block{display:flex;flex-direction:column;gap:8px}
+.dp-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.dp-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.dp-row:last-child{border-bottom:none}
+.dp-label{font-size:12px;color:var(--muted)}
+.dp-val{font-size:12.5px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.dp-val.up{color:var(--cyan)}
+.dp-val.down{color:var(--pink)}
+.dp-val.neutral{color:var(--gold)}
+.dp-chart-wrap{height:140px;position:relative}
+
+/* ── CHART GRID ── */
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px}
+@media(max-width:900px){.chart-grid{grid-template-columns:1fr}}
+.chart-box{
+  background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:20px;transition:border-color .2s
+}
+.chart-box:hover{border-color:var(--border2)}
+.chart-box.wide{grid-column:span 2}
+@media(max-width:900px){.chart-box.wide{grid-column:span 1}}
+.cb-title{
+  font-size:11px;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:16px;
+  display:flex;align-items:center;gap:6px
+}
+.cb-wrap{position:relative;height:220px}
+.cb-wrap.tall{height:280px}
+
+/* ── COMPARISON TABLE ── */
+.ctable{width:100%;border-collapse:collapse;font-size:12px}
+.ctable th{
+  padding:10px 12px;text-align:left;font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--muted);
+  border-bottom:1px solid var(--border);background:var(--s2)
+}
+.ctable th.r{text-align:right}
+.ctable td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.ctable td.r{text-align:right;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted)}
+.ctable td.name{font-weight:600;font-size:12.5px}
+.ctable tr:hover td{background:var(--s2)}
+.ctable tr:last-child td{border-bottom:none}
+.diff{
+  display:inline-block;padding:2px 8px;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600
+}
+.diff.pos{background:rgba(0,212,170,.1);color:var(--cyan)}
+.diff.neg{background:rgba(232,23,93,.1);color:var(--pink)}
+.diff.neut{background:rgba(245,166,35,.1);color:var(--gold)}
+
+/* rank number badge */
+.rnum{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:4px;
+  font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;
+  background:var(--s3);color:var(--dim)
+}
+.rnum.top3{background:rgba(245,166,35,.15);color:var(--gold)}
+.rnum.r1{background:rgba(232,23,93,.15);color:var(--pink)}
+
+/* ── PRESSURE EXPLAINER ── */
+.explainer{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px
+}
+@media(max-width:900px){.explainer{grid-template-columns:1fr}}
+.ex-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:22px;
+  display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;
+  transition:border-color .2s, transform .2s
+}
+.ex-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.ex-card-bg{
+  position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;
+  opacity:.07;pointer-events:none
+}
+.ex-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.ex-num{font-size:38px;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1;color:var(--pink)}
+.ex-num.c{color:var(--cyan)}
+.ex-num.g{color:var(--gold)}
+.ex-icon-wrap{
+  width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:20px;background:var(--s2);border:1px solid var(--border);flex-shrink:0
+}
+.ex-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:7px}
+.ex-desc{font-size:12px;color:var(--dim);line-height:1.65;flex:1}
+.ex-meter{margin-top:14px}
+.ex-meter-track{height:5px;background:var(--border2);border-radius:3px;overflow:hidden;margin-bottom:4px}
+.ex-meter-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.ex-meter-labels{display:flex;justify-content:space-between;font-size:9.5px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.ex-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.ex-tag{
+  font-size:10px;font-family:'JetBrains Mono',monospace;padding:2px 8px;border-radius:4px;
+  background:var(--s2);color:var(--muted);border:1px solid var(--border)
+}
+
+/* ── NEXT IN LINE ── */
+.nil-grid{display:flex;flex-wrap:wrap;gap:10px}
+.nil-chip{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:8px;
+  background:var(--s2);border:1px solid var(--border);
+  font-size:12px;font-weight:500
+}
+.nil-rank{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.nil-name{color:var(--text)}
+.nil-score{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.nil-freq{font-size:10px;padding:1px 6px;border-radius:3px;background:var(--s3);color:var(--dim)}
+
+/* ── METHODOLOGY ── */
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.method-grid{grid-template-columns:1fr}}
+.method-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:20px;display:flex;flex-direction:column;gap:10px
+}
+.method-icon{font-size:24px}
+.method-title{font-size:13px;font-weight:700}
+.method-body{font-size:12px;color:var(--dim);line-height:1.7}
+.method-body strong{color:var(--text)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:24px;
+  font-size:11px;color:var(--dim);
+  border-top:1px solid var(--border)
+}
+
+/* ── SCROLL ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--s1)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── ANIMATE ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fadeUp .4s ease both}
+.anim-d1{animation-delay:.05s}
+.anim-d2{animation-delay:.1s}
+.anim-d3{animation-delay:.15s}
+
+.view{display:none}
+.view.active{display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Pressure Index
+    <span class="logo-sub">SupeRR Selector S2 · Rajasthan Royals</span>
+  </div>
+  <div class="header-pills">
+    <button class="pill active" id="btn-bat" onclick="switchView('bat')">🏏 Batters</button>
+    <button class="pill" id="btn-bowl" onclick="switchView('bowl')">🎯 Bowlers</button>
+    <button class="pill" id="btn-method" onclick="switchView('method')">⚗ Methodology</button>
+    <button class="pill" id="btn-explore" onclick="switchView('explore')">📂 Explore Data</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ── HERO ── -->
+<div class="hero anim">
+  <!-- Left: title + stat cards -->
+  <div class="hero-left">
+    <h1>Who delivers<br>when it <span>matters most?</span></h1>
+    <p>A leverage-based pressure rating across 788 IPL + T20I matches (2022–2026). Pressure is defined where win probability is live and each delivery moves the match — not just any high-stakes moment.</p>
+    <div class="hero-stats">
+      <div class="hs" style="--hs-color:var(--pink)">
+        <div class="hs-val" id="cnt-matches" style="color:var(--pink)">0</div>
+        <div class="hs-lbl">Matches</div>
+      </div>
+      <div class="hs" style="--hs-color:var(--muted)">
+        <div class="hs-val" id="cnt-del">0</div>
+        <div class="hs-lbl">Deliveries</div>
+      </div>
+      <div class="hs" style="--hs-color:var(--cyan)">
+        <div class="hs-val" id="cnt-pb" style="color:var(--cyan)">0</div>
+        <div class="hs-lbl">Pressure balls</div>
+      </div>
+      <div class="hs" style="--hs-color:var(--gold)">
+        <div class="hs-val" id="cnt-share" style="color:var(--gold)">0%</div>
+        <div class="hs-lbl">Pressure share</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Middle: donut chart -->
+  <div class="hero-donut">
+    <div class="hero-donut-title">Pressure share by phase</div>
+    <div class="hero-donut-wrap">
+      <canvas id="hero-donut-chart"></canvas>
+      <div class="hero-donut-center">
+        <div class="hero-donut-center-val">14.5%</div>
+        <div class="hero-donut-center-lbl">overall</div>
+      </div>
+    </div>
+    <div class="donut-legend">
+      <div class="donut-legend-item">
+        <div class="donut-legend-dot" style="background:#f5a623"></div>
+        <span class="donut-legend-label">Powerplay</span>
+        <span class="donut-legend-val">13.5%</span>
+      </div>
+      <div class="donut-legend-item">
+        <div class="donut-legend-dot" style="background:#7c5cbf"></div>
+        <span class="donut-legend-label">Middle overs</span>
+        <span class="donut-legend-val">12.4%</span>
+      </div>
+      <div class="donut-legend-item">
+        <div class="donut-legend-dot" style="background:#e8175d"></div>
+        <span class="donut-legend-label">Death overs</span>
+        <span class="donut-legend-val">21.0%</span>
+      </div>
+      <div class="donut-legend-item">
+        <div class="donut-legend-dot" style="background:#3a3f58"></div>
+        <span class="donut-legend-label">Inn 1 total</span>
+        <span class="donut-legend-val">7.7%</span>
+      </div>
+      <div class="donut-legend-item">
+        <div class="donut-legend-dot" style="background:#00d4aa"></div>
+        <span class="donut-legend-label">Inn 2 total</span>
+        <span class="donut-legend-val">21.8%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: animated pressure bars + key thresholds -->
+  <div class="hero-right">
+    <div class="label">Pressure intensity by phase</div>
+    <div class="pressure-bands">
+      <div class="pband">
+        <div class="pband-name">Powerplay</div>
+        <div class="pband-track"><div class="pband-fill" style="width:0%;background:var(--gold)" data-to="64.3"></div></div>
+        <div class="pband-val">13.5%</div>
+      </div>
+      <div class="pband">
+        <div class="pband-name">Middle overs</div>
+        <div class="pband-track"><div class="pband-fill" style="width:0%;background:var(--purple)" data-to="59.0"></div></div>
+        <div class="pband-val">12.4%</div>
+      </div>
+      <div class="pband">
+        <div class="pband-name">Death overs</div>
+        <div class="pband-track"><div class="pband-fill" style="width:0%;background:var(--pink)" data-to="100"></div></div>
+        <div class="pband-val">21.0%</div>
+      </div>
+    </div>
+    <div class="phase-metric-row">
+      <div class="phase-metric">
+        <div class="phase-metric-val" style="color:var(--cyan)">Inn 2</div>
+        <div class="phase-metric-lbl">highest pressure 21.8%</div>
+      </div>
+      <div class="phase-metric">
+        <div class="phase-metric-val" style="color:var(--gold)">Death</div>
+        <div class="phase-metric-lbl">highest by phase 21.0%</div>
+      </div>
+      <div class="phase-metric">
+        <div class="phase-metric-val" style="color:var(--pink)">1.5×</div>
+        <div class="phase-metric-lbl">LI threshold</div>
+      </div>
+      <div class="phase-metric">
+        <div class="phase-metric-val" style="color:var(--muted)">15–85</div>
+        <div class="phase-metric-lbl">WP window %</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ BATTERS VIEW ═══════════════════ -->
+<div class="view active" id="view-bat">
+
+  <!-- Pressure explainers -->
+  <div class="explainer anim anim-d1">
+    <div class="ex-card">
+      <div class="ex-card-bg" style="background:var(--pink)"></div>
+      <div class="ex-header">
+        <div>
+          <div class="ex-num">1.5×</div>
+          <div class="ex-label">Leverage threshold</div>
+        </div>
+        <div class="ex-icon-wrap">⚡</div>
+      </div>
+      <div class="ex-desc">A ball qualifies as high-pressure when its Leverage Index ≥ 1.5× the average delivery — meaning every run or wicket moves the match at least <strong style="color:var(--text)">50% more than usual</strong>.</div>
+      <div class="ex-meter">
+        <div class="ex-meter-track"><div class="ex-meter-fill" style="width:0%;background:var(--pink)" data-to="66.7"></div></div>
+        <div class="ex-meter-labels"><span>1.0× avg</span><span>1.5× threshold</span><span>2.0×+</span></div>
+      </div>
+      <div class="ex-tags">
+        <span class="ex-tag">WP 15–85%</span>
+        <span class="ex-tag">overs &gt;6</span>
+        <span class="ex-tag">≥3 wkts down</span>
+        <span class="ex-tag">Inn 2</span>
+      </div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-card-bg" style="background:var(--cyan)"></div>
+      <div class="ex-header">
+        <div>
+          <div class="ex-num c">0.22</div>
+          <div class="ex-label">Split-half reliability</div>
+        </div>
+        <div class="ex-icon-wrap">🔁</div>
+      </div>
+      <div class="ex-desc">Rank correlation across two random halves of 788 matches. Modest but <strong style="color:var(--text)">real signal</strong> — pressure performance is not pure noise. Used to calibrate shrinkage toward the mean.</div>
+      <div class="ex-meter">
+        <div class="ex-meter-track"><div class="ex-meter-fill" style="width:0%;background:var(--cyan)" data-to="22"></div></div>
+        <div class="ex-meter-labels"><span>0 (noise)</span><span style="color:var(--cyan)">0.22 ↑</span><span>1.0 (perfect)</span></div>
+      </div>
+      <div class="ex-tags">
+        <span class="ex-tag">ρ=0.22 batters</span>
+        <span class="ex-tag">ρ=0.22 bowlers</span>
+        <span class="ex-tag">20 splits</span>
+      </div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-card-bg" style="background:var(--gold)"></div>
+      <div class="ex-header">
+        <div>
+          <div class="ex-num g">200×</div>
+          <div class="ex-label">Bootstrap resamples</div>
+        </div>
+        <div class="ex-icon-wrap">🔄</div>
+      </div>
+      <div class="ex-desc">Each score is averaged over <strong style="color:var(--text)">200 match-level resamples</strong>. The top-10 stability frequency shows how often a player holds their rank across resamples — a direct read on result robustness.</div>
+      <div class="ex-meter">
+        <div class="ex-meter-track"><div class="ex-meter-fill" style="width:0%;background:var(--gold)" data-to="100"></div></div>
+        <div class="ex-meter-labels"><span>1 resample</span><span>100</span><span style="color:var(--gold)">200 ✓</span></div>
+      </div>
+      <div class="ex-tags">
+        <span class="ex-tag">match-level</span>
+        <span class="ex-tag">top-10 freq</span>
+        <span class="ex-tag">rank P10–P90</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top-10 Batter Cards -->
+  <div class="section anim anim-d2">
+    <div class="section-head">
+      <span class="tag tag-bat">Batters</span>
+      <h2>Top 10 Under Pressure</h2>
+      <span class="sh-sub">Click a card to expand detailed evidence ↓</span>
+    </div>
+    <div class="rank-grid" id="bat-cards"></div>
+    <div class="detail-panel" id="bat-detail"></div>
+  </div>
+
+  <!-- Charts -->
+  <div class="chart-grid anim anim-d3">
+    <div class="chart-box">
+      <div class="cb-title">Pressure value vs usual level (shrunk, runs/100)</div>
+      <div class="cb-wrap"><canvas id="chart-bat-pv"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Bootstrap top-10 stability frequency</div>
+      <div class="cb-wrap"><canvas id="chart-bat-stab"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Strike rate: actual vs expected under pressure</div>
+      <div class="cb-wrap"><canvas id="chart-bat-sr"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Dismissal rate: actual vs expected (lower is better)</div>
+      <div class="cb-wrap"><canvas id="chart-bat-out"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">SR lift vs Pressure Value — does aggression translate?</div>
+      <div class="cb-wrap"><canvas id="chart-bat-scatter"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Consistency rate (% innings with positive net value)</div>
+      <div class="cb-wrap"><canvas id="chart-bat-cons"></canvas></div>
+    </div>
+    <div class="chart-box wide">
+      <div class="cb-title">Top-5 batters — multi-dimension radar (normalised)</div>
+      <div class="cb-wrap tall" style="max-width:520px;margin:0 auto"><canvas id="chart-bat-radar"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Comparison table -->
+  <div class="section">
+    <div class="section-head">
+      <span class="tag tag-info">Evidence</span>
+      <h2>Full Batter Breakdown</h2>
+    </div>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="ctable" id="bat-table"></table>
+    </div>
+  </div>
+
+  <!-- Next in line -->
+  <div class="section">
+    <div class="section-head">
+      <span class="tag tag-bat">Batters</span>
+      <h2>Next in Line (Ranks 11–16)</h2>
+    </div>
+    <div class="nil-grid" id="bat-nil"></div>
+  </div>
+
+</div><!-- /view-bat -->
+
+
+<!-- ═══════════════════ BOWLERS VIEW ═══════════════════ -->
+<div class="view" id="view-bowl">
+
+  <div class="explainer anim anim-d1">
+    <div class="ex-card">
+      <div class="ex-card-bg" style="background:var(--cyan)"></div>
+      <div class="ex-header">
+        <div>
+          <div class="ex-num c">783</div>
+          <div class="ex-label">Shrinkage constant (runs)</div>
+        </div>
+        <div class="ex-icon-wrap">📉</div>
+      </div>
+      <div class="ex-desc">Bowling outcomes are noisier — a bowler's runs-saved component is shrunk toward the league average with k ≈ 783 balls, vs 127 for batting runs. <strong style="color:var(--text)">More shrinkage = more scepticism</strong> about small samples.</div>
+      <div class="ex-meter">
+        <div class="ex-meter-track"><div class="ex-meter-fill" style="width:0%;background:var(--cyan)" data-to="100"></div></div>
+        <div class="ex-meter-labels"><span>bat k=127</span><span style="color:var(--cyan)">bowl k=783 ↑</span><span></span></div>
+      </div>
+      <div class="ex-tags">
+        <span class="ex-tag">bat wkts k=174</span>
+        <span class="ex-tag">bowl wkts k=627</span>
+      </div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-card-bg" style="background:var(--gold)"></div>
+      <div class="ex-header">
+        <div>
+          <div class="ex-num g">5.8</div>
+          <div class="ex-label">Run value of a wicket (pp)</div>
+        </div>
+        <div class="ex-icon-wrap">🎯</div>
+      </div>
+      <div class="ex-desc">Estimated from win-probability regression. A wicket in the powerplay is worth <strong style="color:var(--text)">5.8 runs</strong>, 7.6 in the middle overs, 4.4 at the death — putting runs and wickets on the same scale.</div>
+      <div class="ex-meter">
+        <div class="ex-meter-track" style="height:8px;position:relative">
+          <div style="position:absolute;left:0;top:0;width:76.3%;height:100%;background:var(--gold);border-radius:3px;opacity:.3"></div>
+          <div style="position:absolute;left:0;top:0;width:100%;height:100%;background:var(--gold);border-radius:3px;clip-path:inset(0 0 0 0)"></div>
+        </div>
+        <div class="ex-meter-labels"><span>PP: 5.8</span><span style="color:var(--gold)">Mid: 7.6 ↑</span><span>Death: 4.4</span></div>
+      </div>
+      <div class="ex-tags">
+        <span class="ex-tag">WP regression</span>
+        <span class="ex-tag">phase-specific</span>
+      </div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-card-bg" style="background:var(--purple)"></div>
+      <div class="ex-header">
+        <div>
+          <div class="ex-num" style="color:var(--purple)">40</div>
+          <div class="ex-label">Opposition ridge alpha</div>
+        </div>
+        <div class="ex-icon-wrap">⚖️</div>
+      </div>
+      <div class="ex-desc">Ridge regression across all batters and bowlers adjusts for opposition quality. Fitted on <strong style="color:var(--text)">non-pressure balls only</strong> — so a player's pressure result doesn't contaminate their own adjustment.</div>
+      <div class="ex-meter">
+        <div class="ex-meter-track"><div class="ex-meter-fill" style="width:0%;background:var(--purple)" data-to="40"></div></div>
+        <div class="ex-meter-labels"><span>0 (OLS)</span><span style="color:var(--purple)">α=40 ✓</span><span>high (bias)</span></div>
+      </div>
+      <div class="ex-tags">
+        <span class="ex-tag">cross-fit</span>
+        <span class="ex-tag">non-pressure only</span>
+        <span class="ex-tag">114 batters</span>
+        <span class="ex-tag">115 bowlers</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section anim anim-d2">
+    <div class="section-head">
+      <span class="tag tag-bowl">Bowlers</span>
+      <h2>Top 10 Under Pressure</h2>
+      <span class="sh-sub">Click a card to expand detailed evidence ↓</span>
+    </div>
+    <div class="rank-grid" id="bowl-cards"></div>
+    <div class="detail-panel" id="bowl-detail"></div>
+  </div>
+
+  <div class="chart-grid anim anim-d3">
+    <div class="chart-box">
+      <div class="cb-title">Pressure value vs usual level (shrunk, runs/100)</div>
+      <div class="cb-wrap"><canvas id="chart-bowl-pv"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Bootstrap top-10 stability frequency</div>
+      <div class="cb-wrap"><canvas id="chart-bowl-stab"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Economy rate: actual vs expected under pressure</div>
+      <div class="cb-wrap"><canvas id="chart-bowl-econ"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Wicket rate: actual vs expected (higher is better)</div>
+      <div class="cb-wrap"><canvas id="chart-bowl-wk"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Dot ball % under pressure</div>
+      <div class="cb-wrap"><canvas id="chart-bowl-dots"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="cb-title">Economy saved per over (actual vs expected diff)</div>
+      <div class="cb-wrap"><canvas id="chart-bowl-esaved"></canvas></div>
+    </div>
+    <div class="chart-box wide">
+      <div class="cb-title">Top-5 bowlers — multi-dimension radar (normalised)</div>
+      <div class="cb-wrap tall" style="max-width:520px;margin:0 auto"><canvas id="chart-bowl-radar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag tag-info">Evidence</span>
+      <h2>Full Bowler Breakdown</h2>
+    </div>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="ctable" id="bowl-table"></table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag tag-bowl">Bowlers</span>
+      <h2>Next in Line (Ranks 11–16)</h2>
+    </div>
+    <div class="nil-grid" id="bowl-nil"></div>
+  </div>
+
+</div><!-- /view-bowl -->
+
+
+<!-- ═══════════════════ METHODOLOGY VIEW ═══════════════════ -->
+<div class="view" id="view-method">
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag tag-info">System Design</span>
+      <h2>How Pressure Is Defined and Measured</h2>
+    </div>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="method-icon">📐</div>
+        <div class="method-title">Step 1 — Win Probability Model</div>
+        <div class="method-body">
+          Gradient-boosted models (HistGBT) are trained independently for each innings using 5-fold cross-validation grouped by match — so a match never informs its own predictions. Features: <strong>runs scored/needed, wickets lost, balls remaining, required run rate, current run rate, IPL flag</strong>.<br><br>
+          Monotone constraints ensure more runs needed never helps the chase and more wickets never hurts.<br><br>
+          <span class="mono">Inn 1: AUC 0.679 · Brier 0.226</span><br>
+          <span class="mono">Inn 2: AUC 0.889 · Brier 0.136</span>
+        </div>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">⚡</div>
+        <div class="method-title">Step 2 — Leverage Index</div>
+        <div class="method-body">
+          For every delivery, we compute the <strong>expected absolute change in win probability</strong> across all possible outcomes (0, 1, 2, 3, 4, 6, wicket), weighted by their phase-specific probabilities. This is normalised to a mean of 1.0.<br><br>
+          <span class="mono">LI = E[|ΔWP|] / mean(E[|ΔWP|])</span><br><br>
+          A ball is <strong>high-pressure</strong> when: LI ≥ 1.5, win probability between 15–85%, and stage filter (overs &gt; 6, or ≥ 3 wickets down, or second innings).
+        </div>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">🎯</div>
+        <div class="method-title">Step 3 — Context-Adjusted Value</div>
+        <div class="method-body">
+          Each delivery is compared to the <strong>league average in an identical context</strong>: innings × 2-over block × wickets lost × required-rate band. Runs and wickets are unified via phase-specific run values (5.8 / 7.6 / 4.4 runs per wicket).<br><br>
+          Opposition quality is removed via ridge regression fitted on <strong>non-pressure balls only</strong> — preventing pressure results from contaminating their own adjustment.
+        </div>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">📉</div>
+        <div class="method-title">Step 4 — Empirical Bayes Shrinkage</div>
+        <div class="method-body">
+          Each component is shrunk toward the league average by <span class="mono">n / (n + k)</span>, where k is estimated from the variance ratio of ball-level noise to between-player variance:<br><br>
+          <span class="mono">Bat runs:  k ≈ 127 balls</span><br>
+          <span class="mono">Bat wkts:  k ≈ 174 balls</span><br>
+          <span class="mono">Bowl runs: k ≈ 783 balls</span><br>
+          <span class="mono">Bowl wkts: k ≈ 627 balls</span><br><br>
+          Bowling is shrunk harder because wicket counts are noisier relative to true skill.
+        </div>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">🔄</div>
+        <div class="method-title">Step 5 — Rating Formula</div>
+        <div class="method-body">
+          <span class="mono">Rating = 0.8 × z(pressure value) + 0.2 × z(consistency)</span><br><br>
+          Consistency = share of innings/spells with positive net value, shrunk toward 0.50 with prior weight of 12. The rating is computed on full data <strong>and</strong> 200 bootstrap match resamples; the final score is the average of both.<br><br>
+          Weights chosen by out-of-sample testing. "Clutch lift" (pressure minus usual) has zero weight — split-half correlation of −0.11 for batters, −0.03 for bowlers.
+        </div>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">✅</div>
+        <div class="method-title">Step 6 — Eligibility &amp; Fairness</div>
+        <div class="method-body">
+          <strong>Minimum:</strong> 75 pressure balls, 15 different matches, 100 ordinary balls for a baseline. Leaves 114 batters and 115 bowlers eligible.<br><br>
+          Context conditioning (innings × over × wickets × RR band) means a finisher is only compared with other finishers in similar chases. An IPL flag in the win model and opposition regression links the two competitions on the same scale.<br><br>
+          Sensitivity checks at LI ≥ 1.0, LI ≥ 2.0, PV-only, stricter eligibility confirm robustness.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reliability table -->
+  <div class="section">
+    <div class="section-head">
+      <span class="tag tag-info">Validation</span>
+      <h2>Split-Half Reliability (20 random splits)</h2>
+    </div>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="ctable">
+        <thead><tr><th>Predictor (measured on half A)</th><th class="r">Batters ρ</th><th class="r">Bowlers ρ</th></tr></thead>
+        <tbody>
+          <tr><td class="name">Pressure value, unshrunk</td><td class="r">0.18</td><td class="r">0.21</td></tr>
+          <tr><td class="name">Pressure value, shrunk <span class="tag tag-info" style="margin-left:6px">our metric</span></td><td class="r" style="color:var(--cyan)">0.21</td><td class="r" style="color:var(--cyan)">0.23</td></tr>
+          <tr><td class="name">Final rating (80% PV + 20% consistency)</td><td class="r" style="color:var(--cyan)">0.22</td><td class="r" style="color:var(--cyan)">0.22</td></tr>
+          <tr><td class="name">Consistency alone</td><td class="r">0.17</td><td class="r">0.18</td></tr>
+          <tr><td class="name">Usual (non-pressure) level alone</td><td class="r">0.22</td><td class="r">0.24</td></tr>
+          <tr><td class="name">Clutch lift (pressure − usual) <span style="color:var(--pink);font-size:10px;margin-left:6px">zero weight</span></td><td class="r" style="color:var(--pink)">−0.11</td><td class="r" style="color:var(--pink)">−0.03</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6">The right way to find players reliable under pressure is to find those who are both excellent in general and have delivered in high-leverage moments. Pressure performance is real but modest (~0.22 ρ). There is no distinct "clutch" skill — the gap is noise.</p>
+  </div>
+
+  <!-- Sensitivity -->
+  <div class="section">
+    <div class="section-head">
+      <span class="tag tag-info">Sensitivity</span>
+      <h2>Top-10 Overlap Under Different Assumptions</h2>
+    </div>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="ctable">
+        <thead><tr><th>Change to method</th><th class="r">Batters retained</th><th class="r">Bowlers retained</th></tr></thead>
+        <tbody>
+          <tr><td class="name">Pressure threshold LI ≥ 1.0</td><td class="r">8 / 10</td><td class="r">4 / 10</td></tr>
+          <tr><td class="name">Pressure threshold LI ≥ 2.0</td><td class="r">5 / 10</td><td class="r">6 / 10</td></tr>
+          <tr><td class="name">Pressure value only (no consistency)</td><td class="r">9 / 10</td><td class="r">8 / 10</td></tr>
+          <tr><td class="name">Weights 70/15/15 incl. lift</td><td class="r">9 / 10</td><td class="r">9 / 10</td></tr>
+          <tr><td class="name">Stricter eligibility (120 balls, 25 matches)</td><td class="r">8 / 10</td><td class="r">9 / 10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /view-method -->
+
+
+<!-- ═══════════════════ EXPLORE DATA VIEW ═══════════════════ -->
+<div class="view" id="view-explore">
+  <div class="ex-wrap">
+
+    <!-- ── UPLOAD ZONE (shown before upload) ── -->
+    <div id="up-section">
+      <div class="ex-upload-hero">
+        <div class="ex-upload-icon">📂</div>
+        <h2>Drop your CSVs — we'll do the rest</h2>
+        <p>Upload any ball-by-ball cricket data and get instant analytics across batters, bowlers, teams, phases, and match patterns. <strong>ball_by_ball.csv</strong> is the only required file.</p>
+      </div>
+
+      <label class="ex-drop-zone" id="drop-zone"
+        ondragover="event.preventDefault();document.getElementById('drop-zone').classList.add('drag')"
+        ondragleave="document.getElementById('drop-zone').classList.remove('drag')"
+        ondrop="handleDrop(event)">
+        <input type="file" id="ex-file-input" accept=".csv" multiple style="display:none"
+          onchange="handleFileInput(this.files)"/>
+        <div class="ex-drop-inner">
+          <div class="ex-drop-big-icon">🗂</div>
+          <div class="ex-drop-cta">Drag &amp; drop CSV files here</div>
+          <div class="ex-drop-sub">or <span class="ex-drop-browse" onclick="document.getElementById('ex-file-input').click()">browse files</span></div>
+        </div>
+      </label>
+
+      <!-- auto-detected file list -->
+      <div id="ex-file-list" class="ex-file-list"></div>
+
+      <div class="ex-upload-actions">
+        <button class="ex-btn-analyse" id="btn-load" onclick="uploadFiles()" disabled>
+          <span id="btn-load-text">⚡ Analyse</span>
+        </button>
+        <button class="ex-btn-clear" onclick="clearFiles()">Clear</button>
+        <span class="ex-upload-hint" id="up-status"></span>
+      </div>
+      <div class="up-error" id="up-error"></div>
+
+      <div class="ex-supported">
+        <span class="ex-sup-label">Auto-detected files:</span>
+        <span class="ex-sup-chip">ball_by_ball.csv ✱</span>
+        <span class="ex-sup-chip">matches.csv</span>
+        <span class="ex-sup-chip">competitions.csv</span>
+        <span class="ex-sup-chip">player_mapping.csv</span>
+        <span class="ex-sup-chip">playing_eleven.csv</span>
+        <span class="ex-sup-chip">teams.csv</span>
+      </div>
+    </div>
+
+    <!-- ── LOADING ── -->
+    <div id="ua-loading" style="display:none">
+      <div class="ex-loading-wrap">
+        <!-- Animated cricket ball -->
+        <div class="load-ball-wrap">
+          <div class="load-orbit2"></div>
+          <div class="load-orbit"></div>
+          <div class="load-ball"></div>
+        </div>
+        <div class="ex-loading-title">Running Pressure Index pipeline</div>
+        <div class="ex-loading-sub" id="ua-loading-msg">Starting…</div>
+        <!-- Step tracker -->
+        <div class="load-steps" id="load-steps">
+          <div class="load-step" id="lstep-0"><span class="load-step-icon">📥</span><span class="load-step-name">Preparing &amp; filtering data</span><span class="load-step-tick">✓</span></div>
+          <div class="load-step" id="lstep-1"><span class="load-step-icon">🤖</span><span class="load-step-name">Training Win Probability model</span><span class="load-step-tick">✓</span></div>
+          <div class="load-step" id="lstep-2"><span class="load-step-icon">⚡</span><span class="load-step-name">Computing Leverage Index</span><span class="load-step-tick">✓</span></div>
+          <div class="load-step" id="lstep-3"><span class="load-step-icon">📐</span><span class="load-step-name">Context baselines + run values</span><span class="load-step-tick">✓</span></div>
+          <div class="load-step" id="lstep-4"><span class="load-step-icon">⚖️</span><span class="load-step-name">Opponent quality adjustment</span><span class="load-step-tick">✓</span></div>
+          <div class="load-step" id="lstep-5"><span class="load-step-icon">📉</span><span class="load-step-name">Empirical Bayes ratings</span><span class="load-step-tick">✓</span></div>
+          <div class="load-step" id="lstep-6"><span class="load-step-icon">🔄</span><span class="load-step-name">Bootstrap stability (200 resamples)</span><span class="load-step-tick">✓</span></div>
+        </div>
+        <div class="load-eta">Takes <strong>2–10 minutes</strong> depending on dataset size.<br>Win probability model trains on every fold — this is the slow part.</div>
+      </div>
+    </div>
+
+    <!-- ── RESULTS (shown after upload) ── -->
+    <div id="ua-output" style="display:none">
+
+      <!-- top bar -->
+      <div class="ex-result-bar">
+        <div class="ex-result-meta" id="ua-meta"></div>
+        <button class="ex-btn-clear" onclick="resetUpload()">↩ New upload</button>
+      </div>
+
+      <!-- stat strip -->
+      <div class="ex-stat-strip" id="ua-stats"></div>
+
+      <!-- tabs -->
+      <div class="ua-tabs" id="ua-tabs">
+        <div class="ua-tab active" onclick="uaSwitch('overview')">Overview</div>
+        <div class="ua-tab" onclick="uaSwitch('batters')">Batters</div>
+        <div class="ua-tab" onclick="uaSwitch('bowlers')">Bowlers</div>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="ua-view active" id="ua-overview">
+        <div class="u-chart-grid">
+          <div class="u-cbox wide">
+            <div class="u-ctitle">Avg runs per over (across all matches)</div>
+            <div class="u-cwrap"><canvas id="uc-over"></canvas></div>
+          </div>
+          <div class="u-cbox">
+            <div class="u-ctitle">Phase run rate</div>
+            <div class="u-cwrap"><canvas id="uc-phase-rr"></canvas></div>
+          </div>
+          <div class="u-cbox">
+            <div class="u-ctitle">Wicket types</div>
+            <div class="u-cwrap"><canvas id="uc-wkt"></canvas></div>
+          </div>
+          <div class="u-cbox">
+            <div class="u-ctitle">Runs per ball distribution</div>
+            <div class="u-cwrap"><canvas id="uc-rundist"></canvas></div>
+          </div>
+          <div class="u-cbox">
+            <div class="u-ctitle">Dot % · Boundary % by phase</div>
+            <div class="u-cwrap"><canvas id="uc-phase-bnd"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BATTERS — full pressure detail -->
+      <div class="ua-view" id="ua-batters" style="display:none"></div>
+
+      <!-- BOWLERS — full pressure detail -->
+      <div class="ua-view" id="ua-bowlers" style="display:none"></div>
+
+    </div><!-- /ua-output -->
+  </div>
+</div><!-- /view-explore -->
+
+</main>
+
+<footer>
+  Pressure Index · SupeRR Selector Season 2 · Rajasthan Royals · IPL + T20I 2022–2026 · 788 matches · 188,151 deliveries
+</footer>
+
+<script>
+// ════════════════ INIT ANIMATIONS ════════════════
+// Unregister datalabels globally — it auto-registers and breaks all charts
+if (window.ChartDataLabels) {
+  Chart.unregister(ChartDataLabels);
+}
+
+function animateCounter(el, target, suffix='', duration=1400) {
+  if (!el) return;
+  const start = performance.now();
+  const isFloat = !Number.isInteger(target);
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = target * ease;
+    el.textContent = isFloat ? val.toFixed(1) + suffix : Math.round(val).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = isFloat ? target.toFixed(1) + suffix : Number(target).toLocaleString() + suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+// Update hero stat counters from DATA.overview (data-driven, not hardcoded)
+function updateHeroStats(ov) {
+  ov = ov || {};
+  animateCounter(document.getElementById('cnt-matches'), ov.n_match || 0);
+  animateCounter(document.getElementById('cnt-del'),    ov.n_ball || 0);
+  animateCounter(document.getElementById('cnt-pb'),    ov.n_pressure || 0);
+  animateCounter(document.getElementById('cnt-share'), (Number(ov.share) || 0) * 100, '%');
+}
+
+function initHeroAnimations() {
+  // Hero counters are data-driven — set by updateHeroStats() once DATA.overview loads.
+
+  // Animated progress bars (pband-fill)
+  setTimeout(() => {
+    document.querySelectorAll('.pband-fill[data-to], .ex-meter-fill[data-to]').forEach(el => {
+      el.style.width = el.dataset.to + '%';
+    });
+  }, 300);
+
+  // Hero donut chart
+  const ctx = document.getElementById('hero-donut-chart');
+  if (ctx) {
+    makeChart('hero-donut-chart', ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Powerplay', 'Middle overs', 'Death overs', 'Inn 1 total', 'Inn 2 total'],
+        datasets: [{
+          data: [13.5, 12.4, 21.0, 7.7, 21.8],
+          backgroundColor: ['#f5a623', '#7c5cbf', '#e8175d', '#3a3f58', '#00d4aa'],
+          borderWidth: 2,
+          borderColor: '#0e1016',
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '68%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.label}: ${ctx.raw}%`
+            }
+          }
+        },
+        animation: { animateRotate: true, duration: 1000 }
+      }
+    });
+  }
+}
+
+// ════════════════ DATA ════════════════
+let DATA = null;         // pre-computed official results from dashboard_data.json
+let EXPLORE_DATA = null; // results from user-uploaded CSVs — kept separate, never overwrites DATA
+
+// Global registry of every main Chart.js instance so we can destroy them
+// before rebuilding. This prevents "Canvas already in use" errors when the
+// Explore pipeline re-runs and buildBatCharts/buildBowlCharts fire again.
+// (The Explore-tab overview charts keep their own separate `uaCharts` map.)
+const mainCharts = {};
+
+function destroyMainChart(id) {
+  if (mainCharts[id]) { try { mainCharts[id].destroy(); } catch (e) {} delete mainCharts[id]; }
+}
+
+// Destroy any existing chart on this canvas, create a fresh one, and track it.
+function makeChart(id, ctx, config) {
+  destroyMainChart(id);
+  const chart = new Chart(ctx, config);
+  mainCharts[id] = chart;
+  return chart;
+}
+
+// Backend URL: localhost while developing, Render in production.
+// Override anytime with ?api=https://your-backend.onrender.com
+const API = (() => {
+  const q = new URLSearchParams(location.search).get('api');
+  if (q) return q.replace(/\/$/, '');
+  const local = location.protocol === 'file:' || ['localhost', '127.0.0.1'].includes(location.hostname);
+  return local ? 'http://localhost:8000' : 'https://pressure-index-api.onrender.com';
+})();
+
+// ════════════════ HELPERS ════════════════
+const $  = id => document.getElementById(id);
+const f1 = v => v == null ? '—' : Number(v).toFixed(1);
+const f2 = v => v == null ? '—' : Number(v).toFixed(2);
+const pct = v => v == null ? '—' : (Number(v)*100).toFixed(0)+'%';
+const firstName = n => n.split(' ')[0];
+const lastName  = n => { const p = n.split(' '); return p[p.length-1]; };
+
+function diffTag(val, invert=false) {
+  const n = parseFloat(val);
+  const isPos = invert ? n < 0 : n > 0;
+  const cls = isPos ? 'pos' : (n < 0 ? 'neg' : 'neut');
+  const prefix = n > 0 ? '+' : '';
+  return `<span class="diff ${cls}">${prefix}${f1(n)}</span>`;
+}
+
+// ════════════════ CHARTS ════════════════
+Chart.defaults.color = '#5a6180';
+Chart.defaults.font.family = "'Inter', sans-serif";
+const _isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+function _safariSizeCanvas(ctx) {
+  const p = ctx.parentElement;
+  if (!p) return;
+  const h = p.offsetHeight || parseInt(p.style.height) || 220;
+  const w = p.offsetWidth  || 400;
+  if (h > 0) { ctx.width = w; ctx.height = h; ctx.style.height = h+'px'; }
+}
+
+function mkBar(id, labels, datasets, opts={}) {
+  const ctx = $(id);
+  if (!ctx) return;
+  _safariSizeCanvas(ctx);
+  return makeChart(id, ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: datasets.map(d=>({
+        label: d.label, data: d.data,
+        backgroundColor: d.color,
+        borderRadius: 4, borderSkipped: false,
+        ...d.extra
+      }))
+    },
+    options: {
+      responsive: !_isSafari, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: datasets.length > 1, labels: { color:'#5a6180', font:{size:11}, boxWidth:10 } },
+        tooltip: { mode:'index', intersect:false }
+      },
+      scales: {
+        x: { stacked: opts.stacked, grid:{color:'rgba(31,34,53,.8)'}, ticks:{color:'#5a6180',font:{size:10},maxRotation:30} },
+        y: { stacked: opts.stacked, grid:{color:'rgba(31,34,53,.8)'}, ticks:{color:'#5a6180',font:{size:10}} }
+      }
+    }
+  });
+}
+
+function mkGroupedBar(id, labels, sets) {
+  const ctx = $(id);
+  if (!ctx) return;
+  _safariSizeCanvas(ctx);
+  return makeChart(id, ctx, {
+    type: 'bar',
+    data: { labels, datasets: sets },
+    options: {
+      responsive: !_isSafari, maintainAspectRatio: false,
+      plugins: { legend:{ labels:{color:'#5a6180',font:{size:11},boxWidth:10} } },
+      scales: {
+        x: { grid:{color:'rgba(31,34,53,.8)'}, ticks:{color:'#5a6180',font:{size:10},maxRotation:30} },
+        y: { grid:{color:'rgba(31,34,53,.8)'}, ticks:{color:'#5a6180',font:{size:10}} }
+      }
+    }
+  });
+}
+
+// ════════════════ RENDER CARDS ════════════════
+let selectedBat  = null;
+let selectedBowl = null;
+
+function renderCards(players, containerId, detailId, isBowl) {
+  const container = $(containerId);
+  const detail    = $(detailId);
+  container.innerHTML = '';
+
+  players.forEach((p, i) => {
+    const rank = i + 1;
+    const isBowlCard = isBowl;
+    const scoreColor = isBowlCard ? 'var(--cyan)' : 'var(--pink)';
+    const stabPct = Math.round(p.top10_freq * 100);
+    const initials = p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+    const card = document.createElement('div');
+    card.className = `rcard ${isBowlCard ? 'bowl-card' : ''}`;
+    card.innerHTML = `
+      <div class="rcard-glow ${isBowlCard ? 'bowl' : ''}"></div>
+      <div class="rcard-rank ${isBowlCard ? 'bowl-rank' : ''}"><span>#${rank}</span> of 10</div>
+      <div class="rcard-name">${p.name}</div>
+      <div class="rcard-score ${isBowlCard ? 'bowl-score' : ''}">${f2(p.final_score)}</div>
+      <div class="rcard-score-lbl">Pressure Score</div>
+      <div class="rcard-meta">
+        <span class="rcard-chip">${p.pb|0} balls</span>
+        <span class="rcard-chip">${isBowlCard ? (p.ipl|0)+' IPL' : (p.ipl|0)+' IPL'}</span>
+        <span class="rcard-chip">${isBowlCard ? (p.t20i|0)+' T20I' : (p.t20i|0)+' T20I'}</span>
+      </div>
+      <div class="rcard-stab">
+        <div class="stab-bar-track"><div class="stab-bar-fill ${isBowlCard?'bowl':''}" style="width:${stabPct}%"></div></div>
+        <div class="stab-pct">Top-10 freq: ${stabPct}%</div>
+      </div>`;
+    card.addEventListener('click', () => {
+      if (isBowlCard) {
+        if (selectedBowl === i) { selectedBowl = null; detail.className='detail-panel'; return; }
+        selectedBowl = i;
+      } else {
+        if (selectedBat === i) { selectedBat = null; detail.className='detail-panel'; return; }
+        selectedBat = i;
+      }
+      container.querySelectorAll('.rcard').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      renderDetail(p, detail, isBowlCard);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderDetail(p, panel, isBowl) {
+  const cyan = '#00d4aa', pink = '#e8175d', gold = '#f5a623';
+  const accent = isBowl ? cyan : pink;
+
+  if (isBowl) {
+    const econDiff = (p.exp_econ - p.econ).toFixed(2);
+    const wkDiff   = (p.wk_pct  - p.exp_wk).toFixed(2);
+    panel.innerHTML = `
+      <div class="dp-block">
+        <div class="dp-title">Performance vs Expected</div>
+        <div class="dp-row"><span class="dp-label">Economy (actual)</span><span class="dp-val">${f2(p.econ)}</span></div>
+        <div class="dp-row"><span class="dp-label">Economy (expected)</span><span class="dp-val">${f2(p.exp_econ)}</span></div>
+        <div class="dp-row"><span class="dp-label">Economy saved/over</span><span class="dp-val up">${econDiff > 0 ? '+' : ''}${econDiff}</span></div>
+        <div class="dp-row"><span class="dp-label">Wicket % (actual)</span><span class="dp-val">${f1(p.wk_pct)}%</span></div>
+        <div class="dp-row"><span class="dp-label">Wicket % (expected)</span><span class="dp-val">${f1(p.exp_wk)}%</span></div>
+        <div class="dp-row"><span class="dp-label">Wicket lift</span><span class="dp-val ${wkDiff>=0?'up':'down'}">${wkDiff>=0?'+':''}${wkDiff}%</span></div>
+        <div class="dp-row"><span class="dp-label">Dot ball %</span><span class="dp-val up">${f1(p.dots)}%</span></div>
+      </div>
+      <div class="dp-block">
+        <div class="dp-title">Rating Components</div>
+        <div class="dp-row"><span class="dp-label">Raw PV (runs/100)</span><span class="dp-val">${f1(p.pvraw100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Shrunk PV</span><span class="dp-val" style="color:${accent}">${f1(p.pv100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Usual level</span><span class="dp-val">${f1(p.usual100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Lift (pressure−usual)</span><span class="dp-val ${parseFloat(p.lift100)>=0?'up':'down'}">${parseFloat(p.lift100)>=0?'+':''}${f1(p.lift100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Consistency (eb)</span><span class="dp-val">${pct(p.cons_eb)}</span></div>
+        <div class="dp-row"><span class="dp-label">Final score</span><span class="dp-val" style="color:${accent};font-size:16px">${f2(p.final_score)}</span></div>
+      </div>
+      <div class="dp-block">
+        <div class="dp-title">Stability (120 resamples)</div>
+        <div class="dp-row"><span class="dp-label">Pressure balls</span><span class="dp-val">${p.pb|0}</span></div>
+        <div class="dp-row"><span class="dp-label">Spells</span><span class="dp-val">${p.stints|0}</span></div>
+        <div class="dp-row"><span class="dp-label">IPL / T20I balls</span><span class="dp-val">${p.ipl|0} / ${p.t20i|0}</span></div>
+        <div class="dp-row"><span class="dp-label">Top-10 freq</span><span class="dp-val" style="color:${accent}">${pct(p.top10_freq)}</span></div>
+        <div class="dp-row"><span class="dp-label">Median rank</span><span class="dp-val">#${f1(p.median_rank)}</span></div>
+        <div class="dp-row"><span class="dp-label">P10–P90 rank range</span><span class="dp-val">#${f1(p.p10_rank)} – #${f1(p.p90_rank)}</span></div>
+      </div>`;
+  } else {
+    const srDiff  = (p.sr - p.exp_sr).toFixed(1);
+    const outDiff = (p.exp_out - p.out_pct).toFixed(2);
+    panel.innerHTML = `
+      <div class="dp-block">
+        <div class="dp-title">Performance vs Expected</div>
+        <div class="dp-row"><span class="dp-label">Strike rate (actual)</span><span class="dp-val">${f1(p.sr)}</span></div>
+        <div class="dp-row"><span class="dp-label">Strike rate (expected)</span><span class="dp-val">${f1(p.exp_sr)}</span></div>
+        <div class="dp-row"><span class="dp-label">SR above expected</span><span class="dp-val up">+${srDiff}</span></div>
+        <div class="dp-row"><span class="dp-label">Dismissal % (actual)</span><span class="dp-val">${f2(p.out_pct)}%</span></div>
+        <div class="dp-row"><span class="dp-label">Dismissal % (expected)</span><span class="dp-val">${f2(p.exp_out)}%</span></div>
+        <div class="dp-row"><span class="dp-label">Dismissal saved</span><span class="dp-val ${parseFloat(outDiff)>=0?'up':'down'}">${parseFloat(outDiff)>=0?'+':''}${outDiff}%</span></div>
+        <div class="dp-row"><span class="dp-label">Dot ball %</span><span class="dp-val">${f1(p.dots)}%</span></div>
+      </div>
+      <div class="dp-block">
+        <div class="dp-title">Rating Components</div>
+        <div class="dp-row"><span class="dp-label">Raw PV (runs/100)</span><span class="dp-val">${f1(p.pvraw100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Shrunk PV</span><span class="dp-val" style="color:${accent}">${f1(p.pv100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Usual level</span><span class="dp-val">${f1(p.usual100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Lift (pressure−usual)</span><span class="dp-val ${parseFloat(p.lift100)>=0?'up':'down'}">${parseFloat(p.lift100)>=0?'+':''}${f1(p.lift100)}</span></div>
+        <div class="dp-row"><span class="dp-label">Consistency (eb)</span><span class="dp-val">${pct(p.cons_eb)}</span></div>
+        <div class="dp-row"><span class="dp-label">Final score</span><span class="dp-val" style="color:${accent};font-size:16px">${f2(p.final_score)}</span></div>
+      </div>
+      <div class="dp-block">
+        <div class="dp-title">Stability (120 resamples)</div>
+        <div class="dp-row"><span class="dp-label">Pressure balls</span><span class="dp-val">${p.pb|0}</span></div>
+        <div class="dp-row"><span class="dp-label">Innings</span><span class="dp-val">${p.stints|0}</span></div>
+        <div class="dp-row"><span class="dp-label">IPL / T20I balls</span><span class="dp-val">${p.ipl|0} / ${p.t20i|0}</span></div>
+        <div class="dp-row"><span class="dp-label">Top-10 freq</span><span class="dp-val" style="color:${accent}">${pct(p.top10_freq)}</span></div>
+        <div class="dp-row"><span class="dp-label">Median rank</span><span class="dp-val">#${f1(p.median_rank)}</span></div>
+        <div class="dp-row"><span class="dp-label">P10–P90 rank range</span><span class="dp-val">#${f1(p.p10_rank)} – #${f1(p.p90_rank)}</span></div>
+      </div>`;
+  }
+  panel.className = 'detail-panel open';
+}
+
+// ════════════════ RENDER TABLES ════════════════
+function renderBatTable() {
+  if (!DATA) return;
+  const t = $('bat-table');
+  t.innerHTML = `<thead><tr>
+    <th>#</th><th>Batter</th>
+    <th class="r">Press Balls</th><th class="r">Inn</th><th class="r">IPL/T20I</th>
+    <th class="r">SR</th><th class="r">Exp SR</th><th class="r">Out%</th><th class="r">Exp Out%</th>
+    <th class="r">Raw PV</th><th class="r">Shrunk PV</th><th class="r">Usual</th><th class="r">Lift</th>
+    <th class="r">Cons</th><th class="r">Top10%</th><th class="r">Score</th>
+  </tr></thead><tbody>${DATA.bat.map((p,i)=>`<tr>
+    <td><span class="rnum ${i<3?'top3':''} ${i===0?'r1':''}">${i+1}</span></td>
+    <td class="name">${p.name}</td>
+    <td class="r">${p.pb|0}</td>
+    <td class="r">${p.stints|0}</td>
+    <td class="r">${p.ipl|0}/${p.t20i|0}</td>
+    <td class="r">${f1(p.sr)}</td>
+    <td class="r">${f1(p.exp_sr)}</td>
+    <td class="r">${f2(p.out_pct)}%</td>
+    <td class="r">${f2(p.exp_out)}%</td>
+    <td class="r">${f1(p.pvraw100)}</td>
+    <td class="r" style="color:var(--pink)">${f1(p.pv100)}</td>
+    <td class="r">${f1(p.usual100)}</td>
+    <td class="r">${diffTag(p.lift100)}</td>
+    <td class="r">${pct(p.cons_eb)}</td>
+    <td class="r">${pct(p.top10_freq)}</td>
+    <td class="r" style="color:var(--pink);font-weight:700">${f2(p.final_score)}</td>
+  </tr>`).join('')}</tbody>`;
+}
+
+function renderBowlTable() {
+  if (!DATA) return;
+  const t = $('bowl-table');
+  t.innerHTML = `<thead><tr>
+    <th>#</th><th>Bowler</th>
+    <th class="r">Press Balls</th><th class="r">Spells</th><th class="r">IPL/T20I</th>
+    <th class="r">Econ</th><th class="r">Exp Econ</th><th class="r">Wkt%</th><th class="r">Exp Wkt%</th>
+    <th class="r">Raw PV</th><th class="r">Shrunk PV</th><th class="r">Usual</th><th class="r">Lift</th>
+    <th class="r">Cons</th><th class="r">Top10%</th><th class="r">Score</th>
+  </tr></thead><tbody>${DATA.bowl.map((p,i)=>`<tr>
+    <td><span class="rnum ${i<3?'top3':''} ${i===0?'r1':''}">${i+1}</span></td>
+    <td class="name">${p.name}</td>
+    <td class="r">${p.pb|0}</td>
+    <td class="r">${p.stints|0}</td>
+    <td class="r">${p.ipl|0}/${p.t20i|0}</td>
+    <td class="r">${f2(p.econ)}</td>
+    <td class="r">${f2(p.exp_econ)}</td>
+    <td class="r">${f2(p.wk_pct)}%</td>
+    <td class="r">${f2(p.exp_wk)}%</td>
+    <td class="r">${f1(p.pvraw100)}</td>
+    <td class="r" style="color:var(--cyan)">${f1(p.pv100)}</td>
+    <td class="r">${f1(p.usual100)}</td>
+    <td class="r">${diffTag(p.lift100)}</td>
+    <td class="r">${pct(p.cons_eb)}</td>
+    <td class="r">${pct(p.top10_freq)}</td>
+    <td class="r" style="color:var(--cyan);font-weight:700">${f2(p.final_score)}</td>
+  </tr>`).join('')}</tbody>`;
+}
+
+// ════════════════ RENDER NIL ════════════════
+function renderNil(data, containerId, isBowl) {
+  const c = $(containerId);
+  c.innerHTML = data.map(r=>`
+    <div class="nil-chip">
+      <span class="nil-rank">#${r[0]}</span>
+      <span class="nil-name">${r[1]}</span>
+      <span class="nil-score">${r[2]}</span>
+      <span class="nil-freq">${r[3]}</span>
+    </div>`).join('');
+}
+
+// ════════════════ BUILD BAT CHARTS ════════════════
+function buildBatCharts() {
+  const names   = DATA.bat.map(p => lastName(p.name));
+  const pink    = '#e8175d', cyan = '#00d4aa', gold = '#f5a623', purple = '#7c5cbf';
+  const pinkFad = 'rgba(232,23,93,.25)', cyanFad = 'rgba(0,212,170,.25)';
+
+  // PV vs Usual
+  mkGroupedBar('chart-bat-pv', names, [
+    { label:'Pressure Value', data: DATA.bat.map(p=>p.pv100),
+      backgroundColor: pink, borderRadius:4, borderSkipped:false },
+    { label:'Usual Level',    data: DATA.bat.map(p=>p.usual100),
+      backgroundColor: 'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+  ]);
+
+  // Stability
+  mkBar('chart-bat-stab', names,
+    [{ label:'Top-10 Freq %', data: DATA.bat.map(p=>+(p.top10_freq*100).toFixed(0)), color: pink }]);
+
+  // SR actual vs expected
+  mkGroupedBar('chart-bat-sr', names, [
+    { label:'Actual SR',   data: DATA.bat.map(p=>+f1(p.sr)),
+      backgroundColor: pink, borderRadius:4, borderSkipped:false },
+    { label:'Expected SR', data: DATA.bat.map(p=>+f1(p.exp_sr)),
+      backgroundColor: 'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+  ]);
+
+  // Dismissal actual vs expected
+  mkGroupedBar('chart-bat-out', names, [
+    { label:'Actual Out %',   data: DATA.bat.map(p=>+f2(p.out_pct)),
+      backgroundColor: pink, borderRadius:4, borderSkipped:false },
+    { label:'Expected Out %', data: DATA.bat.map(p=>+f2(p.exp_out)),
+      backgroundColor: 'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+  ]);
+
+  // Scatter: SR lift vs PV
+  const scatterCtx = $('chart-bat-scatter');
+  if (scatterCtx) {
+    makeChart('chart-bat-scatter', scatterCtx, {
+      type: 'scatter',
+      data: {
+        datasets: [{
+          label: 'Batters',
+          data: DATA.bat.map(p => ({
+            x: +(p.sr - p.exp_sr).toFixed(1),
+            y: +p.pv100.toFixed(1),
+            name: p.name
+          })),
+          backgroundColor: DATA.bat.map((_, i) => i < 3 ? gold : pinkFad),
+          borderColor:     DATA.bat.map((_, i) => i < 3 ? gold : pink),
+          borderWidth: 1.5,
+          pointRadius: 7,
+          pointHoverRadius: 9
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                const d = ctx.raw;
+                return ` ${d.name}  SR lift: +${d.x}  PV: ${d.y}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'SR above expected', color: '#5a6180', font: {size:10} },
+            grid: { color: 'rgba(31,34,53,.8)' }, ticks: { color:'#5a6180', font:{size:10} }
+          },
+          y: {
+            title: { display: true, text: 'Shrunk PV (runs/100)', color: '#5a6180', font: {size:10} },
+            grid: { color: 'rgba(31,34,53,.8)' }, ticks: { color:'#5a6180', font:{size:10} }
+          }
+        }
+      }
+    });
+  }
+
+  // Consistency bar
+  mkBar('chart-bat-cons', names,
+    [{ label:'Consistency %', data: DATA.bat.map(p=>+(p.cons_eb*100).toFixed(1)), color: purple }]);
+
+  // Radar top-5
+  const radarCtx = $('chart-bat-radar');
+  if (radarCtx) {
+    const top5 = DATA.bat.slice(0, 5);
+    const norm = (arr) => { const mx = Math.max(...arr), mn = Math.min(...arr); return arr.map(v => mx===mn ? 50 : Math.round((v-mn)/(mx-mn)*100)); };
+    const pvN    = norm(top5.map(p=>p.pv100));
+    const stabN  = norm(top5.map(p=>p.top10_freq));
+    const srN    = norm(top5.map(p=>p.sr - p.exp_sr));
+    const consN  = norm(top5.map(p=>p.cons_eb));
+    const safeN  = norm(top5.map(p=>p.exp_out - p.out_pct));
+    const colors = ['#e8175d','#f5a623','#00d4aa','#7c5cbf','#5a9fd4'];
+    makeChart('chart-bat-radar', radarCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Pressure Value', 'Stability', 'SR Lift', 'Consistency', 'Safety (low out%)'],
+        datasets: top5.map((p,i) => ({
+          label: lastName(p.name),
+          data: [pvN[i], stabN[i], srN[i], consN[i], safeN[i]],
+          borderColor: colors[i],
+          backgroundColor: colors[i].replace(')', ', .08)').replace('rgb', 'rgba').replace('#','').length > 7
+            ? colors[i] + '14' : colors[i] + '14',
+          borderWidth: 1.5,
+          pointRadius: 3
+        }))
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#5a6180', font:{size:11}, boxWidth:10 } } },
+        scales: {
+          r: {
+            min: 0, max: 100,
+            grid: { color: 'rgba(31,34,53,.9)' },
+            angleLines: { color: 'rgba(31,34,53,.9)' },
+            pointLabels: { color: '#5a6180', font:{size:11} },
+            ticks: { display: false }
+          }
+        }
+      }
+    });
+  }
+}
+
+// ════════════════ BUILD BOWL CHARTS ════════════════
+function buildBowlCharts() {
+  const names = DATA.bowl.map(p => lastName(p.name));
+  const cyan  = '#00d4aa', pink = '#e8175d', gold = '#f5a623', purple = '#7c5cbf';
+  const cyanFad = 'rgba(0,212,170,.2)';
+
+  mkGroupedBar('chart-bowl-pv', names, [
+    { label:'Pressure Value', data: DATA.bowl.map(p=>p.pv100),
+      backgroundColor: cyan, borderRadius:4, borderSkipped:false },
+    { label:'Usual Level',    data: DATA.bowl.map(p=>p.usual100),
+      backgroundColor: 'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+  ]);
+
+  mkBar('chart-bowl-stab', names,
+    [{ label:'Top-10 Freq %', data: DATA.bowl.map(p=>+(p.top10_freq*100).toFixed(0)), color: cyan }]);
+
+  mkGroupedBar('chart-bowl-econ', names, [
+    { label:'Actual Econ',   data: DATA.bowl.map(p=>+f2(p.econ)),
+      backgroundColor: cyan, borderRadius:4, borderSkipped:false },
+    { label:'Expected Econ', data: DATA.bowl.map(p=>+f2(p.exp_econ)),
+      backgroundColor: 'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+  ]);
+
+  mkGroupedBar('chart-bowl-wk', names, [
+    { label:'Actual Wkt %',   data: DATA.bowl.map(p=>+f2(p.wk_pct)),
+      backgroundColor: cyan, borderRadius:4, borderSkipped:false },
+    { label:'Expected Wkt %', data: DATA.bowl.map(p=>+f2(p.exp_wk)),
+      backgroundColor: 'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+  ]);
+
+  // Dot ball %
+  mkBar('chart-bowl-dots', names,
+    [{ label:'Dot %', data: DATA.bowl.map(p=>+f1(p.dots)), color: gold }]);
+
+  // Economy saved (exp - actual, positive = better)
+  const esaved = DATA.bowl.map(p => +(p.exp_econ - p.econ).toFixed(2));
+  const esavedCtx = $('chart-bowl-esaved');
+  if (esavedCtx) {
+    makeChart('chart-bowl-esaved', esavedCtx, {
+      type: 'bar',
+      data: {
+        labels: names,
+        datasets: [{
+          label: 'Economy saved/over',
+          data: esaved,
+          backgroundColor: esaved.map(v => v >= 0 ? cyan : pink),
+          borderRadius: 4,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` Saved: ${ctx.raw > 0 ? '+' : ''}${ctx.raw} rpo` } }
+        },
+        scales: {
+          x: { grid:{ color:'rgba(31,34,53,.8)' }, ticks:{ color:'#5a6180', font:{size:10}, maxRotation:30 } },
+          y: { grid:{ color:'rgba(31,34,53,.8)' }, ticks:{ color:'#5a6180', font:{size:10} } }
+        }
+      }
+    });
+  }
+
+  // Radar top-5 bowlers
+  const radarCtx = $('chart-bowl-radar');
+  if (radarCtx) {
+    const top5 = DATA.bowl.slice(0, 5);
+    const norm = (arr) => { const mx = Math.max(...arr), mn = Math.min(...arr); return arr.map(v => mx===mn ? 50 : Math.round((v-mn)/(mx-mn)*100)); };
+    const pvN     = norm(top5.map(p=>p.pv100));
+    const stabN   = norm(top5.map(p=>p.top10_freq));
+    const econN   = norm(top5.map(p=>p.exp_econ - p.econ)); // higher = better
+    const wkN     = norm(top5.map(p=>p.wk_pct));
+    const dotsN   = norm(top5.map(p=>p.dots));
+    const colors  = ['#00d4aa','#f5a623','#e8175d','#7c5cbf','#5a9fd4'];
+    makeChart('chart-bowl-radar', radarCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Pressure Value', 'Stability', 'Econ Saved', 'Wicket Rate', 'Dot Ball %'],
+        datasets: top5.map((p,i) => ({
+          label: lastName(p.name),
+          data: [pvN[i], stabN[i], econN[i], wkN[i], dotsN[i]],
+          borderColor: colors[i],
+          backgroundColor: colors[i] + '14',
+          borderWidth: 1.5,
+          pointRadius: 3
+        }))
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#5a6180', font:{size:11}, boxWidth:10 } } },
+        scales: {
+          r: {
+            min: 0, max: 100,
+            grid: { color: 'rgba(31,34,53,.9)' },
+            angleLines: { color: 'rgba(31,34,53,.9)' },
+            pointLabels: { color: '#5a6180', font:{size:11} },
+            ticks: { display: false }
+          }
+        }
+      }
+    });
+  }
+}
+
+// ════════════════ VIEW SWITCHER ════════════════
+function switchView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  $(`view-${id}`).classList.add('active');
+
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active','bowl','explore'));
+  const btn = $(`btn-${id}`);
+  btn.classList.add('active');
+  if (id === 'bowl')    btn.classList.add('bowl');
+  if (id === 'explore') btn.classList.add('explore');
+
+  // Hide hero on method/explore tabs, show on bat/bowl
+  const hero = document.querySelector('.hero');
+  if (hero) hero.style.display = (id === 'method' || id === 'explore') ? 'none' : 'grid';
+
+  if (id === 'bowl')    setTimeout(() => { if (DATA) buildBowlCharts(); }, 300);
+}
+
+// ════════════════ BOOT ════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  initHeroAnimations();
+
+  // Show a loading skeleton while fetching
+  ['bat-cards','bowl-cards','bat-nil','bowl-nil'].forEach(id => {
+    const el = $(id);
+    if (el) el.innerHTML = `<div style="color:var(--muted);font-size:12px;padding:16px 0;grid-column:1/-1">
+      <div class="spinner" style="width:20px;height:20px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:8px"></div>
+      Loading pressure data…
+    </div>`;
+  });
+
+  // ── Boot data fetch ──
+  // Try the backend up to 3 times (1s apart) so a slow-to-start uvicorn does not
+  // leave the dashboard stuck on a spinner. On final failure show a clear
+  // "backend not running" state with the exact command to start it.
+  function showBackendError(msg) {
+    const html = `<div style="color:var(--pink);font-size:13px;padding:18px 0;grid-column:1/-1;line-height:1.7">
+        ⚠ <strong>Backend not running.</strong> Could not reach
+        <code style="font-family:monospace;color:var(--gold)">${API}/pressure</code>
+        after 3 attempts (${msg}).<br>
+        <span style="color:var(--muted)">Start the dashboard with:</span>
+        <code style="font-family:monospace;color:var(--gold)">bash dashboard/start.sh</code><br>
+        <span style="color:var(--muted)">or the backend alone:</span>
+        <code style="font-family:monospace;color:var(--gold)">cd dashboard/backend && uvicorn main:app --port 8000</code>
+      </div>`;
+    ['bat-cards','bowl-cards'].forEach(id => { const el=$(id); if(el) el.innerHTML=html; });
+    ['bat-nil','bowl-nil'].forEach(id => { const el=$(id); if(el) el.innerHTML=''; });
+  }
+
+  function fetchWithRetry(url, attempts, delay) {
+    return fetch(url).then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    }).catch(err => {
+      if (attempts <= 1) throw err;
+      return new Promise(res => setTimeout(res, delay))
+        .then(() => fetchWithRetry(url, attempts - 1, delay));
+    });
+  }
+
+  fetchWithRetry(`${API}/pressure`, 3, 1000)
+    .then(json => {
+      DATA = json;
+      updateHeroStats(DATA.overview);
+      renderCards(DATA.bat,  'bat-cards',  'bat-detail',  false);
+      renderCards(DATA.bowl, 'bowl-cards', 'bowl-detail', true);
+      renderBatTable();
+      renderBowlTable();
+      renderNil(DATA.next_bat,  'bat-nil',  false);
+      renderNil(DATA.next_bowl, 'bowl-nil', true);
+      setTimeout(buildBatCharts, 400);
+    })
+    .catch(err => showBackendError(err.message));
+});
+
+// ════════════════ EXPLORE DATA ════════════════
+const FILE_DEFS = [
+  { key:'ball_by_ball',                    label:'Ball by Ball', required:true },
+  { key:'matches',                         label:'Matches' },
+  { key:'competitions',                    label:'Competitions' },
+  { key:'competition_team_player_mapping', label:'Player Mapping' },
+  { key:'playing_eleven',                  label:'Playing XI' },
+  { key:'teams',                           label:'Teams' },
+];
+let pickedFiles = {};
+let uaData = null;
+let uaCharts = {};
+let uaBatSort  = { key:'runs',    dir:-1 };
+let uaBowlSort = { key:'wickets', dir:-1 };
+
+// ── file matching ──
+function matchKey(filename) {
+  const n = filename.toLowerCase();
+  if (n.includes('ball'))    return 'ball_by_ball';
+  if (n.includes('match'))   return 'matches';
+  if (n.includes('player') || n.includes('mapping')) return 'competition_team_player_mapping';
+  if (n.includes('eleven') || n.includes('playing')) return 'playing_eleven';
+  if (n.includes('comp'))    return 'competitions';
+  if (n.includes('team'))    return 'teams';
+  return null;
+}
+
+function addFile(key, file) {
+  if (!file) return;
+  pickedFiles[key] = file;
+  renderFileList();
+  $('btn-load').disabled = !pickedFiles.ball_by_ball;
+  $('up-error').textContent = '';
+}
+
+function removeFile(key) {
+  delete pickedFiles[key];
+  renderFileList();
+  $('btn-load').disabled = !pickedFiles.ball_by_ball;
+}
+
+function renderFileList() {
+  const list = $('ex-file-list');
+  if (!list) return;
+  const entries = Object.entries(pickedFiles);
+  if (!entries.length) { list.innerHTML=''; return; }
+  list.innerHTML = entries.map(([key, file]) => {
+    const def = FILE_DEFS.find(d=>d.key===key)||{label:key};
+    return `<div class="ex-file-chip ready ${def.required?'required':''}">
+      <span class="ex-file-chip-icon">📄</span>
+      <div>
+        <div class="ex-file-chip-name">${file.name}</div>
+        <div class="ex-file-chip-key">${def.label}${def.required?' ✱':''}</div>
+      </div>
+      <span class="ex-file-chip-rm" onclick="removeFile('${key}')">✕</span>
+    </div>`;
+  }).join('');
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag');
+  Array.from(e.dataTransfer.files)
+    .filter(f => f.name.endsWith('.csv'))
+    .forEach(f => { const k = matchKey(f.name); if (k) addFile(k, f); });
+}
+
+function handleFileInput(files) {
+  Array.from(files)
+    .filter(f => f.name.endsWith('.csv'))
+    .forEach(f => { const k = matchKey(f.name); if (k) addFile(k, f); });
+}
+
+function clearFiles() {
+  pickedFiles = {};
+  renderFileList();
+  const inp = $('ex-file-input'); if (inp) inp.value = '';
+  $('btn-load').disabled = true;
+  $('up-error').textContent = '';
+}
+
+// Step keywords → step index mapping (matches pressure_engine.py log messages exactly)
+// Pipeline emits: Step 1/6, Step 2/6, Step 3/6, Step 4/6, Step 5/6, Step 6/6, Building dashboard
+// UI has 7 visual steps — WP training and Leverage are split for clarity even though
+// they come from the same pipeline step (Step 2). Both activate at Step 2 message.
+const STEP_MAP = [
+  { idx:0, kw:['Step 1','Preparing'] },
+  { idx:1, kw:['Step 2','Training WP','WP model','computing leverage'] },
+  { idx:2, kw:['Step 2','Training WP','WP model','computing leverage'] },
+  { idx:3, kw:['Step 3','context baseline','wicket run'] },
+  { idx:4, kw:['Step 4','Opponent','ridge regression'] },
+  { idx:5, kw:['Step 5','Computing EB','EB rating'] },
+  { idx:6, kw:['Step 6','Bootstrap','resamples','Building dashboard'] },
+];
+
+let _currentStep = -1;
+
+function setLoadingMsg(msg) {
+  const el = $('ua-loading-msg'); if (el) el.textContent = msg;
+  // Try to advance step tracker
+  const lower = msg.toLowerCase();
+  for (const { idx, kw } of STEP_MAP) {
+    if (idx <= _currentStep) continue;
+    if (kw.some(k => lower.includes(k.toLowerCase()))) {
+      advanceToStep(idx);
+      break;
+    }
+  }
+}
+
+function advanceToStep(idx) {
+  if (idx <= _currentStep) return;
+  // Mark all previous as done
+  for (let i = 0; i < idx; i++) {
+    const el = $('lstep-' + i);
+    if (el) { el.classList.remove('active'); el.classList.add('done'); }
+  }
+  // Mark current as active
+  const cur = $('lstep-' + idx);
+  if (cur) { cur.classList.remove('done'); cur.classList.add('active'); }
+  _currentStep = idx;
+}
+
+function resetLoadingSteps() {
+  _currentStep = -1;
+  for (let i = 0; i <= 6; i++) {
+    const el = $('lstep-' + i);
+    if (el) { el.classList.remove('active', 'done'); }
+  }
+}
+
+async function uploadFiles() {
+  if (!pickedFiles.ball_by_ball) return;
+  $('up-section').style.display   = 'none';
+  $('ua-output').style.display    = 'none';
+  $('ua-loading').style.display   = 'block';
+  resetLoadingSteps();
+  $('up-error').textContent       = '';
+
+  try {
+    setLoadingMsg('Uploading files to server…');
+    // Upload all files to both endpoints
+    const fd = new FormData();
+    Object.entries(pickedFiles).forEach(([k,v]) => fd.append(k, v));
+
+    // 1. Upload to /upload so /analytics works for Batters/Bowlers/Teams/Matches tabs
+    setLoadingMsg('Uploading files…');
+    await fetch(`${API}/reset`, { method:'DELETE' }).catch(()=>{});
+    const ru = await fetch(`${API}/upload`, { method:'POST', body: fd });
+    // ignore upload errors — pressure pipeline has its own reading
+
+    // 2. Start pressure pipeline with the same files (re-read from pickedFiles)
+    setLoadingMsg('Starting Pressure Index pipeline…');
+    const fd2 = new FormData();
+    if (pickedFiles.ball_by_ball) fd2.append('ball_by_ball', pickedFiles.ball_by_ball);
+    if (pickedFiles.matches)      fd2.append('matches',      pickedFiles.matches);
+    if (pickedFiles.competitions) fd2.append('competitions', pickedFiles.competitions);
+    if (pickedFiles.competition_team_player_mapping)
+      fd2.append('competition_team_player_mapping', pickedFiles.competition_team_player_mapping);
+
+    const r = await fetch(`${API}/pressure/run`, { method: 'POST', body: fd2 });
+    if (!r.ok) {
+      const e = await r.json();
+      throw new Error(e.detail || 'Pipeline start failed');
+    }
+
+    // Poll for completion
+    await pollPressurePipeline();
+
+  } catch(err) {
+    $('up-section').style.display = 'block';
+    $('up-error').textContent = '⚠ ' + err.message;
+    $('ua-loading').style.display = 'none';
+  }
+}
+
+async function pollPressurePipeline() {
+  return new Promise((resolve, reject) => {
+    const interval = setInterval(async () => {
+      try {
+        const r = await fetch(`${API}/pressure/status`);
+        const s = await r.json();
+        setLoadingMsg(s.msg || 'Running…');
+
+        if (s.status === 'done') {
+          clearInterval(interval);
+          // fetch pressure result
+          const r2 = await fetch(`${API}/pressure/result`);
+          if (!r2.ok) throw new Error('Failed to fetch results');
+          const result = await r2.json();
+
+          // fetch generic analytics for Batters/Bowlers/Teams/Matches tabs
+          try {
+            const r3 = await fetch(`${API}/analytics`);
+            if (r3.ok) uaData = await r3.json();
+          } catch(e) { /* analytics optional */ }
+
+          // Mark all steps done briefly before hiding
+          advanceToStep(6);
+          for (let i = 0; i <= 6; i++) {
+            const el = $('lstep-' + i);
+            if (el) { el.classList.add('done'); el.classList.remove('active'); }
+          }
+          await new Promise(r => setTimeout(r, 600)); // show completed state briefly
+          $('ua-loading').style.display = 'none';
+          showPressureOutput(result);
+          resolve();
+        } else if (s.status === 'error') {
+          clearInterval(interval);
+          throw new Error(s.error || 'Pipeline failed');
+        }
+      } catch(err) {
+        clearInterval(interval);
+        $('ua-loading').style.display = 'none';
+        $('up-section').style.display = 'block';
+        $('up-error').textContent = '⚠ ' + err.message;
+        reject(err);
+      }
+    }, 2000); // poll every 2s
+  });
+}
+
+function showPressureOutput(result) {
+  // ── IMPORTANT: do NOT touch global DATA or the main Batters/Bowlers views.
+  // The main top-10 views are pre-computed from dashboard_data.json (the official
+  // submission). Explore tab results come from whatever CSVs the user uploads —
+  // possibly a different or newer dataset — and must stay isolated here.
+  EXPLORE_DATA = result;
+
+  const ov     = result.overview || {};
+  const loaded = Object.keys(pickedFiles).map(k => k.replace(/_/g,' '));
+
+  $('ua-meta').innerHTML =
+    `<strong>${loaded.join(', ')}</strong> &nbsp;·&nbsp; ` +
+    `${(ov.n_match||0).toLocaleString()} matches &nbsp;·&nbsp; ` +
+    `${(ov.n_ball||0).toLocaleString()} deliveries &nbsp;·&nbsp; ` +
+    `${(ov.n_pressure||0).toLocaleString()} pressure balls`;
+
+  const cards = [
+    { label:'Matches',       val:(ov.n_match||0).toLocaleString(),              color:'var(--gold)'   },
+    { label:'Deliveries',    val:(ov.n_ball||0).toLocaleString(),               color:'var(--pink)'   },
+    { label:'Pressure Balls',val:(ov.n_pressure||0).toLocaleString(),           color:'var(--cyan)'   },
+    { label:'Pressure Share',val:((ov.share||0)*100).toFixed(1)+'%',            color:'var(--purple)' },
+    { label:'IPL Matches',   val:(ov.n_ipl||0).toLocaleString(),                color:'var(--gold)'   },
+    { label:'T20I Matches',  val:(ov.n_t20i||0).toLocaleString(),               color:'var(--pink)'   },
+    { label:'Top Batter',    val:result.bat?.[0]?.name?.split(' ').pop()||'—',  color:'var(--cyan)'   },
+    { label:'Top Bowler',    val:result.bowl?.[0]?.name?.split(' ').pop()||'—', color:'var(--purple)' },
+  ];
+  $('ua-stats').innerHTML = cards.map(c=>`
+    <div class="scard" style="--scolor:${c.color}">
+      <div class="scard-val">${c.val}</div>
+      <div class="scard-lbl">${c.label}</div>
+    </div>`).join('');
+
+  // Show output panel so canvas elements get real dimensions
+  $('ua-output').style.display = 'block';
+
+  // Set overview tab active
+  document.querySelectorAll('.ua-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  document.querySelectorAll('.ua-view').forEach((v,i) => {
+    v.classList.toggle('active', i===0);
+    v.style.display = i===0 ? 'block' : 'none';
+  });
+
+  // Render results INSIDE the Explore tab (ua-batters / ua-bowlers sub-views)
+  renderExploreBatters(result.bat  || [], result.next_bat  || []);
+  renderExploreBowlers(result.bowl || [], result.next_bowl || []);
+
+  // Build overview charts
+  renderPressureOverview(result);
+
+  // Stay in the Explore tab — results are shown here, not in the main views
+  switchView('explore');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Render Explore-tab batter results (self-contained, no global DATA) ──
+function renderExploreBatters(batters, nextBat) {
+  const c = $('ua-batters');
+  if (!c) return;
+  const f1 = v => Number(v).toFixed(1);
+  const f2 = v => Number(v).toFixed(2);
+  const diffCls = v => parseFloat(v) >= 0 ? 'diff pos' : 'diff neg';
+  const diffFmt = v => { const n = parseFloat(v); return (n>=0?'+':'')+f1(n); };
+
+  c.innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;padding:10px 14px;background:var(--s2);border:1px solid var(--border);border-radius:8px">
+        ⚠ These results are from your uploaded dataset — they may differ from the pre-computed top-10 if your data covers different matches or a different time window.
+      </div>
+      <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+        <table class="u-table">
+          <thead><tr>
+            <th>#</th><th>Batter</th>
+            <th class="r">P.Balls</th><th class="r">Inn</th><th class="r">IPL/T20I</th>
+            <th class="r">SR</th><th class="r">ExpSR</th><th class="r">Out%</th><th class="r">ExpOut%</th>
+            <th class="r">RawPV</th><th class="r">PV</th><th class="r">Usual</th><th class="r">Lift</th>
+            <th class="r">Cons</th><th class="r">Top10%</th><th class="r">Score</th>
+          </tr></thead>
+          <tbody>${batters.map((p,i)=>`<tr>
+            <td><span class="rnum ${i<3?'top3':''} ${i===0?'r1':''}">${i+1}</span></td>
+            <td class="name">${p.name}</td>
+            <td class="r">${p.pb|0}</td>
+            <td class="r">${p.stints|0}</td>
+            <td class="r">${p.ipl|0}/${p.t20i|0}</td>
+            <td class="r">${f1(p.sr)}</td>
+            <td class="r">${f1(p.exp_sr)}</td>
+            <td class="r">${f2(p.out_pct)}%</td>
+            <td class="r">${f2(p.exp_out)}%</td>
+            <td class="r">${f1(p.pvraw100)}</td>
+            <td class="r" style="color:var(--pink)">${f1(p.pv100)}</td>
+            <td class="r">${f1(p.usual100)}</td>
+            <td class="r"><span class="${diffCls(p.lift100)}">${diffFmt(p.lift100)}</span></td>
+            <td class="r">${(p.cons_eb*100).toFixed(0)}%</td>
+            <td class="r">${(p.top10_freq*100).toFixed(0)}%</td>
+            <td class="r" style="color:var(--pink);font-weight:700">${f2(p.final_score)}</td>
+          </tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>
+    ${nextBat.length ? `<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:10px">Next in Line</div>
+    <div class="nil-grid">${nextBat.map(r=>`<div class="nil-chip"><span class="nil-rank">#${r[0]}</span><span class="nil-name">${r[1]}</span><span class="nil-score">${r[2]}</span><span class="nil-freq">${r[3]}</span></div>`).join('')}</div>` : ''}
+  `;
+}
+
+// ── Render Explore-tab bowler results (self-contained, no global DATA) ──
+function renderExploreBowlers(bowlers, nextBowl) {
+  const c = $('ua-bowlers');
+  if (!c) return;
+  const f1 = v => Number(v).toFixed(1);
+  const f2 = v => Number(v).toFixed(2);
+  const diffCls = v => parseFloat(v) >= 0 ? 'diff pos' : 'diff neg';
+  const diffFmt = v => { const n = parseFloat(v); return (n>=0?'+':'')+f1(n); };
+
+  c.innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;padding:10px 14px;background:var(--s2);border:1px solid var(--border);border-radius:8px">
+        ⚠ These results are from your uploaded dataset — they may differ from the pre-computed top-10 if your data covers different matches or a different time window.
+      </div>
+      <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+        <table class="u-table">
+          <thead><tr>
+            <th>#</th><th>Bowler</th>
+            <th class="r">P.Balls</th><th class="r">Spells</th><th class="r">IPL/T20I</th>
+            <th class="r">Econ</th><th class="r">ExpEcon</th><th class="r">Wkt%</th><th class="r">ExpWkt%</th>
+            <th class="r">RawPV</th><th class="r">PV</th><th class="r">Usual</th><th class="r">Lift</th>
+            <th class="r">Cons</th><th class="r">Top10%</th><th class="r">Score</th>
+          </tr></thead>
+          <tbody>${bowlers.map((p,i)=>`<tr>
+            <td><span class="rnum ${i<3?'top3':''} ${i===0?'r1':''}">${i+1}</span></td>
+            <td class="name">${p.name}</td>
+            <td class="r">${p.pb|0}</td>
+            <td class="r">${p.stints|0}</td>
+            <td class="r">${p.ipl|0}/${p.t20i|0}</td>
+            <td class="r">${f2(p.econ)}</td>
+            <td class="r">${f2(p.exp_econ)}</td>
+            <td class="r">${f2(p.wk_pct)}%</td>
+            <td class="r">${f2(p.exp_wk)}%</td>
+            <td class="r">${f1(p.pvraw100)}</td>
+            <td class="r" style="color:var(--cyan)">${f1(p.pv100)}</td>
+            <td class="r">${f1(p.usual100)}</td>
+            <td class="r"><span class="${diffCls(p.lift100)}">${diffFmt(p.lift100)}</span></td>
+            <td class="r">${(p.cons_eb*100).toFixed(0)}%</td>
+            <td class="r">${(p.top10_freq*100).toFixed(0)}%</td>
+            <td class="r" style="color:var(--cyan);font-weight:700">${f2(p.final_score)}</td>
+          </tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>
+    ${nextBowl.length ? `<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:10px">Next in Line</div>
+    <div class="nil-grid">${nextBowl.map(r=>`<div class="nil-chip"><span class="nil-rank">#${r[0]}</span><span class="nil-name">${r[1]}</span><span class="nil-score">${r[2]}</span><span class="nil-freq">${r[3]}</span></div>`).join('')}</div>` : ''}
+  `;
+}
+
+function renderPressureOverview(result) {
+  const batters = result.bat  || [];
+  const bowlers = result.bowl || [];
+
+  const ovContainer = $('ua-overview');
+  if (!ovContainer) return;
+
+  ['uc-pr-bat','uc-pr-bowl','uc-pr-bat-pv','uc-pr-bowl-pv','uc-pr-bat-stab','uc-pr-bowl-stab'].forEach(id => {
+    if (uaCharts[id]) { try { uaCharts[id].destroy(); } catch(e){} delete uaCharts[id]; }
+  });
+
+  ovContainer.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+      <div class="u-cbox">
+        <div class="u-ctitle" style="color:var(--pink)">Top 10 Batters — Pressure Score</div>
+        <div class="u-cwrap tall" style="height:280px"><canvas id="uc-pr-bat"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle" style="color:var(--cyan)">Top 10 Bowlers — Pressure Score</div>
+        <div class="u-cwrap tall" style="height:280px"><canvas id="uc-pr-bowl"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Batters — Pressure Value vs Usual Level (runs/100)</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-pr-bat-pv"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Bowlers — Pressure Value vs Usual Level (runs/100)</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-pr-bowl-pv"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Batters — Bootstrap Stability (%)</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-pr-bat-stab"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Bowlers — Bootstrap Stability (%)</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-pr-bowl-stab"></canvas></div>
+      </div>
+    </div>`;
+
+  // Safari needs time to paint the DOM before canvas dimensions are readable
+  setTimeout(() => {
+    const batNames  = batters.map(p => p.name.split(' ').pop());
+    const bowlNames = bowlers.map(p => p.name.split(' ').pop());
+
+    mkUaChart('uc-pr-bat', 'bar', batNames,
+      [{ label:'Final Score', data: batters.map(p => +(p.final_score||0).toFixed(2)),
+         backgroundColor: batNames.map((_,i) => i===0 ? '#f5a623' : '#e8175d'),
+         borderRadius:4, borderSkipped:false }], {h:true});
+
+    mkUaChart('uc-pr-bowl', 'bar', bowlNames,
+      [{ label:'Final Score', data: bowlers.map(p => +(p.final_score||0).toFixed(2)),
+         backgroundColor: bowlNames.map((_,i) => i===0 ? '#f5a623' : '#00d4aa'),
+         borderRadius:4, borderSkipped:false }], {h:true});
+
+    mkUaChart('uc-pr-bat-pv', 'bar', batNames, [
+      { label:'Pressure Value', data: batters.map(p => +(p.pv100||0).toFixed(1)),
+        backgroundColor:'#e8175d', borderRadius:4, borderSkipped:false },
+      { label:'Usual Level',    data: batters.map(p => +(p.usual100||0).toFixed(1)),
+        backgroundColor:'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+    ]);
+
+    mkUaChart('uc-pr-bowl-pv', 'bar', bowlNames, [
+      { label:'Pressure Value', data: bowlers.map(p => +(p.pv100||0).toFixed(1)),
+        backgroundColor:'#00d4aa', borderRadius:4, borderSkipped:false },
+      { label:'Usual Level',    data: bowlers.map(p => +(p.usual100||0).toFixed(1)),
+        backgroundColor:'rgba(90,97,128,.35)', borderRadius:4, borderSkipped:false }
+    ]);
+
+    mkUaChart('uc-pr-bat-stab', 'bar', batNames,
+      [{ label:'Top-10 Freq %', data: batters.map(p => Math.round((p.top10_freq||0)*100)),
+         backgroundColor:'#f5a623', borderRadius:4, borderSkipped:false }]);
+
+    mkUaChart('uc-pr-bowl-stab', 'bar', bowlNames,
+      [{ label:'Top-10 Freq %', data: bowlers.map(p => Math.round((p.top10_freq||0)*100)),
+         backgroundColor:'#7c5cbf', borderRadius:4, borderSkipped:false }]);
+  }, 300);
+}
+
+function resetUpload() {
+  uaData = null;
+  Object.values(uaCharts).forEach(c => { try { c.destroy(); } catch(e){} });
+  uaCharts = {};
+  clearFiles();
+  $('ua-output').style.display  = 'none';
+  $('up-section').style.display = 'block';
+  fetch(`${API}/reset`, { method:'DELETE' }).catch(()=>{});
+}
+
+function showUaOutput(uploadResult) {
+  const ov = uaData.overview || {};
+  const loaded = uploadResult.uploaded || [];
+
+  // meta bar
+  $('ua-meta').innerHTML =
+    `<strong>${loaded.map(l=>l.replace(/_/g,' ')).join(', ')}</strong> &nbsp;·&nbsp; `+
+    `${(ov.total_matches||0).toLocaleString()} matches &nbsp;·&nbsp; `+
+    `${(ov.total_deliveries||0).toLocaleString()} deliveries &nbsp;·&nbsp; `+
+    `${(ov.total_runs||0).toLocaleString()} runs`;
+
+  // stat strip
+  const cards = [
+    { label:'Matches',     val:(ov.total_matches||0).toLocaleString(),         color:'var(--gold)' },
+    { label:'Runs',        val:(ov.total_runs||0).toLocaleString(),            color:'var(--pink)' },
+    { label:'Wickets',     val:(ov.total_wickets||0).toLocaleString(),         color:'var(--cyan)' },
+    { label:'Run Rate',    val:(ov.run_rate||0).toFixed(2)+' rpo',             color:'var(--purple)' },
+    { label:'Fours',       val:(ov.total_fours||0).toLocaleString(),           color:'var(--gold)' },
+    { label:'Sixes',       val:(ov.total_sixes||0).toLocaleString(),           color:'var(--pink)' },
+    { label:'Deliveries',  val:(ov.total_deliveries||0).toLocaleString(),      color:'var(--cyan)' },
+    { label:'Avg / Match', val:(ov.avg_match_runs||0).toFixed(1)+' runs',      color:'var(--purple)' },
+  ];
+  $('ua-stats').innerHTML = cards.map(c=>`
+    <div class="scard" style="--scolor:${c.color}">
+      <div class="scard-val">${c.val}</div>
+      <div class="scard-lbl">${c.label}</div>
+    </div>`).join('');
+
+  $('ua-output').style.display = 'block';
+  // reset tabs
+  document.querySelectorAll('.ua-tab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  document.querySelectorAll('.ua-view').forEach((v,i)=>v.classList.toggle('active',i===0));
+  setTimeout(() => renderUaOverview(), 60);
+}
+
+function uaSwitch(tab) {
+  const tabs = ['overview','batters','bowlers'];
+  document.querySelectorAll('.ua-tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===tab));
+  document.querySelectorAll('.ua-view').forEach(v => {
+    v.classList.remove('active');
+    v.style.display = 'none';
+  });
+  const target = $(`ua-${tab}`);
+  if (target) { target.classList.add('active'); target.style.display = 'block'; }
+
+  setTimeout(() => {
+    if (tab==='overview') { if (EXPLORE_DATA) renderPressureOverview(EXPLORE_DATA); return; }
+    if (tab==='batters')  { if (EXPLORE_DATA) renderUaBatters(); return; }
+    if (tab==='bowlers')  { if (EXPLORE_DATA) renderUaBowlers(); return; }
+  }, 100);
+}
+
+// ── chart helper ──
+const f1u = v => v==null?'—':Number(v).toFixed(1);
+const f2u = v => v==null?'—':Number(v).toFixed(2);
+const fnu = v => v==null?'—':Number(v).toLocaleString();
+
+function mkUaChart(id, type, labels, datasets, opts={}) {
+  const ctx = $(id);
+  if (!ctx) return null;
+  if (uaCharts[id]) { try { uaCharts[id].destroy(); } catch(e){} delete uaCharts[id]; }
+
+  // Force canvas to inherit its container's size before Chart.js measures it
+  const parent = ctx.parentElement;
+  if (parent) {
+    const h = parent.offsetHeight || (opts.h ? 320 : 220);
+    const w = parent.offsetWidth  || 400;
+    ctx.width  = w;
+    ctx.height = h;
+    ctx.style.width  = '100%';
+    ctx.style.height = h + 'px';
+  }
+
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const scales = {};
+  const axisX = { stacked: opts.stacked||false, grid:{color:'rgba(31,34,53,.8)'}, ticks:{color:'#5a6180',font:{size:10},maxRotation:30} };
+  const axisY = { stacked: opts.stacked||false, grid:{color:'rgba(31,34,53,.8)'}, ticks:{color:'#5a6180',font:{size:10}} };
+  if (opts.h) { scales.x = axisY; scales.y = axisX; }
+  else        { scales.x = axisX; scales.y = axisY; }
+
+  uaCharts[id] = new Chart(ctx, {
+    type,
+    data: { labels, datasets },
+    options: {
+      responsive: !isSafari,
+      maintainAspectRatio: false,
+      indexAxis: opts.h ? 'y' : 'x',
+      animation: { duration: 400 },
+      plugins: {
+        legend: {
+          display: datasets.length > 1,
+          labels: { color:'#5a6180', font:{size:11}, boxWidth:10 }
+        },
+        tooltip: { mode:'index', intersect:false }
+      },
+      scales
+    }
+  });
+  return uaCharts[id];
+}
+
+// ── OVERVIEW ──
+function renderUaOverview() {
+  const ov = uaData.overview||{};
+  const ph = uaData.phase_stats||[];
+  const oe = uaData.over_economy||[];
+  const wk = uaData.wicket_types||[];
+  const rd = uaData.run_distribution||[];
+
+  if(oe.length) mkUaChart('uc-over','line',
+    oe.map(o=>`Ov ${o.over}`),
+    [{ label:'Avg Runs', data:oe.map(o=>o.avg_runs),
+       borderColor:'#f5a623', backgroundColor:'rgba(245,166,35,.08)',
+       tension:.4, fill:true, pointRadius:2 }]);
+
+  if(ph.length) mkUaChart('uc-phase-rr','bar',
+    ph.map(p=>p.phase),
+    [{ label:'Run Rate', data:ph.map(p=>p.run_rate),
+       backgroundColor:['#e8175d','#f5a623','#00d4aa'],
+       borderRadius:5, borderSkipped:false }]);
+
+  if(wk.length){
+    const ctx=$('uc-wkt'); if(ctx){ if(uaCharts['uc-wkt'])uaCharts['uc-wkt'].destroy();
+    uaCharts['uc-wkt']=new Chart(ctx,{ type:'doughnut',
+      data:{ labels:wk.slice(0,8).map(w=>w.type), datasets:[{
+        data:wk.slice(0,8).map(w=>w.count),
+        backgroundColor:['#e8175d','#f5a623','#00d4aa','#7c5cbf','#60a5fa','#f97316','#34d399','#a78bfa'],
+        borderColor:'#13151f',borderWidth:2 }]},
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{ position:'right', labels:{color:'#5a6180',font:{size:11},boxWidth:10} } } }
+    }); }
+  }
+
+  if(rd.length) mkUaChart('uc-rundist','bar',
+    rd.map(r=>`${r.runs}r`),
+    [{ label:'Balls', data:rd.map(r=>r.count),
+       backgroundColor:'#7c5cbf', borderRadius:4, borderSkipped:false }]);
+
+  if(ph.length) mkUaChart('uc-phase-bnd','bar',
+    ph.map(p=>p.phase),
+    [
+      { label:'Dot %',      data:ph.map(p=>p.dot_pct),      backgroundColor:'rgba(90,97,128,.5)', borderRadius:3, borderSkipped:false },
+      { label:'Boundary %', data:ph.map(p=>p.boundary_pct), backgroundColor:'#f5a623',            borderRadius:3, borderSkipped:false },
+    ]);
+}
+
+// ── BATTERS — pressure data ──
+function renderUaBatters(){
+  if (!EXPLORE_DATA || !EXPLORE_DATA.bat) return;
+  const players = EXPLORE_DATA.bat;
+  const container = $('ua-batters');
+  if (!container) return;
+
+  // destroy old charts
+  ['uc-exb-score','uc-exb-pv','uc-exb-sr','uc-exb-stab'].forEach(id=>{
+    if(uaCharts[id]){try{uaCharts[id].destroy();}catch(e){}delete uaCharts[id];}
+  });
+
+  container.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+      <div class="u-cbox">
+        <div class="u-ctitle" style="color:var(--pink)">Pressure Score (final rating)</div>
+        <div class="u-cwrap tall" style="height:280px"><canvas id="uc-exb-score"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Strike Rate: Actual vs Expected under pressure</div>
+        <div class="u-cwrap tall" style="height:280px"><canvas id="uc-exb-sr"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Pressure Value vs Usual Level (runs/100)</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-exb-pv"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Bootstrap Stability — Top-10 Frequency %</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-exb-stab"></canvas></div>
+      </div>
+    </div>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="u-table" id="ua-bat-pr-table"></table>
+    </div>`;
+
+  setTimeout(() => {
+    const names = players.map(p=>p.name.split(' ').pop());
+    mkUaChart('uc-exb-score','bar', names,
+      [{label:'Final Score', data:players.map(p=>+p.final_score.toFixed(2)),
+        backgroundColor: names.map((_,i)=>i===0?'#f5a623':'#e8175d'), borderRadius:4, borderSkipped:false}],{h:true});
+
+    mkUaChart('uc-exb-sr','bar', names, [
+      {label:'Actual SR',   data:players.map(p=>+p.sr.toFixed(1)),   backgroundColor:'#e8175d', borderRadius:4, borderSkipped:false},
+      {label:'Expected SR', data:players.map(p=>+p.exp_sr.toFixed(1)), backgroundColor:'rgba(90,97,128,.3)', borderRadius:4, borderSkipped:false}
+    ]);
+
+    mkUaChart('uc-exb-pv','bar', names, [
+      {label:'Pressure Value', data:players.map(p=>+p.pv100.toFixed(1)),    backgroundColor:'#e8175d', borderRadius:4, borderSkipped:false},
+      {label:'Usual Level',    data:players.map(p=>+p.usual100.toFixed(1)), backgroundColor:'rgba(90,97,128,.3)', borderRadius:4, borderSkipped:false}
+    ]);
+
+    mkUaChart('uc-exb-stab','bar', names,
+      [{label:'Top-10 Freq %', data:players.map(p=>Math.round(p.top10_freq*100)),
+        backgroundColor:'#f5a623', borderRadius:4, borderSkipped:false}]);
+
+    // detailed table
+    const t = $('ua-bat-pr-table');
+    t.innerHTML = `<thead><tr>
+      <th>#</th><th>Player</th>
+      <th class="r">Press Balls</th><th class="r">Innings</th>
+      <th class="r">IPL/T20I</th>
+      <th class="r">Act SR</th><th class="r">Exp SR</th>
+      <th class="r">Act Out%</th><th class="r">Exp Out%</th>
+      <th class="r">Dots%</th>
+      <th class="r">Raw PV</th><th class="r" style="color:var(--pink)">Shrunk PV</th>
+      <th class="r">Usual</th><th class="r">Lift</th>
+      <th class="r">Cons</th><th class="r">Stab%</th>
+      <th class="r" style="color:var(--gold)">Score</th>
+    </tr></thead><tbody>${players.map((p,i)=>`<tr>
+      <td><span class="rnum ${i<3?'top3':''} ${i===0?'r1':''}">${i+1}</span></td>
+      <td class="name">${p.name}</td>
+      <td class="r">${p.pb}</td>
+      <td class="r">${p.stints}</td>
+      <td class="r">${p.ipl}/${p.t20i}</td>
+      <td class="r"><span class="u-badge ${p.sr>=175?'g':p.sr>=150?'y':'r'}">${f1u(p.sr)}</span></td>
+      <td class="r">${f1u(p.exp_sr)}</td>
+      <td class="r">${f2u(p.out_pct)}%</td>
+      <td class="r">${f2u(p.exp_out)}%</td>
+      <td class="r">${f1u(p.dots)}%</td>
+      <td class="r">${f1u(p.pvraw100)}</td>
+      <td class="r" style="color:var(--pink);font-weight:600">${f1u(p.pv100)}</td>
+      <td class="r">${f1u(p.usual100)}</td>
+      <td class="r"><span class="u-badge ${p.lift100>=0?'g':'r'}">${p.lift100>=0?'+':''}${f1u(p.lift100)}</span></td>
+      <td class="r">${Math.round(p.cons_eb*100)}%</td>
+      <td class="r">${Math.round(p.top10_freq*100)}%</td>
+      <td class="r" style="color:var(--gold);font-weight:700">${f2u(p.final_score)}</td>
+    </tr>`).join('')}</tbody>`;
+  }, 300);
+}
+
+// ── BOWLERS — pressure data ──
+function renderUaBowlers(){
+  if (!EXPLORE_DATA || !EXPLORE_DATA.bowl) return;
+  const players = EXPLORE_DATA.bowl;
+  const container = $('ua-bowlers');
+  if (!container) return;
+
+  ['uc-exbw-score','uc-exbw-econ','uc-exbw-pv','uc-exbw-stab'].forEach(id=>{
+    if(uaCharts[id]){try{uaCharts[id].destroy();}catch(e){}delete uaCharts[id];}
+  });
+
+  container.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+      <div class="u-cbox">
+        <div class="u-ctitle" style="color:var(--cyan)">Pressure Score (final rating)</div>
+        <div class="u-cwrap tall" style="height:280px"><canvas id="uc-exbw-score"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Economy: Actual vs Expected under pressure</div>
+        <div class="u-cwrap tall" style="height:280px"><canvas id="uc-exbw-econ"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Pressure Value vs Usual Level (runs/100)</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-exbw-pv"></canvas></div>
+      </div>
+      <div class="u-cbox">
+        <div class="u-ctitle">Bootstrap Stability — Top-10 Frequency %</div>
+        <div class="u-cwrap" style="height:220px"><canvas id="uc-exbw-stab"></canvas></div>
+      </div>
+    </div>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="u-table" id="ua-bowl-pr-table"></table>
+    </div>`;
+
+  setTimeout(() => {
+    const names = players.map(p=>p.name.split(' ').pop());
+    mkUaChart('uc-exbw-score','bar', names,
+      [{label:'Final Score', data:players.map(p=>+p.final_score.toFixed(2)),
+        backgroundColor: names.map((_,i)=>i===0?'#f5a623':'#00d4aa'), borderRadius:4, borderSkipped:false}],{h:true});
+
+    mkUaChart('uc-exbw-econ','bar', names, [
+      {label:'Actual Econ',   data:players.map(p=>+p.econ.toFixed(2)),     backgroundColor:'#00d4aa', borderRadius:4, borderSkipped:false},
+      {label:'Expected Econ', data:players.map(p=>+p.exp_econ.toFixed(2)), backgroundColor:'rgba(90,97,128,.3)', borderRadius:4, borderSkipped:false}
+    ]);
+
+    mkUaChart('uc-exbw-pv','bar', names, [
+      {label:'Pressure Value', data:players.map(p=>+p.pv100.toFixed(1)),    backgroundColor:'#00d4aa', borderRadius:4, borderSkipped:false},
+      {label:'Usual Level',    data:players.map(p=>+p.usual100.toFixed(1)), backgroundColor:'rgba(90,97,128,.3)', borderRadius:4, borderSkipped:false}
+    ]);
+
+    mkUaChart('uc-exbw-stab','bar', names,
+      [{label:'Top-10 Freq %', data:players.map(p=>Math.round(p.top10_freq*100)),
+        backgroundColor:'#7c5cbf', borderRadius:4, borderSkipped:false}]);
+
+    const t = $('ua-bowl-pr-table');
+    t.innerHTML = `<thead><tr>
+      <th>#</th><th>Player</th>
+      <th class="r">Press Balls</th><th class="r">Spells</th>
+      <th class="r">IPL/T20I</th>
+      <th class="r">Act Econ</th><th class="r">Exp Econ</th>
+      <th class="r">Act Wkt%</th><th class="r">Exp Wkt%</th>
+      <th class="r">Dots%</th>
+      <th class="r">Raw PV</th><th class="r" style="color:var(--cyan)">Shrunk PV</th>
+      <th class="r">Usual</th><th class="r">Lift</th>
+      <th class="r">Cons</th><th class="r">Stab%</th>
+      <th class="r" style="color:var(--gold)">Score</th>
+    </tr></thead><tbody>${players.map((p,i)=>`<tr>
+      <td><span class="rnum ${i<3?'top3':''} ${i===0?'r1':''}">${i+1}</span></td>
+      <td class="name">${p.name}</td>
+      <td class="r">${p.pb}</td>
+      <td class="r">${p.stints}</td>
+      <td class="r">${p.ipl}/${p.t20i}</td>
+      <td class="r"><span class="u-badge ${p.econ<=7?'g':p.econ<=9?'y':'r'}">${f2u(p.econ)}</span></td>
+      <td class="r">${f2u(p.exp_econ)}</td>
+      <td class="r">${f2u(p.wk_pct)}%</td>
+      <td class="r">${f2u(p.exp_wk)}%</td>
+      <td class="r">${f1u(p.dots)}%</td>
+      <td class="r">${f1u(p.pvraw100)}</td>
+      <td class="r" style="color:var(--cyan);font-weight:600">${f1u(p.pv100)}</td>
+      <td class="r">${f1u(p.usual100)}</td>
+      <td class="r"><span class="u-badge ${p.lift100>=0?'g':'r'}">${p.lift100>=0?'+':''}${f1u(p.lift100)}</span></td>
+      <td class="r">${Math.round(p.cons_eb*100)}%</td>
+      <td class="r">${Math.round(p.top10_freq*100)}%</td>
+      <td class="r" style="color:var(--gold);font-weight:700">${f2u(p.final_score)}</td>
+    </tr>`).join('')}</tbody>`;
+  }, 300);
+}
+
+
+</script>
+</body>
+</html>

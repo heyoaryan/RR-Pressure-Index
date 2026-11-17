@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Analysis intermediates (~500 MB) and outputs
+analysis/*.pkl
+analysis/*.parquet
+analysis/*.csv
+analysis/*.docx
+analysis/*.png
+analysis/rows.json
+analysis/node_modules/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Deploy tooling
+.vercel

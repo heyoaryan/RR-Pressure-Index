@@ -1,0 +1,13 @@
+# Render Blueprint — FastAPI backend (used by index_legacy.html)
+services:
+  - type: web
+    name: pressure-index-api
+    runtime: python
+    plan: free
+    rootDir: dashboard/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

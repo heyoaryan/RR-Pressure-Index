@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/legacy", "destination": "/index_legacy", "permanent": false }
+  ],
+  "headers": [
+    { "source": "/data.js", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
+  ]
+}
